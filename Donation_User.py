@@ -1,6 +1,6 @@
 __author__ = 'Gazdik_Zsolt'
 # Ez az en kommentem Adam Vegh
-# dsgag
+# dsgagff
 
 class User_Data(object):
     #data from the user
