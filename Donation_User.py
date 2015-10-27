@@ -1,6 +1,6 @@
 __author__ = 'Gazdik_Zsolt'
 # Ez az en kommentem Adam Vegh
-# dsgag
+# Misi tesztkommentje
 
 class User_Dta(object):
     #data from the usera
