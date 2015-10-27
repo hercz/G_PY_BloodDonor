@@ -1,7 +1,7 @@
 __author__ = 'Gazdik_Zsolt'
 
 class User_Data(object):
-    #data
+    #data from the user
 
     def __init__(self):
         pass
