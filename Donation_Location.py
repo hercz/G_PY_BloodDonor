@@ -1,6 +1,6 @@
 __author__ = 'Gazdik_Zsolt'
 
-class User_data(object):
+class User_Data(object):
 
     def __init__(self):
         pass
