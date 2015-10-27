@@ -1,2 +1,6 @@
 Ez egy teszt.
+<<<<<<< HEAD
 Ez egy new sor.
+=======
+ez egy masodik sor
+>>>>>>> f862302f8d8029155e6b04f50a66567a6907251a
