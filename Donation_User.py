@@ -68,7 +68,6 @@ class User_Data(object):
                 gender = ""
             else:
                 self.gender = gender
-        pass
 
 
 
@@ -84,6 +83,15 @@ class User_Data(object):
         pass
 
     def get_unique_identifier(self):
+        identifier = input("Please enter your unique identifier aka ID: ")
+        
+
+
+
+
+
+
+
         pass
 
     def get_Blood_Type(self):
