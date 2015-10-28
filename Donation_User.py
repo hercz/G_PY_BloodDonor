@@ -1,9 +1,9 @@
 __author__ = 'Gazdik_Zsolt'
 # Ez az en kommentem Adam Vegh
-# Misi tesztkommentje
+# Misi tesztkomment Es meeeegy a apull reggel
 
 class User_Dta(object):
-    #data from the usera
+    #data from the user
 
     def __init__(self):
         pass
