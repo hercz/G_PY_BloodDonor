@@ -10,6 +10,7 @@ class User_Data(object):
         self.get_weight()
         self.get_gender()
         self.get_email_address()
+        self.get_unique_identifier()
         
 
     def get_title(self):
@@ -84,8 +85,17 @@ class User_Data(object):
         pass
 
     def get_unique_identifier(self):
-        identifier = input("Please enter your unique identifier aka ID: ")
-        
+        identifier = ""
+        while identifier == "":
+            identifier = input("Please enter your unique identifier aka ID: ")
+            if len(identifier) == 8:
+                if identifier[:2].isalpha() and identifier[2:].isdigit():
+                    print("So that's a passport ID")
+                    self.identifier = identifier
+                elif identifier[:2].isdigit() and identifier[2:].isalpha():
+                    print("So it's an Identity Card")
+                    self.identifier = identifier
+
 
 
 
