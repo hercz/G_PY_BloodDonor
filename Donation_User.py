@@ -2,38 +2,43 @@ __author__ = 'Gazdik_Zsolt'
 
 class User_Data(object):
     #data from the user
-    @staticmethod
+    def __init__(self):
+        self.get_title()
+        self.get_first_name()
+        self.get_last_name()
+        self.get_full_name()
 
-
-    def get_name():
-        entered_data_is_valid = False
-        name = ""
+    def get_title(self):
         answer = ""
+        self.title = ""
         while answer == "":
             answer = input("Do you have a title?:  Y/N: ")
             if answer == "Y" or answer == "y":
-                title =input("In that Case enter your title: ") + " "
+                self.title = input("In that Case enter your title: ") + " "
             elif answer == "N" or answer == "n":
                 print("I see, you dont even have a title, poor boy!")
-                title = ""
+                self.title = ""
             else:
                 answer = ""
 
-        first_name = ""
-        while first_name == "":
-            first_name = input("Please enter your first name: ")
-            if not first_name.isalpha():
+    def get_first_name(self):
+        self.first_name = ""
+        while self.first_name == "":
+            self.first_name = input("Please enter your first name: ")
+            if not self.first_name.isalpha():
                 print("I really hope your name does not contain numbers or special characters or whitespace, check before you enter!")
-                first_name = ""
+                self.first_name = ""
 
-        last_name = ""
-        while last_name == "":
-            last_name = input("Please enter your last name: ")
-            if not last_name.isalpha():
-                last_name = ""
+    def get_last_name(self):
+        self.last_name = ""
+        while self.last_name == "":
+            self.last_name = input("Please enter your last name: ")
+            if not self.last_name.isalpha():
+                self.last_name = ""
 
-        name = title + first_name + " " + last_name
-        return name
+    def get_full_name(self):
+        self.full_name = self.title + self.first_name + " " + self.last_name
+        return self.full_name
 
 
 
@@ -91,6 +96,10 @@ class User_Data(object):
     def Donor_is_Suitable_or_not(self):
         pass
 
+    def print_donor(self):
+        print(self.full_name)
+
+
 if __name__ == "__main__":
-    Donor1 = User_Data
-    print(Donor1.get_name())
+    bela = User_Data()
+    bela.print_donor()
