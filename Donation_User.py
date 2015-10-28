@@ -7,10 +7,10 @@ class User_Data(object):
         self.get_first_name()
         self.get_last_name()
         self.get_full_name()
+        
 
     def get_title(self):
         answer = ""
-        self.title = ""
         while answer == "":
             answer = input("Do you have a title?:  Y/N: ")
             if answer == "Y" or answer == "y":
@@ -38,7 +38,7 @@ class User_Data(object):
 
     def get_full_name(self):
         self.full_name = self.title + self.first_name + " " + self.last_name
-        return self.full_name
+
 
 
 
