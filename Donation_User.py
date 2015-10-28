@@ -7,6 +7,7 @@ class User_Data(object):
         self.get_first_name()
         self.get_last_name()
         self.get_full_name()
+        self.get_weight()
         
 
     def get_title(self):
@@ -39,12 +40,15 @@ class User_Data(object):
     def get_full_name(self):
         self.full_name = self.title + self.first_name + " " + self.last_name
 
-
-
-
-
     def get_weight(self):
-        pass
+        weight = input("Please enter your weight(Kg): ")
+        iweight = int(weight)
+        while iweight <= 50:
+            weight = input(print("Your weight should be more then 50 kg!"))
+            if iweight > 50:
+                self.get_weight()
+
+
 
     def get_gender(self):
         pass
@@ -96,8 +100,8 @@ class User_Data(object):
     def Donor_is_Suitable_or_not(self):
         pass
 
-    def print_donor(self):
-        print(self.full_name)
+    def print_donor(self,):
+        print(self.get_weight())
 
 
 if __name__ == "__main__":
