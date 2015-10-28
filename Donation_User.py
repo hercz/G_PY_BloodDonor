@@ -8,6 +8,7 @@ class User_Data(object):
         self.get_last_name()
         self.get_full_name()
         self.get_weight()
+        self.get_gender()
         
 
     def get_title(self):
@@ -57,11 +58,21 @@ class User_Data(object):
                 weight = ""
 
 
-
-
-
     def get_gender(self):
+        gender = ""
+        available_genders = ["f", "m"]
+        while gender == "":
+            gender = input("Please choose your gender F/M")
+            if not gender.lower() in available_genders:
+                print("You most type in one of the available genders:")
+                gender = ""
+            else:
+                self.gender = gender
         pass
+
+
+
+
 
     def get_Date_of_Birth(self):
         pass
@@ -111,8 +122,7 @@ class User_Data(object):
         pass
 
     def print_donor(self):
-        print(self.full_name)
-        print(self.weight)
+        print(self.gender)
 
 if __name__ == "__main__":
     bela = User_Data()
