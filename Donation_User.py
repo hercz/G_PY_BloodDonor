@@ -7,6 +7,7 @@ class User_Data(object):
         self.get_first_name()
         self.get_last_name()
         self.get_full_name()
+        self.get_weight()
         
 
     def get_title(self):
@@ -22,29 +23,42 @@ class User_Data(object):
                 answer = ""
 
     def get_first_name(self):
-        self.first_name = ""
-        while self.first_name == "":
-            self.first_name = input("Please enter your first name: ")
-            if not self.first_name.isalpha():
+        first_name = ""
+        while first_name == "":
+            first_name = input("Please enter your first name: ")
+            if not first_name.isalpha():
                 print("I really hope your name does not contain numbers or special characters or whitespace, check before you enter!")
-                self.first_name = ""
+                first_name = ""
+            else:
+                self.first_name = first_name
 
     def get_last_name(self):
-        self.last_name = ""
-        while self.last_name == "":
-            self.last_name = input("Please enter your last name: ")
-            if not self.last_name.isalpha():
-                self.last_name = ""
+        last_name = ""
+        while last_name == "":
+            last_name = input("Please enter your last name: ")
+            if not last_name.isalpha():
+                last_name = ""
+            else:
+                self.last_name = last_name
 
     def get_full_name(self):
-        self.full_name = self.title + self.first_name + " " + self.last_name
-
-
-
+        full_name = self.title + self.first_name + " " + self.last_name
+        self.full_name = full_name
 
 
     def get_weight(self):
-        pass
+        weight = ""
+        while weight == "":
+            weight = input("Please enter your weight in Kg: ")
+            if weight.isdigit() and int(weight) >= 50:
+                self.weight = int(weight)
+            else:
+                print("You must type in positive integers, above 50Kg ")
+                weight = ""
+
+
+
+
 
     def get_gender(self):
         pass
@@ -98,7 +112,7 @@ class User_Data(object):
 
     def print_donor(self):
         print(self.full_name)
-
+        print(self.weight)
 
 if __name__ == "__main__":
     bela = User_Data()
