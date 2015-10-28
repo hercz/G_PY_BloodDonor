@@ -9,6 +9,7 @@ class User_Data(object):
         self.get_full_name()
         self.get_weight()
         self.get_gender()
+        self.get_email_address()
         
 
     def get_title(self):
@@ -100,8 +101,17 @@ class User_Data(object):
     def get_Expiration_ID(self):
         pass
 
-    def get_Email_Adress(self):
-        pass
+    def get_email_address(self):
+        email_string = ""
+        while email_string == "":
+            email_string = input("E-mail (abc@xyz.hu/.com): ")
+            email_list = email_string.split('@')
+            if len(email_list) == 2 and (email_list[1].endswith(".hu") or email_list[1].endswith(".com")):
+                self.email_string = email_string
+                return
+            else:
+                print("Please enter your e-mail correctly! (abc@xyz.hu/.com)")
+                email_string = ""
 
     def get_Mobil_Number(self):
         pass
