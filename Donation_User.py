@@ -1,6 +1,6 @@
 __author__ = 'Gazdik_Zsolt'
 # Ez az en kommentem Adam Vegh
-# Misi tesztkomment Es meeeegy a apull reggel
+# Misi tesztkomment Es meeeegy a apull reggel!!!!!!!!!
 
 class User_Dta(object):
     #data from the user
