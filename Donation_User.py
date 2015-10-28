@@ -2,25 +2,42 @@ __author__ = 'Gazdik_Zsolt'
 # Ez az en kommentem Adam Vegh
 # Misi tesztkomment Es meeeegy a apull reggel!!!!!!!!!
 
-class User_Dta(object):
-    #data from the user
+class User_Data(object):
+    #data from the use
 
     def __init__(self):
-        pass
+        self.name()
+        self.entered_data_is_valid = False
 
     def get_name(self):
-        entered_data_is_valid = False
-        name = ""
-        name_form_instruction = " (FirstName LastName)"
+        answer = ""
+        while answer == "":
+            answer = input("Do you have a title?:  Y/N: ")
+            if answer == "Y" or answer == "y":
+                title =input("In that Case enter your title: ") + " "
+            elif answer == "N" or answer == "n":
+                print("I see, you dont even have a title, poor boy!")
+                title = ""
+            else:
+                answer = ""
 
-        while not entered_data_is_valid:
-            name = input("Please enter your name in the correct form: FIRST NAME LAST NAME")
-            if name
+        first_name = ""
+        while first_name == "":
+            first_name = input("Please enter your first name: ")
+            if not first_name.isalpha():
+                first_name = ""
+
+        last_name = ""
+        while last_name == "":
+            last_name = input("Please enter your last name: ")
+            if not last_name.isalpha():
+                last_name = ""
+
+        self.name = title + first_name + " " + last_name
+        return self.name
 
 
 
-
-        pass
 
     def get_weight(self):
         pass
@@ -75,3 +92,6 @@ class User_Dta(object):
     def Donor_is_Suitable_or_not(self):
         pass
 
+if __name__ == "__main__":
+    Donor1= User_Data
+    print(Donor1.get_name(Donor1))
