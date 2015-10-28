@@ -7,7 +7,7 @@ class User_Data(object):
         self.get_first_name()
         self.get_last_name()
         self.get_full_name()
-        
+
 
     def get_title(self):
         answer = ""
@@ -17,29 +17,31 @@ class User_Data(object):
                 self.title = input("In that Case enter your title: ") + " "
             elif answer == "N" or answer == "n":
                 print("I see, you dont even have a title, poor boy!")
-                self.title = ""
             else:
                 answer = ""
 
     def get_first_name(self):
-        self.first_name = ""
-        while self.first_name == "":
-            self.first_name = input("Please enter your first name: ")
-            if not self.first_name.isalpha():
+        first_name = ""
+        while first_name == "":
+            first_name = input("Please enter your first name: ")
+            if not first_name.isalpha():
                 print("I really hope your name does not contain numbers or special characters or whitespace, check before you enter!")
-                self.first_name = ""
+                first_name = ""
+            else:
+                self.first_name= first_name
 
     def get_last_name(self):
-        self.last_name = ""
-        while self.last_name == "":
-            self.last_name = input("Please enter your last name: ")
-            if not self.last_name.isalpha():
-                self.last_name = ""
+        last_name = ""
+        while last_name == "":
+            last_name = input("Please enter your last name: ")
+            if not last_name.isalpha():
+                last_name = ""
+            else:
+                self.last_name = last_name
 
     def get_full_name(self):
-        self.full_name = self.title + self.first_name + " " + self.last_name
-
-
+        full_name = self.title + self.first_name + " " + self.last_name
+        self.full_name = full_name
 
 
 
