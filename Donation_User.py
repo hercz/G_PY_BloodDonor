@@ -83,11 +83,23 @@ class User_Data(object):
         pass
 
     def get_was_she_he_sick(self):
+        was_she_he_sick = ""
+        available_answers = ["y", "n"]
+        while was_she_he_sick == "":
+            was_she_he_sick = input("Have you been sick in the last three months? (Y, N)")
+            if not was_she_he_sick.lower() in available_answers:
+                print("This is an important question! Please write here the TRUTH!")
+                was_she_he_sick = ""
+            else:
+                self.get_was_she_he_sick = was_she_he_sick
+
+
+
         pass
 
     def get_unique_identifier(self):
         identifier = ""
-        while identifier == "":
+        while identifier == "" and len(identifier) > 7:
             identifier = input("Please enter your unique identifier aka ID: ")
             if len(identifier) == 8:
                 if identifier[:2].isalpha() and identifier[2:].isdigit():
