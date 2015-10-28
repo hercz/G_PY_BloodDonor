@@ -1,15 +1,13 @@
 __author__ = 'Gazdik_Zsolt'
-# Ez az en kommentem Adam Vegh
-# Misi tesztkomment Es meeeegy a apull reggel!!!!!!!!!
 
 class User_Data(object):
-    #data from the use
+    #data from the user
+    @staticmethod
 
-    def __init__(self):
-        self.name()
-        self.entered_data_is_valid = False
 
-    def get_name(self):
+    def get_name():
+        entered_data_is_valid = False
+        name = ""
         answer = ""
         while answer == "":
             answer = input("Do you have a title?:  Y/N: ")
@@ -25,6 +23,7 @@ class User_Data(object):
         while first_name == "":
             first_name = input("Please enter your first name: ")
             if not first_name.isalpha():
+                print("I really hope your name does not contain numbers or special characters or whitespace, check before you enter!")
                 first_name = ""
 
         last_name = ""
@@ -33,8 +32,8 @@ class User_Data(object):
             if not last_name.isalpha():
                 last_name = ""
 
-        self.name = title + first_name + " " + last_name
-        return self.name
+        name = title + first_name + " " + last_name
+        return name
 
 
 
@@ -93,5 +92,5 @@ class User_Data(object):
         pass
 
 if __name__ == "__main__":
-    Donor1= User_Data
-    print(Donor1.get_name(Donor1))
+    Donor1 = User_Data
+    print(Donor1.get_name())
