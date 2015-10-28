@@ -9,6 +9,17 @@ class User_Dta(object):
         pass
 
     def get_name(self):
+        entered_data_is_valid = False
+        name = ""
+        name_form_instruction = " (FirstName LastName)"
+
+        while not entered_data_is_valid:
+            name = input("Please enter your name in the correct form: FIRST NAME LAST NAME")
+            if name
+
+
+
+
         pass
 
     def get_weight(self):
