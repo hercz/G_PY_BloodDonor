@@ -11,6 +11,7 @@ class User_Data(object):
         self.get_gender()
         self.get_email_address()
         self.get_unique_identifier()
+        self.get_was_she_he_sick()
         
 
     def get_title(self):
