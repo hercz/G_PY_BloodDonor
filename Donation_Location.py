@@ -5,6 +5,7 @@ class User_Data(object):
     def __init__(self):
         self.get_Zip_Code()
         self.get_City()
+        self.get_Address()
 
 
 
@@ -47,8 +48,14 @@ class User_Data(object):
         self.city = city.lower()
 
 
-    def get_Adress(self):
-        pass
+    def get_Address(self):
+        address = ""
+        while address == "":
+            address = input("Please enter your address: ")
+            if len(address) > 25:
+                print("Address should be less then 25 characters!")
+                address = ""
+                self.address = address
 
     def get_Beds_Available(self):
         pass
@@ -64,9 +71,6 @@ class User_Data(object):
     def Datetime_Only_on_Weekdays(self):
         pass
 
-    def Adress_Validation(self):
-        pass
-
     def Calculate_Duration_in_Minutes(self):
         pass
 
@@ -74,7 +78,7 @@ class User_Data(object):
         pass
 
     def print_donor(self):
-        print(self.zip_code)
+        print(self.address)
 
 if __name__ == "__main__":
     gaspar = User_Data()
