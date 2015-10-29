@@ -6,20 +6,20 @@ class User_Data(object):
     #data from the user
     def __init__(self):
 
-
+        self.get_Last_Donation_Date()
         self.get_Expiration_ID()
-        # self.get_Date_of_Birth()
-        # self.get_title()
-        # self.get_first_name()
-        # self.get_last_name()
-        # self.get_full_name()
-        # self.get_weight()
-        # self.get_gender()
-        # self.get_unique_identifier()
-        # self.get_email_address()
-        # self.get_was_she_he_sick()
-        # self.get_blood_type()
-        # self.random_hemogoblin_donor_is_suitable_or_not()
+        self.get_Date_of_Birth()
+        self.get_title()
+        self.get_first_name()
+        self.get_last_name()
+        self.get_full_name()
+        self.get_weight()
+        self.get_gender()
+        self.get_unique_identifier()
+        self.get_email_address()
+        self.get_was_she_he_sick()
+        self.get_blood_type()
+        self.random_hemogoblin_donor_is_suitable_or_not()
 
 
 
@@ -100,14 +100,17 @@ class User_Data(object):
             else:
                 self.date_of_birth = date
 
-
     def get_Last_Donation_Date(self):
         donation_date = ""
+        today = datetime.date.today()
         while donation_date == "":
-            donation_date = input("Please enter the date of your last donation")
-
-
-
+            donation_date = input("Please enter the date of your last donation: ")
+            if User_Data.date_string_is_valid(donation_date) is False:
+                print("Please enter a valid Date eg: YYYY.MM.DD, e.g: 1991.05.26 ")
+                donation_date = ""
+            else:
+                donation_date = datetime.datetime.strptime(donation_date, "%Y.%m.%d").date()
+                self.donation_date = (today - donation_date).days > 90
 
     def get_was_she_he_sick(self):
         was_she_he_sick = ""
@@ -148,9 +151,6 @@ class User_Data(object):
             else:
                 user_id = datetime.datetime.strptime(user_id, "%Y.%m.%d").date()
                 self.expiration = today < user_id
-
-
-
 
     def get_blood_type(self):
         blood_type = ""
@@ -230,7 +230,7 @@ class User_Data(object):
             exit()
 
     def print_donor(self):
-        print(self.expiration)
+        print(self.donation_date)
 
 if __name__ == "__main__":
     bela = User_Data()
