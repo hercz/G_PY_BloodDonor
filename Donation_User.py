@@ -1,5 +1,9 @@
 __author__ = 'Gazdik_Zsolt'
 
+
+from datetime import date
+
+
 class User_Data(object):
     #data from the user
     def __init__(self):
@@ -76,9 +80,18 @@ class User_Data(object):
             else:
                 self.gender = gender
 
+    @staticmethod
+    def date_verification(date):
+        date_parts = date.split(".")
+        if len(date_parts) == 3:
+            for part in date_parts:
+                if not part.isdigit():
+                    print("Bad date format ! It should be YYYY.MM.DD !")
+                    return False
+            return True
+        print("Bad date format ! It should be YYYY.MM.DD !")
+        return False
 
-    def get_Date_of_Birth(self):
-        pass
 
     def get_Last_Donation_Date(self):
         pass
