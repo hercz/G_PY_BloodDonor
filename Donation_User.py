@@ -1,18 +1,21 @@
 __author__ = 'Gazdik_Zsolt'
+import random
 
 class User_Data(object):
     #data from the user
     def __init__(self):
+
         self.get_title()
         self.get_first_name()
         self.get_last_name()
         self.get_full_name()
         self.get_weight()
         self.get_gender()
-        self.get_email_address()
         self.get_unique_identifier()
+        self.get_email_address()
         self.get_was_she_he_sick()
         self.get_blood_type()
+        self.random_hemogoblin_donor_is_suitable_or_not()
         
 
     def get_title(self):
@@ -50,17 +53,18 @@ class User_Data(object):
         full_name = self.title + self.first_name + " " + self.last_name
         self.full_name = full_name
 
-
     def get_weight(self):
         weight = ""
         while weight == "":
             weight = input("Please enter your weight in Kg: ")
             if weight.isdigit() and int(weight) >= 50:
                 self.weight = int(weight)
+            elif weight.isdigit() and int(weight) < 50:
+                print("Sorry you are not suitable for donation! ")
+                exit()
             else:
                 print("You must type in positive integers, above 50Kg ")
                 weight = ""
-
 
     def get_gender(self):
         gender = ""
@@ -73,14 +77,14 @@ class User_Data(object):
             else:
                 self.gender = gender
 
-
-
-
-
     def get_Date_of_Birth(self):
+
+
         pass
 
     def get_Last_Donation_Date(self):
+
+
         pass
 
     def get_was_she_he_sick(self):
@@ -94,27 +98,25 @@ class User_Data(object):
             else:
                 self.get_was_she_he_sick = was_she_he_sick
 
-
-
-        pass
-
     def get_unique_identifier(self):
         identifier = ""
-        while identifier == "" and len(identifier) > 7:
+        while identifier == "":
             identifier = input("Please enter your unique identifier aka ID: ")
-            if len(identifier) == 8:
-                if identifier[:2].isalpha() and identifier[2:].isdigit():
-                    print("So that's a passport ID")
-                    self.identifier = identifier
-                elif identifier[:2].isdigit() and identifier[2:].isalpha():
-                    print("So it's an Identity Card")
-                    self.identifier = identifier
+            if len(identifier) != 8:
+                print("Your Identifier length is not enough, type in again: ")
+                identifier = ""
+            elif identifier[:2].isalpha() and identifier[2:].isdigit():
+                print("So that's a passport ID")
+                self.identifier = identifier
+            elif identifier[:2].isdigit() and identifier[2:].isalpha():
+                print("So it's an Identity Card")
+                self.identifier = identifier
+            else:
+                print("Your ID is wrong, type in again(It must match with the ID or the Passport): ")
+                identifier = ""
 
 
-
-
-
-
+    def get_Expiration_ID(self):
 
 
         pass
@@ -131,8 +133,6 @@ class User_Data(object):
             blood_type = input("Please enter your blood type(eg: A+): ")
         self.get_blood_type = blood_type.upper()
 
-    def get_Expiration_ID(self):
-        pass
 
     def get_email_address(self):
         email_string = ""
@@ -191,11 +191,16 @@ class User_Data(object):
     def Random_Number(self):
         pass
 
-    def Donor_is_Suitable_or_not(self):
-        pass
+    def random_hemogoblin_donor_is_suitable_or_not(self):
+        random_hemogoblin = random.randrange(80,200,1)
+        if random_hemogoblin >= 110:
+            print("Donor is suitable for donation")
+        else:
+            print("Sorry you are not suitable for donation!")
+            exit()
 
     def print_donor(self):
-        print(self.gender)
+        print(self.weight)
 
 if __name__ == "__main__":
     bela = User_Data()
