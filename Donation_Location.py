@@ -3,7 +3,11 @@ __author__ = 'Gazdik_Zsolt'
 class User_Data(object):
 
     def __init__(self):
-        pass
+        self.get_Zip_Code()
+        self.get_City()
+
+
+
 
     #Inputs, gets
 
@@ -17,10 +21,28 @@ class User_Data(object):
         pass
 
     def get_Zip_Code(self):
-        pass
+        zip_code = ""
+        while zip_code == "":
+            zip_code = input("Please enter your ZIP code ")
+            if len(zip_code) != 4:
+                print("You must enter a valid ZIP code")
+                zip_code = ""
+            elif not zip_code.isdigit():
+                print("You must enter positive numbers ")
+                zip_code = ""
+            elif len(zip_code) == 4:
+                self.zip_code = zip_code
 
     def get_City(self):
-        pass
+        city = ""
+        city_names = ("miskolc", "kazincbarcika", "szerencs", "sarospatak")
+        while city == "":
+            city = input("Please enter your city name: ")
+            if city.lower() not in city_names:
+                print("You must fill this and city names must be: Miskolc, Kazincbarcika, Szerencs, Sarospatak")
+                city = ""
+        self.city = city.lower()
+
 
     def get_Adress(self):
         pass
@@ -47,3 +69,10 @@ class User_Data(object):
 
     def Maximum_Donor_Number(self):
         pass
+
+    def print_donor(self):
+        print(self.zip_code)
+
+if __name__ == "__main__":
+    gaspar = User_Data()
+    gaspar.print_donor()
