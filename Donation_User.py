@@ -4,6 +4,21 @@ import datetime
 
 class User_Data(object):
     #data from the user
+
+    @staticmethod
+    def date_string_is_valid(date_string: str):
+        splitted_date = date_string.split(".")
+        if not (len(splitted_date) == 3 and splitted_date[0].isdigit() and
+            splitted_date[1].isdigit() and splitted_date[2].isdigit()):
+            return False
+        try:
+            datetime.date(int(splitted_date[0]), int(splitted_date[1]), int(splitted_date[2]))
+            return True
+        except ValueError as vex:
+            print("This date is not correct!")
+            return False
+
+
     def __init__(self):
 
         self.available_for_donation()
@@ -94,18 +109,6 @@ class User_Data(object):
             else:
                 self.gender = gender
 
-    @staticmethod
-    def date_string_is_valid(date_string: str):
-        splitted_date = date_string.split(".")
-        if not (len(splitted_date) == 3 and splitted_date[0].isdigit() and
-            splitted_date[1].isdigit() and splitted_date[2].isdigit()):
-            return False
-        try:
-            datetime.date(int(splitted_date[0]), int(splitted_date[1]), int(splitted_date[2]))
-            return True
-        except ValueError as vex:
-            print("This date is not correct!")
-            return False
 
     def get_Date_of_Birth(self):
         date = ""
