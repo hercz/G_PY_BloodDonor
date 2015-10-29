@@ -136,8 +136,30 @@ class User_Data(object):
                 print("Please enter your e-mail correctly! (abc@xyz.hu/.com)")
                 email_string = ""
 
-    def get_Mobil_Number(self):
-        pass
+    def get_mobil_number(self):
+        mobil_3606_string = ""
+        while mobil_3606_string == "":
+            mobil_3606_string = input("Your mobile number starts with (+36 or 06): ")
+            if not (mobil_3606_string == '+36' or mobil_3606_string == '06'):
+                print("Invalid format!")
+                mobil_3606_string = ""
+
+        mobil_203060_string = ""
+        while mobil_203060_string == "":
+            mobil_203060_string = input("Your mobile provide identifier (20, 30 or 70): ")
+            if not (mobil_203060_string == '20' or mobil_203060_string == '30' or mobil_203060_string == '70'):
+                print("Invalid format!")
+                mobil_203060_string = ""
+
+        mobil_num_str = ""
+        while mobil_num_str == "":
+            mobil_num_str = input("Enter your mobil number (7 digits): ")
+            if not (len(mobil_num_str) == 7 and mobil_num_str.isdigit()):
+                print("Invalid format!")
+                mobil_num_str = ""
+
+        mobil_string = mobil_3606_string + mobil_203060_string + mobil_num_str
+        self.mobil_string = mobil_string
 
     # And now functions
 
