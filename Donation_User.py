@@ -97,11 +97,15 @@ class User_Data(object):
     @staticmethod
     def date_string_is_valid(date_string: str):
         splitted_date = date_string.split(".")
-        return len(splitted_date) == 3 and \
-            splitted_date[0].isdigit() and int(splitted_date[0]) in range(1910,2030) and\
-            splitted_date[1].isdigit() and int(splitted_date[1]) in range(1, 13) and \
-            splitted_date[2].isdigit() and int(splitted_date[2]) in range(1, 32)
-
+        if not (len(splitted_date) == 3 and splitted_date[0].isdigit() and
+            splitted_date[1].isdigit() and splitted_date[2].isdigit()):
+            return False
+        try:
+            datetime.date(int(splitted_date[0]), int(splitted_date[1]), int(splitted_date[2]))
+            return True
+        except ValueError as vex:
+            print("This date is not correct!")
+            return False
 
     def get_Date_of_Birth(self):
         date = ""
@@ -128,9 +132,6 @@ class User_Data(object):
             if self.donation_date is False:
                 print("You are not suitable because you was on Donation not long ago")
                 exit()
-
-
-        pass
 
     def get_was_she_he_sick(self):
         was_she_he_sick = ""
@@ -227,7 +228,6 @@ class User_Data(object):
         mobil_string = mobil_3606_string + mobil_203060_string + mobil_num_str
         self.mobil_string = mobil_string
 
-    # And now functions
     def donor_age(self):
         today = datetime.date.today()
         birth_date = datetime.datetime.strptime(self.date_of_birth,"%Y.%m.%d").date()
