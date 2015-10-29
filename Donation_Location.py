@@ -27,6 +27,9 @@ class User_Data(object):
             if len(zip_code) != 4:
                 print("You must enter a valid ZIP code")
                 zip_code = ""
+            elif zip_code[0] == '0':
+                print("Your first character can't be Zero")
+                zip_code = ""
             elif not zip_code.isdigit():
                 print("You must enter positive numbers ")
                 zip_code = ""
