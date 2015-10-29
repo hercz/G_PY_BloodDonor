@@ -9,11 +9,6 @@ class User_Data(object):
         self.get_Beds_Available()
         self.get_Planned_Donor_Number()
 
-
-
-
-
-
     #Inputs, gets
 
     def get_Date_of_Event(self):
@@ -59,7 +54,7 @@ class User_Data(object):
             if len(address) > 25:
                 print("Address should be less then 25 characters!")
                 address = ""
-                self.address = address
+        self.address = address
 
     def get_Beds_Available(self):
         available_beds = ""
@@ -71,7 +66,7 @@ class User_Data(object):
             if available_beds == "0":
                 print("You should enter a positive intiger!")
                 available_beds = ""
-                self.available_beds = available_beds
+        self.available_beds = available_beds
 
     def get_Planned_Donor_Number(self):
         planned_donor_number = ""
@@ -83,7 +78,7 @@ class User_Data(object):
             if planned_donor_number == "0":
                 print("You should enter a positive intiger!")
                 planned_donor_number = ""
-                self.planned_donor_number = planned_donor_number
+        self.planned_donor_number = planned_donor_number
 
     # FUNCTIONS
 
@@ -100,7 +95,7 @@ class User_Data(object):
         pass
 
     def print_donor(self):
-        print(self.available_beds)
+        print(self.planned_donor_number)
 
 if __name__ == "__main__":
     gaspar = User_Data()
