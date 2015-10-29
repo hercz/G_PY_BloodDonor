@@ -1,11 +1,13 @@
 __author__ = 'Gazdik_Zsolt'
 import random
-
+from datetime import datetime
 
 class User_Data(object):
     #data from the user
     def __init__(self):
 
+        self.get_unique_identifier()
+        self.get_Expiration_ID()
         self.get_Date_of_Birth()
         self.get_title()
         self.get_first_name()
@@ -13,11 +15,12 @@ class User_Data(object):
         self.get_full_name()
         self.get_weight()
         self.get_gender()
-        self.get_unique_identifier()
+
         self.get_email_address()
         self.get_was_she_he_sick()
         self.get_blood_type()
         self.random_hemogoblin_donor_is_suitable_or_not()
+
 
 
     def get_title(self):
@@ -107,6 +110,8 @@ class User_Data(object):
             if User_Data.date_string_is_valid(date) is False:
                 print("Please enter a valid Date eg: YYYY.MM.DD, e.g: 1991.05.26 ")
                 date = ""
+            else:
+                self.date_of_birth = date
 
 
     def get_Last_Donation_Date(self):
@@ -132,19 +137,28 @@ class User_Data(object):
             if len(identifier) != 8:
                 print("Your Identifier length is not enough, type in again: ")
                 identifier = ""
-            elif identifier[:2].isalpha() and identifier[2:].isdigit():
-                print("So that's a passport ID")
+            elif identifier[:6].isalpha() and identifier[6:].isdigit():
+                print("So that's a Passport ID")
                 self.identifier = identifier
-            elif identifier[:2].isdigit() and identifier[2:].isalpha():
+            elif identifier[:6].isdigit() and identifier[6:].isalpha():
                 print("So it's an Identity Card")
                 self.identifier = identifier
             else:
-                print("Your ID is wrong, type in again(It must match with the ID or the Passport): ")
+                print("Your ID is wrong, type in again(It must be an ID or Passport number): ")
                 identifier = ""
 
 
     def get_Expiration_ID(self):
+        user_id = ""
+        today = datetime.today()
+        while user_id =="":
             user_id = input("Enter the experiation date of your Unique Identifier: ")
+            if User_Data.date_string_is_valid(user_id) is False:
+                print("Please enter a valid Date eg: YYYY.MM.DD, e.g: 1991.05.26 ")
+                user_id = ""
+            else:
+                self.user_id = today > User_Data.date_string_is_valid(user_id)
+
 
 
     def get_blood_type(self):
@@ -225,7 +239,7 @@ class User_Data(object):
             exit()
 
     def print_donor(self):
-        print(self.weight)
+        print(self.date_of_birth)
 
 if __name__ == "__main__":
     bela = User_Data()
