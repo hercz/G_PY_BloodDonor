@@ -3,14 +3,15 @@ __author__ = 'Gazdik_Zsolt'
 class User_Data(object):
     #data from the user
     def __init__(self):
+
         self.get_title()
         self.get_first_name()
         self.get_last_name()
         self.get_full_name()
         self.get_weight()
         self.get_gender()
-        self.get_email_address()
         self.get_unique_identifier()
+        self.get_email_address()
         self.get_was_she_he_sick()
         
 
@@ -56,6 +57,9 @@ class User_Data(object):
             weight = input("Please enter your weight in Kg: ")
             if weight.isdigit() and int(weight) >= 50:
                 self.weight = int(weight)
+            elif weight.isdigit() and int(weight) < 50:
+                print("Sorry you are not suitable for donation! ")
+                exit()
             else:
                 print("You must type in positive integers, above 50Kg ")
                 weight = ""
@@ -71,9 +75,6 @@ class User_Data(object):
                 gender = ""
             else:
                 self.gender = gender
-
-
-
 
 
     def get_Date_of_Birth(self):
@@ -94,29 +95,24 @@ class User_Data(object):
                 self.get_was_she_he_sick = was_she_he_sick
 
 
-
-        pass
-
     def get_unique_identifier(self):
         identifier = ""
-        while identifier == "" and len(identifier) > 7:
+        while identifier == "":
             identifier = input("Please enter your unique identifier aka ID: ")
-            if len(identifier) == 8:
-                if identifier[:2].isalpha() and identifier[2:].isdigit():
-                    print("So that's a passport ID")
-                    self.identifier = identifier
-                elif identifier[:2].isdigit() and identifier[2:].isalpha():
-                    print("So it's an Identity Card")
-                    self.identifier = identifier
+            if len(identifier) != 8:
+                print("Your Identifier length is not enough, type in again: ")
+                identifier = ""
+            elif identifier[:2].isalpha() and identifier[2:].isdigit():
+                print("So that's a passport ID")
+                self.identifier = identifier
+            elif identifier[:2].isdigit() and identifier[2:].isalpha():
+                print("So it's an Identity Card")
+                self.identifier = identifier
+            else:
+                print("Your ID is wrong, type in again(It must match with the ID or the Passport): ")
+                identifier = ""
 
 
-
-
-
-
-
-
-        pass
 
     def get_Blood_Type(self):
         pass
@@ -185,7 +181,7 @@ class User_Data(object):
         pass
 
     def print_donor(self):
-        print(self.gender)
+        print(self.weight)
 
 if __name__ == "__main__":
     bela = User_Data()
