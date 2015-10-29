@@ -37,12 +37,12 @@ class User_Data(object):
 
     def available_for_donation(self):
         print("We need these data before you can go on!")
-        self.get_Date_of_Birth()
+        self.get_date_of_birth()
         self.donor_age()
         self.get_weight()
-        self.get_Last_Donation_Date()
+        self.get_last_donation_date()
         self.random_hemogoblin_donor_is_suitable_or_not()
-        self.get_Expiration_ID()
+        self.get_expiration_id()
         self.get_was_she_he_sick()
         print("Congratulations you are available for donation, now we need your other data")
 
@@ -53,7 +53,7 @@ class User_Data(object):
             if answer == "Y" or answer == "y":
                 self.title = input("In that Case enter your title: ") + " "
             elif answer == "N" or answer == "n":
-                print("I see, you dont even have a title, poor boy!")
+                print("I see, you don't even have a title, poor boy!")
                 self.title = ""
             else:
                 answer = ""
@@ -106,7 +106,7 @@ class User_Data(object):
                 self.gender = gender
 
 
-    def get_Date_of_Birth(self):
+    def get_date_of_birth(self):
         date = ""
         while date == "":
             date = input("Please enter the Date of Your Birth: YYYY.MM.DD ")
@@ -117,7 +117,7 @@ class User_Data(object):
                 self.date_of_birth = date
 
 
-    def get_Last_Donation_Date(self):
+    def get_last_donation_date(self):
         donation_date = ""
         today = datetime.date.today()
         while donation_date == "":
@@ -160,8 +160,7 @@ class User_Data(object):
                 print("Your ID is wrong, type in again(It must be an ID or Passport number): ")
                 identifier = ""
 
-
-    def get_Expiration_ID(self):
+    def get_expiration_id(self):
         user_id = ""
         today = datetime.date.today()
         while user_id == "":
