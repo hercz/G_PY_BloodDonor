@@ -78,7 +78,7 @@ class User_Data(object):
                 self.last_name = last_name
 
     def get_full_name(self):
-        full_name = self.title + self.first_name + " " + self.last_name
+        full_name = self.last_name + ", " + self.first_name + " " + self.title
         self.full_name = full_name
 
     def get_weight(self):
@@ -202,8 +202,6 @@ class User_Data(object):
             else:
                 self.blood_type = blood_type
 
-
-
     def get_email_address(self):
         email_string = ""
         while email_string == "":
@@ -251,9 +249,6 @@ class User_Data(object):
         else:
             self.age = age
 
-    def Data_In_Table_Form(self):
-        pass
-
     def random_hemogoblin_donor_is_suitable_or_not(self):
         random_hemogoblin = random.randrange(80,200,1)
         if random_hemogoblin >= 110:
@@ -262,9 +257,18 @@ class User_Data(object):
             print("Sorry you are not suitable for donation, your hemogoblin:",random_hemogoblin)
             exit()
 
+    def data_dictionary(self):
+        data = {"name" : self.full_name,
+                "weight" : self.weight,
+                "date of birt" : self.date_of_birth,
+                "age" : self.age,
+                "e-mail" : self.email_string}
+        return data
+
     def print_donor(self):
         print(self.age)
 
 if __name__ == "__main__":
     bela = User_Data()
     bela.print_donor()
+    print(bela.data_dictionary())
