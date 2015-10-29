@@ -12,6 +12,7 @@ class User_Data(object):
         self.get_email_address()
         self.get_unique_identifier()
         self.get_was_she_he_sick()
+        self.get_blood_type()
         
 
     def get_title(self):
@@ -118,8 +119,17 @@ class User_Data(object):
 
         pass
 
-    def get_Blood_Type(self):
-        pass
+    def get_blood_type(self):
+        blood_type = ""
+        blood_type = input("Please enter your blood type(eg: A+): ")
+        while (blood_type[len(blood_type)-1:] != "+" and\
+               blood_type[len(blood_type)-1:] != "-")\
+            or (blood_type[:len(blood_type)-1].upper() != "A" and\
+                blood_type[:len(blood_type)-1].upper() != "B" and\
+                blood_type[:len(blood_type)-1].upper() != "AB"):
+            print("Incorrect input!")
+            blood_type = input("Please enter your blood type(eg: A+): ")
+        self.get_blood_type = blood_type.upper()
 
     def get_Expiration_ID(self):
         pass
