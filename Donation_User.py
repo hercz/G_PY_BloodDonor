@@ -8,18 +8,18 @@ class User_Data(object):
 
 
         self.get_Expiration_ID()
-        self.get_Date_of_Birth()
-        self.get_title()
-        self.get_first_name()
-        self.get_last_name()
-        self.get_full_name()
-        self.get_weight()
-        self.get_gender()
-        self.get_unique_identifier()
-        self.get_email_address()
-        self.get_was_she_he_sick()
-        self.get_blood_type()
-        self.random_hemogoblin_donor_is_suitable_or_not()
+        # self.get_Date_of_Birth()
+        # self.get_title()
+        # self.get_first_name()
+        # self.get_last_name()
+        # self.get_full_name()
+        # self.get_weight()
+        # self.get_gender()
+        # self.get_unique_identifier()
+        # self.get_email_address()
+        # self.get_was_she_he_sick()
+        # self.get_blood_type()
+        # self.random_hemogoblin_donor_is_suitable_or_not()
 
 
 
@@ -83,25 +83,12 @@ class User_Data(object):
                 self.gender = gender
 
     @staticmethod
-    def date_verification(date):
-        date_parts = date.split(".")
-        if len(date_parts) == 3:
-            for part in date_parts:
-                if not part.isdigit():
-                    print("Bad date format ! It should be YYYY.MM.DD !")
-                    return False
-            return True
-        print("Bad date format ! It should be YYYY.MM.DD !")
-        return False
-
-    @staticmethod
     def date_string_is_valid(date_string: str):
         splitted_date = date_string.split(".")
         return len(splitted_date) == 3 and \
             splitted_date[0].isdigit() and int(splitted_date[0]) in range(1910,2030) and\
             splitted_date[1].isdigit() and int(splitted_date[1]) in range(1, 13) and \
             splitted_date[2].isdigit() and int(splitted_date[2]) in range(1, 32)
-
 
     def get_Date_of_Birth(self):
         date = ""
@@ -115,9 +102,12 @@ class User_Data(object):
 
 
     def get_Last_Donation_Date(self):
+        donation_date = ""
+        while donation_date == "":
+            donation_date = input("Please enter the date of your last donation")
 
 
-        pass
+
 
     def get_was_she_he_sick(self):
         was_she_he_sick = ""
@@ -147,15 +137,17 @@ class User_Data(object):
                 print("Your ID is wrong, type in again(It must be an ID or Passport number): ")
                 identifier = ""
 
-
     def get_Expiration_ID(self):
         user_id = ""
         today = datetime.date.today()
-        while user_id =="":
+        while user_id == "":
             user_id = input("Enter the experiation date of your Unique Identifier: ")
             if User_Data.date_string_is_valid(user_id) is False:
                 print("Please enter a valid Date eg: YYYY.MM.DD, e.g: 1991.05.26 ")
                 user_id = ""
+            else:
+                user_id = datetime.datetime.strptime(user_id, "%Y.%m.%d").date()
+                self.expiration = today < user_id
 
 
 
@@ -238,7 +230,7 @@ class User_Data(object):
             exit()
 
     def print_donor(self):
-        print(self.date_of_birth)
+        print(self.expiration)
 
 if __name__ == "__main__":
     bela = User_Data()
