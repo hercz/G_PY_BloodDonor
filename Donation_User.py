@@ -6,22 +6,31 @@ class User_Data(object):
     #data from the user
     def __init__(self):
 
-        self.get_Last_Donation_Date()
-        self.get_Expiration_ID()
-        self.get_Date_of_Birth()
+        self.available_for_donation()
+
+
+
         self.get_title()
         self.get_first_name()
         self.get_last_name()
         self.get_full_name()
-        self.get_weight()
         self.get_gender()
         self.get_unique_identifier()
         self.get_email_address()
         self.get_was_she_he_sick()
         self.get_blood_type()
+
+
+
+
+    def available_for_donation(self):
+        print("We need these data before you can go on!")
+        self.get_Date_of_Birth()
+        self.donor_age()
+        self.get_weight()
+        self.get_Last_Donation_Date()
         self.random_hemogoblin_donor_is_suitable_or_not()
-
-
+        self.get_Expiration_ID()
 
     def get_title(self):
         answer = ""
@@ -206,8 +215,16 @@ class User_Data(object):
     def Suitable_For_donation(self):
         pass
 
-    def Donor_Age(self):
-        pass
+    def donor_age(self):
+        today = datetime.date.today()
+        birth_date = datetime.datetime.strptime(self.date_of_birth,"%Y.%m.%d").date()
+        age = (today - birth_date).days // 365
+        if age < 18:
+            print("Sorry you are too young! ")
+            exit()
+        else:
+            self.age = age
+
 
     def Id_is_not_Expired(self):
         pass
@@ -230,7 +247,7 @@ class User_Data(object):
             exit()
 
     def print_donor(self):
-        print(self.donation_date)
+        print(self.age)
 
 if __name__ == "__main__":
     bela = User_Data()
