@@ -2,13 +2,11 @@ __author__ = 'Gazdik_Zsolt'
 import random
 
 
-from datetime import date
-
-
 class User_Data(object):
     #data from the user
     def __init__(self):
 
+        self.get_Date_of_Birth()
         self.get_title()
         self.get_first_name()
         self.get_last_name()
@@ -33,7 +31,6 @@ class User_Data(object):
                 self.title = ""
             else:
                 answer = ""
-                return False
 
     def get_first_name(self):
         first_name = ""
@@ -94,10 +91,23 @@ class User_Data(object):
         print("Bad date format ! It should be YYYY.MM.DD !")
         return False
 
+    @staticmethod
+    def date_string_is_valid(date_string: str):
+        splitted_date = date_string.split(".")
+        return len(splitted_date) == 3 and \
+            splitted_date[0].isdigit() and int(splitted_date[0]) in range(1910,2015) and\
+            splitted_date[1].isdigit() and int(splitted_date[1]) in range(1, 13) and \
+            splitted_date[2].isdigit() and int(splitted_date[2]) in range(1, 32)
+
+
     def get_Date_of_Birth(self):
+        date = ""
+        while date == "":
+            date = input("Please enter the Date of Your Birth: YYYY.MM.DD ")
+            if User_Data.date_string_is_valid(date) is False:
+                print("Please enter a valid Date eg: YYYY.MM.DD, e.g: 1991.05.26 ")
+                date = ""
 
-
-        pass
 
     def get_Last_Donation_Date(self):
 
@@ -134,9 +144,8 @@ class User_Data(object):
 
 
     def get_Expiration_ID(self):
+            user_id = input("Enter the experiation date of your Unique Identifier: ")
 
-
-        pass
 
     def get_blood_type(self):
         blood_type = ""
@@ -149,7 +158,6 @@ class User_Data(object):
             print("Incorrect input!")
             blood_type = input("Please enter your blood type(eg: A+): ")
         self.get_blood_type = blood_type.upper()
-
 
     def get_email_address(self):
         email_string = ""
