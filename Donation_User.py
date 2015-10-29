@@ -16,7 +16,7 @@ class User_Data(object):
         self.get_was_she_he_sick()
         self.get_blood_type()
         self.random_hemogoblin_donor_is_suitable_or_not()
-        
+
 
     def get_title(self):
         answer = ""
@@ -29,6 +29,7 @@ class User_Data(object):
                 self.title = ""
             else:
                 answer = ""
+                return False
 
     def get_first_name(self):
         first_name = ""
