@@ -156,8 +156,7 @@ class User_Data(object):
             if User_Data.date_string_is_valid(user_id) is False:
                 print("Please enter a valid Date eg: YYYY.MM.DD, e.g: 1991.05.26 ")
                 user_id = ""
-            else:
-                self.user_id = today <
+
 
 
 
