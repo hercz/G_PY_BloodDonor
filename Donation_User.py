@@ -23,19 +23,14 @@ class User_Data(object):
 
         self.available_for_donation()
 
-        self.get_Expiration_ID()
-        self.get_Date_of_Birth()
         self.get_title()
         self.get_first_name()
         self.get_last_name()
         self.get_full_name()
-        self.get_weight()
         self.get_gender()
         self.get_unique_identifier()
         self.get_email_address()
-        self.get_was_she_he_sick()
         self.get_blood_type()
-        self.random_hemogoblin_donor_is_suitable_or_not()
 
 
 
@@ -48,6 +43,7 @@ class User_Data(object):
         self.get_Last_Donation_Date()
         self.random_hemogoblin_donor_is_suitable_or_not()
         self.get_Expiration_ID()
+        self.get_was_she_he_sick()
         print("Congratulations you are available for donation, now we need your other data")
 
     def get_title(self):
@@ -181,7 +177,7 @@ class User_Data(object):
                 exit()
 
 
-
+    """
     def get_blood_type(self):
         blood_type = ""
         blood_type = input("Please enter your blood type(eg: A+): ")
@@ -193,6 +189,20 @@ class User_Data(object):
             print("Incorrect input!")
             blood_type = input("Please enter your blood type(eg: A+): ")
         self.get_blood_type = blood_type.upper()
+    """
+
+    def get_blood_type(self):
+        blood_types = ('a', 'b', 'ab', '0')
+        blood_type = ""
+        while blood_type == "":
+            blood_type = input("Please enter your blood type: ")
+            if blood_type.lower() not in blood_types:
+                print("Blood type can be only A, B, AB or 0 !")
+                blood_type = ""
+            else:
+                self.blood_type = blood_type
+
+
 
     def get_email_address(self):
         email_string = ""
