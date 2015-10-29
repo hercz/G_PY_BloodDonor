@@ -13,7 +13,6 @@ class User_Data(object):
         self.get_unique_identifier()
         self.get_email_address()
         self.get_was_she_he_sick()
-        
 
     def get_title(self):
         answer = ""
@@ -77,7 +76,7 @@ class User_Data(object):
                 self.gender = gender
 
 
-    def get_Date_of_Birth(self):
+    def get_date_of_birth(self):
         pass
 
     def get_Last_Donation_Date(self):
