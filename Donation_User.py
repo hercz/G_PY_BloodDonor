@@ -1,23 +1,14 @@
-from datetime import date
-from random import randrange
+__author__ = 'Gazdik_Zsolt'
+import random
+import datetime
 
-
-class UserData(object):
-    @staticmethod
-    def date_verification(date_str):
-        date_parts = date_str.split(".")
-        if len(date_parts) == 3:
-            for part in date_parts:
-                if not part.isdigit():
-                    print("Bad date format ! It should be YYYY.MM.DD !")
-                    return False
-            return True
-        print("Bad date format ! It should be YYYY.MM.DD !")
-        return False
-
-    # data from the user
+class User_Data(object):
+    #data from the user
     def __init__(self):
 
+
+        self.get_Expiration_ID()
+        self.get_Date_of_Birth()
         self.get_title()
         self.get_first_name()
         self.get_last_name()
@@ -29,6 +20,7 @@ class UserData(object):
         self.get_was_she_he_sick()
         self.get_blood_type()
         self.random_hemogoblin_donor_is_suitable_or_not()
+        
 
     def get_title(self):
         answer = ""
@@ -89,10 +81,46 @@ class UserData(object):
             else:
                 self.gender = gender
 
+    @staticmethod
+    def date_check(date_string):
+        date_parts = date_string.split(".")
+        if len(date_parts) == 3:
+            for part in date_parts:
+                if not part.isdigit():
+                    # print("Bad date format ! It should be YYYY.MM.DD !")
+                    return False
+            try:
+                # date_date = datetime.date(int(date_parts[0]), int(date_parts[1]), int(date_parts[2]))
+                return True
+            except ValueError as vex:
+                #print("Bad date!")
+                #print(vex)
+                return False
+        # print("Bad date format ! It should be YYYY.MM.DD !")
+        return False
+
+    @staticmethod
+    def date_string_is_valid(date_string: str):
+        splitted_date = date_string.split(".")
+        return len(splitted_date) == 3 and \
+            splitted_date[0].isdigit() and int(splitted_date[0]) in range(1910,2030) and\
+            splitted_date[1].isdigit() and int(splitted_date[1]) in range(1, 13) and \
+            splitted_date[2].isdigit() and int(splitted_date[2]) in range(1, 32)
+
+
     def get_Date_of_Birth(self):
-        pass
+        date = ""
+        while date == "":
+            date = input("Please enter the Date of Your Birth: YYYY.MM.DD ")
+            if User_Data.date_string_is_valid(date) is False:
+                print("Please enter a valid Date eg: YYYY.MM.DD, e.g: 1991.05.26 ")
+                date = ""
+            else:
+                self.date_of_birth = date
 
     def get_Last_Donation_Date(self):
+
+
         pass
 
     def get_was_she_he_sick(self):
@@ -113,33 +141,42 @@ class UserData(object):
             if len(identifier) != 8:
                 print("Your Identifier length is not enough, type in again: ")
                 identifier = ""
-            elif identifier[:2].isalpha() and identifier[2:].isdigit():
-                print("So that's a passport ID")
+            elif identifier[:6].isalpha() and identifier[6:].isdigit():
+                print("So that's a Passport ID")
                 self.identifier = identifier
-            elif identifier[:2].isdigit() and identifier[2:].isalpha():
+            elif identifier[:6].isdigit() and identifier[6:].isalpha():
                 print("So it's an Identity Card")
                 self.identifier = identifier
             else:
-                print("Your ID is wrong, type in again(It must match with the ID or the Passport): ")
+                print("Your ID is wrong, type in again(It must be an ID or Passport number): ")
                 identifier = ""
 
-    def get_Blood_Type(self):
-        pass
 
     def get_Expiration_ID(self):
-        pass
+        user_id = ""
+        today = datetime.date.today()
+        while user_id =="":
+            user_id = input("Enter the experiation date of your Unique Identifier: ")
+            if User_Data.date_string_is_valid(user_id) is False:
+                print("Please enter a valid Date eg: YYYY.MM.DD, e.g: 1991.05.26 ")
+                user_id = ""
+            else:
+                self.user_id = today <
+
+
 
     def get_blood_type(self):
         blood_type = ""
         blood_type = input("Please enter your blood type(eg: A+): ")
-        while (blood_type[len(blood_type)-1:] != "+" and
+        while (blood_type[len(blood_type)-1:] != "+" and\
                blood_type[len(blood_type)-1:] != "-")\
-            or (blood_type[:len(blood_type)-1].upper() != "A" and
-                blood_type[:len(blood_type)-1].upper() != "B" and
+            or (blood_type[:len(blood_type)-1].upper() != "A" and\
+                blood_type[:len(blood_type)-1].upper() != "B" and\
                 blood_type[:len(blood_type)-1].upper() != "AB"):
             print("Incorrect input!")
             blood_type = input("Please enter your blood type(eg: A+): ")
         self.get_blood_type = blood_type.upper()
+
 
     def get_email_address(self):
         email_string = ""
@@ -199,7 +236,7 @@ class UserData(object):
         pass
 
     def random_hemogoblin_donor_is_suitable_or_not(self):
-        random_hemogoblin = randrange(80, 200, 1)
+        random_hemogoblin = random.randrange(80,200,1)
         if random_hemogoblin >= 110:
             print("Donor is suitable for donation")
         else:
@@ -210,5 +247,5 @@ class UserData(object):
         print(self.weight)
 
 if __name__ == "__main__":
-    bela = UserData()
+    bela = User_Data()
     bela.print_donor()
