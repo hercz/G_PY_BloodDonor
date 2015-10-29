@@ -3,6 +3,7 @@ __author__ = 'Gazdik_Zsolt'
 class User_Data(object):
 
     def __init__(self):
+        self.get_Beds_Available()
         self.get_Zip_Code()
         self.get_City()
         self.get_Address()
@@ -58,7 +59,13 @@ class User_Data(object):
                 self.address = address
 
     def get_Beds_Available(self):
-        pass
+        available_beds = ""
+        while available_beds == "":
+            available_beds = input("Please enter the number of available beds: ")
+            if not available_beds.isdigit():
+                print("Please enter a positive intiger!")
+                available_beds = ""
+                self.available_beds = available_beds
 
     def get_Planned_Donor_Number(self):
         pass
@@ -78,7 +85,7 @@ class User_Data(object):
         pass
 
     def print_donor(self):
-        print(self.address)
+        print(self.available_beds)
 
 if __name__ == "__main__":
     gaspar = User_Data()
