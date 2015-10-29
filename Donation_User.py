@@ -218,10 +218,6 @@ class User_Data(object):
         self.mobil_string = mobil_string
 
     # And now functions
-
-    def Suitable_For_donation(self):
-        pass
-
     def donor_age(self):
         today = datetime.date.today()
         birth_date = datetime.datetime.strptime(self.date_of_birth,"%Y.%m.%d").date()
@@ -232,17 +228,7 @@ class User_Data(object):
         else:
             self.age = age
 
-
-    def Id_is_not_Expired(self):
-        pass
-
-    def Personal_Document(self):
-        pass
-
     def Data_In_Table_Form(self):
-        pass
-
-    def Random_Number(self):
         pass
 
     def random_hemogoblin_donor_is_suitable_or_not(self):
