@@ -31,6 +31,7 @@ class User_Data(object):
         self.get_Last_Donation_Date()
         self.random_hemogoblin_donor_is_suitable_or_not()
         self.get_Expiration_ID()
+        print("Congratulations you are available for donation, now we need your other data")
 
     def get_title(self):
         answer = ""
@@ -74,7 +75,7 @@ class User_Data(object):
             if weight.isdigit() and int(weight) >= 50:
                 self.weight = int(weight)
             elif weight.isdigit() and int(weight) < 50:
-                print("Sorry you are not suitable for donation! ")
+                print("Sorry your weight is not enough! ")
                 exit()
             else:
                 print("You must type in positive integers, above 50Kg ")
@@ -120,6 +121,9 @@ class User_Data(object):
             else:
                 donation_date = datetime.datetime.strptime(donation_date, "%Y.%m.%d").date()
                 self.donation_date = (today - donation_date).days > 90
+            if self.donation_date is False:
+                print("You are not suitable because you was on Donation not long ago")
+                exit()
 
     def get_was_she_he_sick(self):
         was_she_he_sick = ""
@@ -160,6 +164,9 @@ class User_Data(object):
             else:
                 user_id = datetime.datetime.strptime(user_id, "%Y.%m.%d").date()
                 self.expiration = today < user_id
+            if self.expiration is False:
+                print("Sorry you can't donate because your ID is expired")
+                exit()
 
     def get_blood_type(self):
         blood_type = ""
@@ -241,9 +248,9 @@ class User_Data(object):
     def random_hemogoblin_donor_is_suitable_or_not(self):
         random_hemogoblin = random.randrange(80,200,1)
         if random_hemogoblin >= 110:
-            print("Donor is suitable for donation")
+            print("Donor is suitable for donation, your hemogoblin:",random_hemogoblin)
         else:
-            print("Sorry you are not suitable for donation!")
+            print("Sorry you are not suitable for donation, your hemogoblin:",random_hemogoblin)
             exit()
 
     def print_donor(self):
