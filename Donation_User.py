@@ -1,12 +1,12 @@
 __author__ = 'Gazdik_Zsolt'
 import random
-from datetime import datetime
+import datetime
 
 class User_Data(object):
     #data from the user
     def __init__(self):
 
-        self.get_unique_identifier()
+
         self.get_Expiration_ID()
         self.get_Date_of_Birth()
         self.get_title()
@@ -15,7 +15,7 @@ class User_Data(object):
         self.get_full_name()
         self.get_weight()
         self.get_gender()
-
+        self.get_unique_identifier()
         self.get_email_address()
         self.get_was_she_he_sick()
         self.get_blood_type()
@@ -98,7 +98,7 @@ class User_Data(object):
     def date_string_is_valid(date_string: str):
         splitted_date = date_string.split(".")
         return len(splitted_date) == 3 and \
-            splitted_date[0].isdigit() and int(splitted_date[0]) in range(1910,2015) and\
+            splitted_date[0].isdigit() and int(splitted_date[0]) in range(1910,2030) and\
             splitted_date[1].isdigit() and int(splitted_date[1]) in range(1, 13) and \
             splitted_date[2].isdigit() and int(splitted_date[2]) in range(1, 32)
 
@@ -150,14 +150,14 @@ class User_Data(object):
 
     def get_Expiration_ID(self):
         user_id = ""
-        today = datetime.today()
+        today = datetime.date.today()
         while user_id =="":
             user_id = input("Enter the experiation date of your Unique Identifier: ")
             if User_Data.date_string_is_valid(user_id) is False:
                 print("Please enter a valid Date eg: YYYY.MM.DD, e.g: 1991.05.26 ")
                 user_id = ""
             else:
-                self.user_id = today > User_Data.date_string_is_valid(user_id)
+                self.user_id = today <
 
 
 
