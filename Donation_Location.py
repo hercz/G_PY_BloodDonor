@@ -3,13 +3,11 @@ __author__ = 'Gazdik_Zsolt'
 class User_Data(object):
 
     def __init__(self):
-        self.get_Beds_Available()
         self.get_Zip_Code()
         self.get_City()
         self.get_Address()
-
-
-
+        self.get_Beds_Available()
+        self.get_Planned_Donor_Number()
 
     #Inputs, gets
 
@@ -56,7 +54,7 @@ class User_Data(object):
             if len(address) > 25:
                 print("Address should be less then 25 characters!")
                 address = ""
-                self.address = address
+        self.address = address
 
     def get_Beds_Available(self):
         available_beds = ""
@@ -65,10 +63,22 @@ class User_Data(object):
             if not available_beds.isdigit():
                 print("Please enter a positive intiger!")
                 available_beds = ""
-                self.available_beds = available_beds
+            if available_beds == "0":
+                print("You should enter a positive intiger!")
+                available_beds = ""
+        self.available_beds = available_beds
 
     def get_Planned_Donor_Number(self):
-        pass
+        planned_donor_number = ""
+        while planned_donor_number == "":
+            planned_donor_number = input("Please enter th planned donor number: ")
+            if not planned_donor_number.isdigit():
+                print("Please enter a positive intiger!")
+                planned_donor_number = ""
+            if planned_donor_number == "0":
+                print("You should enter a positive intiger!")
+                planned_donor_number = ""
+        self.planned_donor_number = planned_donor_number
 
     # FUNCTIONS
 
@@ -85,7 +95,7 @@ class User_Data(object):
         pass
 
     def print_donor(self):
-        print(self.available_beds)
+        print(self.planned_donor_number)
 
 if __name__ == "__main__":
     gaspar = User_Data()
