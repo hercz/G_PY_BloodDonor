@@ -1,4 +1,5 @@
 __author__ = 'Gazdik_Zsolt'
+import random
 
 
 from datetime import date
@@ -17,6 +18,8 @@ class User_Data(object):
         self.get_unique_identifier()
         self.get_email_address()
         self.get_was_she_he_sick()
+        self.get_blood_type()
+        self.random_hemogoblin_donor_is_suitable_or_not()
         
 
     def get_title(self):
@@ -54,7 +57,6 @@ class User_Data(object):
         full_name = self.title + self.first_name + " " + self.last_name
         self.full_name = full_name
 
-
     def get_weight(self):
         weight = ""
         while weight == "":
@@ -67,7 +69,6 @@ class User_Data(object):
             else:
                 print("You must type in positive integers, above 50Kg ")
                 weight = ""
-
 
     def get_gender(self):
         gender = ""
@@ -92,8 +93,14 @@ class User_Data(object):
         print("Bad date format ! It should be YYYY.MM.DD !")
         return False
 
+    def get_Date_of_Birth(self):
+
+
+        pass
 
     def get_Last_Donation_Date(self):
+
+
         pass
 
     def get_was_she_he_sick(self):
@@ -106,7 +113,6 @@ class User_Data(object):
                 was_she_he_sick = ""
             else:
                 self.get_was_she_he_sick = was_she_he_sick
-
 
     def get_unique_identifier(self):
         identifier = ""
@@ -126,12 +132,23 @@ class User_Data(object):
                 identifier = ""
 
 
-
-    def get_Blood_Type(self):
-        pass
-
     def get_Expiration_ID(self):
+
+
         pass
+
+    def get_blood_type(self):
+        blood_type = ""
+        blood_type = input("Please enter your blood type(eg: A+): ")
+        while (blood_type[len(blood_type)-1:] != "+" and\
+               blood_type[len(blood_type)-1:] != "-")\
+            or (blood_type[:len(blood_type)-1].upper() != "A" and\
+                blood_type[:len(blood_type)-1].upper() != "B" and\
+                blood_type[:len(blood_type)-1].upper() != "AB"):
+            print("Incorrect input!")
+            blood_type = input("Please enter your blood type(eg: A+): ")
+        self.get_blood_type = blood_type.upper()
+
 
     def get_email_address(self):
         email_string = ""
@@ -190,8 +207,13 @@ class User_Data(object):
     def Random_Number(self):
         pass
 
-    def Donor_is_Suitable_or_not(self):
-        pass
+    def random_hemogoblin_donor_is_suitable_or_not(self):
+        random_hemogoblin = random.randrange(80,200,1)
+        if random_hemogoblin >= 110:
+            print("Donor is suitable for donation")
+        else:
+            print("Sorry you are not suitable for donation!")
+            exit()
 
     def print_donor(self):
         print(self.weight)
