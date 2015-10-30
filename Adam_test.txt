@@ -1,6 +1,16 @@
-Ez egy teszt.
-<<<<<<< HEAD
-Ez egy new sor.
-=======
-ez egy masodik sor
->>>>>>> f862302f8d8029155e6b04f50a66567a6907251a
+Donation_User testing Cases:
+
+get_title method Cases:
+    input: o                        expected output: ""    empty string cause it was FALSE
+    input: p                        expected output: ""    empty string cause it was FALSE
+    input: é                        expected output: ""    empty string cause it was FALSE
+    input: 8                        expected output: ""    empty string cause it was FALSE
+    input: n                        expected output: I see, you don't even have a title, poor boy! + program goes on
+    input: y                        expected output: In that Case enter your title:   + we are waiting for the title input
+
+get_first_name method Cases:
+    input: ""                       expected output: A text message + program waiting for True input
+    input: 8                        expected output: A text message + program waiting for True input
+    input: alma                     expected output: Program goes on to the next step
+
+
