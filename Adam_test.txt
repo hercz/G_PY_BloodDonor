@@ -13,4 +13,14 @@ get_first_name method Cases:
     input: 8                        expected output: A text message + program waiting for True input
     input: alma                     expected output: Program goes on to the next step
 
+get_last_name method Cases:
+    input: ""                       expected output: A text message + program waiting for True input
+    input: 26                       expected output: A text message + program waiting for True input
+    input: beka                     expected output: Program goes on to the next step
 
+get_full_name method Cases:
+    input: title + first_name + last_name   expected output: A string that contains these data appended
+    input: Dr. + Gazdik + Zsolt             expected output: Dr. Gazdik Zsolt
+
+get_weight method Cases:
+    
