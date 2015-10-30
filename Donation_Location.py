@@ -3,6 +3,7 @@ __author__ = 'Gazdik_Zsolt'
 class User_Data(object):
 
     def __init__(self):
+        self.get_Start_Time()
         self.get_Zip_Code()
         self.get_City()
         self.get_Address()
@@ -15,7 +16,13 @@ class User_Data(object):
         pass
 
     def get_Start_Time(self):
-        pass
+        start_time = ""
+        while start_time == "":
+            start_time = input("Please enter the start time of event: ")
+            while not start_time.isdigit and (24 > start_time >= 0):
+                print("Please write in correct form HH!")
+                start_time = ""
+        self.start_time = start_time
 
     def get_End_Time(self):
         pass
