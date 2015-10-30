@@ -19,6 +19,7 @@ class User_Data(object):
     def __init__(self):
         
         self.get_Date_of_Event()
+
         self.get_Start_Time()
         self.get_Zip_Code()
         self.get_City()
@@ -29,20 +30,52 @@ class User_Data(object):
     #Inputs, gets
 
 
+    # def get_Date_of_Event(self):
+    #     date_of_event = ""
+    #     today = datetime.date.today()
+    #     while date_of_event == "":
+    #         date_of_event = input("Please enter the date of your birth in format YYYY.MM.DD: ")
+    #         if User_Data.date_string_is_valid(date_of_event) is False:
+    #             print("Please enter a valid date (e. g. 1991.05.26)! ")
+    #             date_of_event = ""
+    #         date_of_event_date = datetime.datetime.strptime(date_of_event, "%Y.%m.%d").date()
+    #         if datetime.datetime.isoweekday(date_of_event_date) <=5:
+    #             print("You must enter a date that is on weekday!")
+    #             date_of_event = ""
+    #             if (date_of_event_date - today).days < 10:
+    #                 print("Sorry you must organize it at least 10 days from now!!")
+    #                 date_of_event = ""
+    #         else:
+    #             self.date_of_event = date_of_event
+
     def get_Date_of_Event(self):
         date_of_event = ""
-        today = datetime.date.today()
         while date_of_event == "":
             date_of_event = input("Please enter the date of your birth in format YYYY.MM.DD: ")
             if User_Data.date_string_is_valid(date_of_event) is False:
                 print("Please enter a valid date (e. g. 1991.05.26)! ")
                 date_of_event = ""
-            date_of_event = datetime.datetime.strptime(date_of_event, "%Y.%m.%d").date()
-            if (date_of_event - today).days < 10:
-                print("Sorry you must organize it at least 10 days from now!!")
-                date_of_event = ""
             else:
                 self.date_of_event = date_of_event
+            if User_Data.date_string_is_valid(date_of_event) is True:
+                self.date_of_event_ten_days_before()
+                self.date_weekdays()
+
+
+    def date_of_event_ten_days_before(self):
+        today = datetime.date.today()
+        date_of_event = datetime.datetime.strptime(self.date_of_event, "%Y.%m.%d").date()
+        if (date_of_event - today).days < 10:
+            print("Sorry you must organize it at least 10 days from now!!")
+            self.get_Date_of_Event()
+
+    def date_weekdays(self):
+        date_of_event = datetime.datetime.strptime(self.date_of_event, "%Y.%m.%d").date()
+        if datetime.datetime.isoweekday(date_of_event) >5:
+            print("Sorry you must organize it on weekdays (Monday-Friday!")
+            self.get_Date_of_Event()
+
+
 
 
 
