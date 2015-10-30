@@ -255,7 +255,7 @@ class User_Data(object):
     def data_dictionary(self):
         data = {"name": self.full_name,
                 "weight": self.weight,
-                "date of birt": self.date_of_birth,
+                "date of birth": self.date_of_birth,
                 "age": self.age,
                 "e-mail": self.email_string}
         return data
