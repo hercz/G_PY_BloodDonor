@@ -84,14 +84,14 @@ class User_Data(object):
     def get_weight(self):
         weight = ""
         while weight == "":
-            weight = input("Please enter your weight in Kg: ")
+            weight = input("Please enter your weight in kg: ")
             if weight.isdigit() and int(weight) >= 50:
                 self.weight = int(weight)
             elif weight.isdigit() and int(weight) < 50:
-                print("Sorry you are not suitable for donation! ")
+                print("Sorry you are not suitable for donation! You are below 50 kg.")
                 exit()
             else:
-                print("You must type in positive integers, above 50Kg ")
+                print("You must enter a positive integer! ")
                 weight = ""
 
     def get_gender(self):
@@ -128,9 +128,9 @@ class User_Data(object):
             else:
                 donation_date = datetime.datetime.strptime(donation_date, "%Y.%m.%d").date()
                 self.donation_date = (today - donation_date).days > 90
-            if self.donation_date is False:
-                print("You are not suitable because you was on Donation not long ago")
-                exit()
+                if self.donation_date is False:
+                    print("You are not suitable because you was on Donation not long ago")
+                    exit()
 
     def get_was_she_he_sick(self):
         was_she_he_sick = ""
@@ -265,7 +265,7 @@ class User_Data(object):
         return data
 
     def print_donor(self):
-        print(self.age)
+        print(self.get_last_donation_date())
 
 if __name__ == "__main__":
     bela = User_Data()
