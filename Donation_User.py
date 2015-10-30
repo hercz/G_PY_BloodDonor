@@ -77,17 +77,25 @@ class User_Data(object):
         full_name = self.first_name + ", " + self.title + " " + self.last_name
         self.full_name = full_name
 
+    @staticmethod
+    def valid_weight(weight):
+        if weight.isdigit() and int(weight) >= 50:
+            return True
+        elif weight.isdigit() and int(weight) < 50:
+            print("Sorry you are not suitable for donation! You are below 50 kg.")
+            exit()
+        else:
+            print("You must enter a positive integer! ")
+            return False
+
     def get_weight(self):
         weight = ""
         while weight == "":
             weight = input("Please enter your weight in kg: ")
-            if weight.isdigit() and int(weight) >= 50:
-                self.weight = int(weight)
-            elif weight.isdigit() and int(weight) < 50:
-                print("Sorry you are not suitable for donation! You are below 50 kg.")
-                exit()
+            if User_Data.valid_weight(weight):
+                self.weight = weight
             else:
-                print("You must enter a positive integer! ")
+                User_Data.valid_weight(weight)
                 weight = ""
 
     def get_gender(self):
@@ -245,7 +253,7 @@ class User_Data(object):
             self.age = age
 
     def random_hemogoblin_donor_is_suitable_or_not(self):
-        random_hemogoblin = random.randrange(80,200,1)
+        random_hemogoblin = random.randrange(80, 200, 1)
         if random_hemogoblin >= 110:
             print("Donor is suitable for donation, your hemogoblin:",random_hemogoblin)
         else:
