@@ -171,9 +171,9 @@ class User_Data(object):
             else:
                 user_id = datetime.datetime.strptime(user_id, "%Y.%m.%d").date()
                 self.expiration = today < user_id
-            if self.expiration is False:
-                print("Sorry you can't donate because your ID is expired.")
-                exit()
+                if self.expiration is False:
+                    print("Sorry you can't donate because your ID is expired.")
+                    exit()
 
 
     """
@@ -253,15 +253,15 @@ class User_Data(object):
         if random_hemogoblin >= 110:
             print("Donor is suitable for donation, your hemogoblin:",random_hemogoblin)
         else:
-            print("Sorry you are not suitable for donation, your hemogoblin:",random_hemogoblin)
+            print("Sorry you are not suitable for donation, your hemogoblin:", random_hemogoblin)
             exit()
 
     def data_dictionary(self):
-        data = {"name" : self.full_name,
-                "weight" : self.weight,
-                "date of birt" : self.date_of_birth,
-                "age" : self.age,
-                "e-mail" : self.email_string}
+        data = {"name": self.full_name,
+                "weight": self.weight,
+                "date of birt": self.date_of_birth,
+                "age": self.age,
+                "e-mail": self.email_string}
         return data
 
     def print_donor(self):
