@@ -1,8 +1,26 @@
 __author__ = 'Gazdik_Zsolt'
+import datetime
 
 class User_Data(object):
 
+    @staticmethod
+    def date_string_is_valid(date_string: str):
+        splitted_date = date_string.split(".")
+        if not (len(splitted_date) == 3 and splitted_date[0].isdigit() and
+            splitted_date[1].isdigit() and splitted_date[2].isdigit()):
+            return False
+        try:
+            datetime.date(int(splitted_date[0]), int(splitted_date[1]), int(splitted_date[2]))
+            return True
+        except ValueError as vex:
+            print("This date is not correct!")
+            return False
+
     def __init__(self):
+        
+        self.get_Date_of_Event()
+
+        self.get_Start_Time()
         self.get_Zip_Code()
         self.get_City()
         self.get_Address()
@@ -11,11 +29,48 @@ class User_Data(object):
 
     #Inputs, gets
 
+
     def get_Date_of_Event(self):
-        pass
+        date_of_event = ""
+        while date_of_event == "":
+            date_of_event = input("Please enter the date of your birth in format YYYY.MM.DD: ")
+            if User_Data.date_string_is_valid(date_of_event) is False:
+                print("Please enter a valid date (e. g. 1991.05.26)! ")
+                date_of_event = ""
+            else:
+                self.date_of_event = date_of_event
+            if User_Data.date_string_is_valid(date_of_event) is True:
+                self.date_of_event_ten_days_before()
+                self.date_weekdays()
+
+
+    def date_of_event_ten_days_before(self):
+        today = datetime.date.today()
+        date_of_event = datetime.datetime.strptime(self.date_of_event, "%Y.%m.%d").date()
+        if (date_of_event - today).days < 10:
+            print("Sorry you must organize it at least 10 days from now!!")
+            self.get_Date_of_Event()
+
+    def date_weekdays(self):
+        date_of_event = datetime.datetime.strptime(self.date_of_event, "%Y.%m.%d").date()
+        if datetime.datetime.isoweekday(date_of_event) >5:
+            print("Sorry you must organize it on weekdays (Monday-Friday!")
+            self.get_Date_of_Event()
+
+
+
+
+
+
 
     def get_Start_Time(self):
-        pass
+        start_time = ""
+        while start_time == "":
+            start_time = input("Please enter the start time of event: ")
+            while not start_time.isdigit and (24 > start_time >= 0):
+                print("Please write in correct form HH!")
+                start_time = ""
+        self.start_time = start_time
 
     def get_End_Time(self):
         pass
