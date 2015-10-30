@@ -18,7 +18,6 @@ class User_Data(object):
             print("This date is not correct!")
             return False
 
-
     def __init__(self):
 
         self.available_for_donation()
@@ -31,9 +30,6 @@ class User_Data(object):
         self.get_unique_identifier()
         self.get_email_address()
         self.get_blood_type()
-
-
-
 
     def available_for_donation(self):
         print("We need these data before you can go on!")
@@ -78,7 +74,7 @@ class User_Data(object):
                 self.last_name = last_name
 
     def get_full_name(self):
-        full_name = self.last_name + ", " + self.first_name + " " + self.title
+        full_name = self.first_name + ", " + self.title + " " + self.last_name
         self.full_name = full_name
 
     def get_weight(self):
@@ -259,7 +255,7 @@ class User_Data(object):
     def data_dictionary(self):
         data = {"name": self.full_name,
                 "weight": self.weight,
-                "date of birt": self.date_of_birth,
+                "date of birth": self.date_of_birth,
                 "age": self.age,
                 "e-mail": self.email_string}
         return data

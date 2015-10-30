@@ -27,8 +27,25 @@ if __name__ == "__main__":
         import Donation_User as user
         print_separator_line()
         print("Welcome in Donor registration application!")
+        print()
+        person = user.User_Data()
+        print()
+        print_separator_line()
+        print("The user main data: ")
+        print()
+        print(person.data_dictionary()['name'], '\n',
+              str(person.data_dictionary()['weight']), ' kg\n',
+              person.data_dictionary()['date of birth'], ' - ', person.data_dictionary()['age'], ' years old\n',
+              person.data_dictionary()['e-mail'])
+        print()
+        print("Thank for your registration (and your blood)!")
 
     else:
         import Donation_Location as loc
         print_separator_line()
         print("Welcome in Donation event registration application!")
+        print()
+        location = loc.User_Data()
+        print()
+        print("Thank for your registration (and your blood)!")
+        
