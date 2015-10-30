@@ -49,7 +49,7 @@ class User_Data(object):
     def get_title(self):
         answer = ""
         while answer == "":
-            answer = input("Do you have a title?:  Y/N: ")
+            answer = input("Do you have a title? (Y/N): ")
             if answer == "Y" or answer == "y":
                 self.title = input("In that Case enter your title: ") + " "
             elif answer == "N" or answer == "n":
@@ -98,7 +98,7 @@ class User_Data(object):
         gender = ""
         available_genders = ["f", "m"]
         while gender == "":
-            gender = input("Please choose your gender F/M")
+            gender = input("Please choose your gender F/M: ")
             if not gender.lower() in available_genders:
                 print("You most type in one of the available genders:")
                 gender = ""
@@ -109,9 +109,9 @@ class User_Data(object):
     def get_date_of_birth(self):
         date = ""
         while date == "":
-            date = input("Please enter the Date of Your Birth: YYYY.MM.DD ")
+            date = input("Please enter the date of your birth in format YYYY.MM.DD: ")
             if User_Data.date_string_is_valid(date) is False:
-                print("Please enter a valid Date eg: YYYY.MM.DD, e.g: 1991.05.26 ")
+                print("Please enter a valid date (e. g. 1991.05.26)! ")
                 date = ""
             else:
                 self.date_of_birth = date
@@ -123,20 +123,20 @@ class User_Data(object):
         while donation_date == "":
             donation_date = input("Please enter the date of your last donation: ")
             if User_Data.date_string_is_valid(donation_date) is False:
-                print("Please enter a valid Date eg: YYYY.MM.DD, e.g: 1991.05.26 ")
+                print("Please enter a valid date (e.g: 1991.05.26)! ")
                 donation_date = ""
             else:
                 donation_date = datetime.datetime.strptime(donation_date, "%Y.%m.%d").date()
                 self.donation_date = (today - donation_date).days > 90
                 if self.donation_date is False:
-                    print("You are not suitable because you was on Donation not long ago")
+                    print("You are not suitable because you was on donation not long ago.")
                     exit()
 
     def get_was_she_he_sick(self):
         was_she_he_sick = ""
         available_answers = ["y", "n"]
         while was_she_he_sick == "":
-            was_she_he_sick = input("Have you been sick in the last three months? (Y, N)")
+            was_she_he_sick = input("Have you been sick in the last three months? (Y, N): ")
             if not was_she_he_sick.lower() in available_answers:
                 print("This is an important question! Please write here the TRUTH!")
                 was_she_he_sick = ""
@@ -151,10 +151,10 @@ class User_Data(object):
                 print("Your Identifier length is not enough, type in again: ")
                 identifier = ""
             elif identifier[:6].isalpha() and identifier[6:].isdigit():
-                print("So that's a Passport ID")
+                print("So that's a Passport ID.")
                 self.identifier = identifier
             elif identifier[:6].isdigit() and identifier[6:].isalpha():
-                print("So it's an Identity Card")
+                print("So it's an Identity Card.")
                 self.identifier = identifier
             else:
                 print("Your ID is wrong, type in again(It must be an ID or Passport number): ")
@@ -164,15 +164,15 @@ class User_Data(object):
         user_id = ""
         today = datetime.date.today()
         while user_id == "":
-            user_id = input("Enter the experiation date of your Unique Identifier: ")
+            user_id = input("Enter the expiration date of your unique identifier: ")
             if User_Data.date_string_is_valid(user_id) is False:
-                print("Please enter a valid Date eg: YYYY.MM.DD, e.g: 1991.05.26 ")
+                print("Please enter a valid date (e. g. 1991.05.26)! ")
                 user_id = ""
             else:
                 user_id = datetime.datetime.strptime(user_id, "%Y.%m.%d").date()
                 self.expiration = today < user_id
             if self.expiration is False:
-                print("Sorry you can't donate because your ID is expired")
+                print("Sorry you can't donate because your ID is expired.")
                 exit()
 
 
