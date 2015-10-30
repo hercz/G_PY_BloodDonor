@@ -1,8 +1,23 @@
 __author__ = 'Gazdik_Zsolt'
+import datetime
 
 class User_Data(object):
 
+    @staticmethod
+    def date_string_is_valid(date_string: str):
+        splitted_date = date_string.split(".")
+        if not (len(splitted_date) == 3 and splitted_date[0].isdigit() and
+            splitted_date[1].isdigit() and splitted_date[2].isdigit()):
+            return False
+        try:
+            datetime.date(int(splitted_date[0]), int(splitted_date[1]), int(splitted_date[2]))
+            return True
+        except ValueError as vex:
+            print("This date is not correct!")
+            return False
+
     def __init__(self):
+        self.get_Date_of_Event()
         self.get_Zip_Code()
         self.get_City()
         self.get_Address()
@@ -11,7 +26,19 @@ class User_Data(object):
 
     #Inputs, gets
 
+    
     def get_Date_of_Event(self):
+        date_of_event = ""
+        while date_of_event == "":
+            date_of_event = input("Please enter the date of your birth in format YYYY.MM.DD: ")
+            if User_Data.date_string_is_valid(date_of_event) is False:
+                print("Please enter a valid date (e. g. 1991.05.26)! ")
+                date_of_event = ""
+            else:
+                self.date_of_event = date_of_event
+
+
+
         pass
 
     def get_Start_Time(self):
