@@ -17,6 +17,7 @@ class User_Data(object):
             return False
 
     def __init__(self):
+
         self.get_Date_of_Event()
         self.get_Zip_Code()
         self.get_City()
@@ -26,20 +27,25 @@ class User_Data(object):
 
     #Inputs, gets
 
-    
+
     def get_Date_of_Event(self):
         date_of_event = ""
+        today = datetime.date.today()
         while date_of_event == "":
             date_of_event = input("Please enter the date of your birth in format YYYY.MM.DD: ")
             if User_Data.date_string_is_valid(date_of_event) is False:
                 print("Please enter a valid date (e. g. 1991.05.26)! ")
+                date_of_event = ""
+            date_of_event = datetime.datetime.strptime(date_of_event, "%Y.%m.%d").date()
+            if (date_of_event - today).days < 10:
+                print("Sorry you must organize it at least 10 days from now!!")
                 date_of_event = ""
             else:
                 self.date_of_event = date_of_event
 
 
 
-        pass
+
 
     def get_Start_Time(self):
         pass
