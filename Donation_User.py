@@ -6,6 +6,17 @@ class User_Data(object):
     #data from the user
 
     @staticmethod
+    def valid_weight(weight):
+        if weight.isdigit() and int(weight) >= 50:
+            return True
+        elif weight.isdigit() and int(weight) < 50:
+            print("Sorry you are not suitable for donation! You are below 50 kg.")
+            exit()
+        else:
+            print("You must enter a positive integer! ")
+            return False
+
+    @staticmethod
     def date_string_is_valid(date_string: str):
         splitted_date = date_string.split(".")
         if not (len(splitted_date) == 3 and splitted_date[0].isdigit() and
@@ -76,17 +87,6 @@ class User_Data(object):
     def get_full_name(self):
         full_name = self.first_name + ", " + self.title + " " + self.last_name
         self.full_name = full_name
-
-    @staticmethod
-    def valid_weight(weight):
-        if weight.isdigit() and int(weight) >= 50:
-            return True
-        elif weight.isdigit() and int(weight) < 50:
-            print("Sorry you are not suitable for donation! You are below 50 kg.")
-            exit()
-        else:
-            print("You must enter a positive integer! ")
-            return False
 
     def get_weight(self):
         weight = ""
