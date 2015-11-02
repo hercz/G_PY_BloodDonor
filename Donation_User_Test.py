@@ -20,5 +20,18 @@ class MyTestCase(unittest.TestCase):
 
 
 
+    def test_check_date_string_1(self):
+        self.assertFalse(User_Data.check_date_string("gsdkjhgs"))
+
+    def test_check_date_string_2(self):
+        self.assertFalse(User_Data.check_date_string("2005.02.31"))
+
+    def test_check_date_string_3(self):
+        self.assertTrue(User_Data.check_date_string("2005.12.05"))
+
+
+
+
+
 if __name__ == '__main__':
     unittest.main()
