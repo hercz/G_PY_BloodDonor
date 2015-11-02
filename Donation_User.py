@@ -6,10 +6,10 @@ class User_Data(object):
     #data from the user
 
     @staticmethod
-    def valid_weight(weight):
-        if weight.isdigit() and int(weight) >= 50:
+    def valid_weight(weight_str):
+        if weight_str.isdigit() and int(weight_str) >= 50:
             return True
-        elif weight.isdigit() and int(weight) < 50:
+        elif weight_str.isdigit() and int(weight_str) < 50:
             print("Sorry you are not suitable for donation! You are below 50 kg.")
             exit()
         else:
@@ -17,7 +17,7 @@ class User_Data(object):
             return False
 
     @staticmethod
-    def date_string_is_valid(date_string: str):
+    def check_date_string(date_string: str):
         splitted_date = date_string.split(".")
         if not (len(splitted_date) == 3 and splitted_date[0].isdigit() and
             splitted_date[1].isdigit() and splitted_date[2].isdigit()):
@@ -28,6 +28,22 @@ class User_Data(object):
         except ValueError as vex:
             print("This date is not correct!")
             return False
+
+    @staticmethod
+    def validate_last_donation_date(donation_date):
+        today = datetime.date.today()
+        if User_Data.check_date_string(donation_date) is False:
+            print("Please enter a valid date (e.g: 1991.05.26)! ")
+            donation_date = ""
+            return donation_date
+        else:
+            donation_date = datetime.datetime.strptime(donation_date, "%Y.%m.%d").date()
+            if (today - donation_date).days < 90:
+                print("You are not suitable because you was on donation not long ago.")
+                exit()
+            else:
+                return donation_date
+
 
     def __init__(self):
 
@@ -114,7 +130,7 @@ class User_Data(object):
         date = ""
         while date == "":
             date = input("Please enter the date of your birth in format YYYY.MM.DD: ")
-            if User_Data.date_string_is_valid(date) is False:
+            if User_Data.check_date_string(date) is False:
                 print("Please enter a valid date (e. g. 1991.05.26)! ")
                 date = ""
             else:
@@ -123,18 +139,14 @@ class User_Data(object):
 
     def get_last_donation_date(self):
         donation_date = ""
-        today = datetime.date.today()
         while donation_date == "":
             donation_date = input("Please enter the date of your last donation: ")
-            if User_Data.date_string_is_valid(donation_date) is False:
-                print("Please enter a valid date (e.g: 1991.05.26)! ")
-                donation_date = ""
-            else:
-                donation_date = datetime.datetime.strptime(donation_date, "%Y.%m.%d").date()
-                self.donation_date = (today - donation_date).days > 90
-                if self.donation_date is False:
-                    print("You are not suitable because you was on donation not long ago.")
-                    exit()
+            donation_date = User_Data.validate_last_donation_date(donation_date)
+        self.donation_date = donation_date
+
+
+
+
 
     def get_was_she_he_sick(self):
         was_she_he_sick = ""
@@ -169,7 +181,7 @@ class User_Data(object):
         today = datetime.date.today()
         while user_id == "":
             user_id = input("Enter the expiration date of your unique identifier: ")
-            if User_Data.date_string_is_valid(user_id) is False:
+            if User_Data.check_date_string(user_id) is False:
                 print("Please enter a valid date (e. g. 1991.05.26)! ")
                 user_id = ""
             else:
