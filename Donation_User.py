@@ -171,21 +171,6 @@ class User_Data(object):
                     print("Sorry you can't donate because your ID is expired.")
                     exit()
 
-
-    """
-    def get_blood_type(self):
-        blood_type = ""
-        blood_type = input("Please enter your blood type(eg: A+): ")
-        while (blood_type[len(blood_type)-1:] != "+" and\
-               blood_type[len(blood_type)-1:] != "-")\
-            or (blood_type[:len(blood_type)-1].upper() != "A" and\
-                blood_type[:len(blood_type)-1].upper() != "B" and\
-                blood_type[:len(blood_type)-1].upper() != "AB"):
-            print("Incorrect input!")
-            blood_type = input("Please enter your blood type(eg: A+): ")
-        self.get_blood_type = blood_type.upper()
-    """
-
     def get_blood_type(self):
         blood_types = ('a', 'b', 'ab', '0')
         blood_type = ""
