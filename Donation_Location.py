@@ -1,13 +1,13 @@
 __author__ = 'Gazdik_Zsolt'
 import datetime
 
-class User_Data(object):
 
+class User_Data(object):
     @staticmethod
     def date_string_is_valid(date_string: str):
         splitted_date = date_string.split(".")
         if not (len(splitted_date) == 3 and splitted_date[0].isdigit() and
-            splitted_date[1].isdigit() and splitted_date[2].isdigit()):
+                    splitted_date[1].isdigit() and splitted_date[2].isdigit()):
             return False
         try:
             datetime.date(int(splitted_date[0]), int(splitted_date[1]), int(splitted_date[2]))
@@ -17,7 +17,7 @@ class User_Data(object):
             return False
 
     def __init__(self):
-        
+
         self.get_Date_of_Event()
 
         self.get_Start_Time()
@@ -27,7 +27,7 @@ class User_Data(object):
         self.get_Beds_Available()
         self.get_Planned_Donor_Number()
 
-    #Inputs, gets
+    # Inputs, gets
 
 
     def get_Date_of_Event(self):
@@ -43,7 +43,6 @@ class User_Data(object):
                 self.date_of_event_ten_days_before()
                 self.date_weekdays()
 
-
     def date_of_event_ten_days_before(self):
         today = datetime.date.today()
         date_of_event = datetime.datetime.strptime(self.date_of_event, "%Y.%m.%d").date()
@@ -53,15 +52,9 @@ class User_Data(object):
 
     def date_weekdays(self):
         date_of_event = datetime.datetime.strptime(self.date_of_event, "%Y.%m.%d").date()
-        if datetime.datetime.isoweekday(date_of_event) >5:
+        if datetime.datetime.isoweekday(date_of_event) > 5:
             print("Sorry you must organize it on weekdays (Monday-Friday!")
             self.get_Date_of_Event()
-
-
-
-
-
-
 
     def get_Start_Time(self):
         start_time = ""
@@ -100,7 +93,6 @@ class User_Data(object):
                 print("You must fill this and city names must be: Miskolc, Kazincbarcika, Szerencs, Sarospatak")
                 city = ""
         self.city = city.lower()
-
 
     def get_Address(self):
         address = ""
@@ -145,6 +137,7 @@ class User_Data(object):
 
     def print_donor(self):
         print(self.planned_donor_number)
+
 
 if __name__ == "__main__":
     gaspar = User_Data()

@@ -1,30 +1,42 @@
 def print_separator_line():
-    print("-"*32)
+    print("-" * 32)
 
 
 def greetings():
     print("Welcome in the blood donor register application!!")
-    print("Please choose an application which you want to use!")
     print_separator_line()
 
 
-def print_apps():
-    print("If you want to use Donor registration application, type in: user")
-    print("If you want to use Donation event registration application, type in: loc")
+def Main_Menu():
+    #print("If you want to use Donor registration application, type in: user")
+    print("Main menu")
+    print("     1. I want to add a new guy, bro!!")
+    print("     2. How about a new donation event? Yeah! That's what i want!")
+    print("     3. Genie make a donor disappear!")
+    print("     4. Obama destroy event protocol..")
+    print("     5. Show me everyone and everything The way I want!")
+    print("     6. Search and...? SEARCH")
+    print("     7. Exit \n")
 
+    #print("\n Choose what you want: ")
+    #print("If you want to use Donation event registration application, type in: loc")
 
 if __name__ == "__main__":
     print_separator_line()
     greetings()
-    apps_alias_str = ""
-    while apps_alias_str == "":
-        print_apps()
-        apps_alias_str = input("> ")
-        if not (apps_alias_str == "user" or apps_alias_str == "loc"):
-            print("Invalid input!")
-            apps_alias_str = ""
-    if apps_alias_str == "user":
+    Main_Menu()
+    Picked_option_string = ""
+    while Picked_option_string == "":
+        #Main_Menu()
+        Picked_option_string = input("Pick an option: ")
+        if not (Picked_option_string == "1" or Picked_option_string == "2" or Picked_option_string == "3" or \
+                Picked_option_string == "4" or Picked_option_string == "5" or Picked_option_string == "6" or \
+                Picked_option_string == "7"):
+            print("Your input is invalid, choose from the available menus!")
+            Picked_option_string = ""
+    if Picked_option_string == "1":
         import Donation_User as user
+
         print_separator_line()
         print("Welcome in Donor registration application!")
         print()
@@ -39,13 +51,27 @@ if __name__ == "__main__":
               person.data_dictionary()['e-mail'])
         print()
         print("Thank for your registration (and your blood)!")
+    if Picked_option_string == "2":
+        import Donation_Location as location
 
-    else:
-        import Donation_Location as loc
         print_separator_line()
         print("Welcome in Donation event registration application!")
         print()
-        location = loc.User_Data()
+        location = location.User_Data()
         print()
         print("Thank for your registration (and your blood)!")
-        
+
+    if Picked_option_string == "3":
+        pass
+
+    if Picked_option_string == "4":
+        pass
+
+    if Picked_option_string == "5":
+        pass
+
+    if Picked_option_string == "6":
+        pass
+
+    if Picked_option_string == "7":
+        exit()
