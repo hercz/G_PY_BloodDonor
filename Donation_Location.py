@@ -137,12 +137,6 @@ class User_Data(object):
 
     # FUNCTIONS
 
-    def Registration_ten_days_before_date(self):
-        pass
-
-    def Datetime_Only_on_Weekdays(self):
-        pass
-
     def Calculate_Duration_in_Minutes(self):
         pass
 
