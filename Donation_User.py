@@ -21,6 +21,8 @@ class UserData(object):
         self.get_email_address()
         self.get_mobil_number()
         self.get_blood_type()
+        self.make_data_into_one_string()
+        self.data_to_file()
 
         self.print_separator_line()
 
@@ -143,7 +145,7 @@ class UserData(object):
                 print("This is an important question! Please write here the TRUTH!")
                 was_she_he_sick = ""
             else:
-                self.get_was_she_he_sick = was_she_he_sick
+                self.was_she_he_sick = was_she_he_sick
 
     def get_unique_identifier(self):
         identifier = ""
@@ -228,6 +230,7 @@ class UserData(object):
 
     def random_hemoglobin_donor_is_suitable_or_not(self):
         random_hemoglobin = random.randrange(80, 200, 1)
+        self.hemogoblin= random_hemoglobin
         if random_hemoglobin >= 110:
             print("You are suitable for donation, your hemoglobin level is:", random_hemoglobin)
         else:
@@ -241,6 +244,21 @@ class UserData(object):
                    self.birth_date,
                    self.age,
                    self.email_string))
+
+    def make_data_into_one_string(self):
+        full_data = str(self.full_name) + ", " + str(self.gender) + ", " + str(self.identifier) + ", " + \
+                    str(self.email_string) + ", " + str(self.blood_type) + ", " + str(self.birth_date) + ", " + str(
+            self.age) \
+                    + ", " + str(self.weight) + ", " + str(
+            self.last_donation_date) + ", " + \
+                    str(self.id_expiration) + ", " + str(
+            self.hemogoblin) + ", " + (self.was_she_he_sick)
+
+        self.full_data = full_data
+
+    def data_to_file(self):
+        with open("./Data/Donor_Data.txt", "r+") as Donor_Text_File:
+            Donor_Text_File.write(self.full_data + "\n")
 
 if __name__ == '__main__':
     UserData()
