@@ -40,15 +40,15 @@ if __name__ == "__main__":
         print_separator_line()
         print("Welcome in Donor registration application!")
         print()
-        person = user.User_Data()
+        person = user.UserData()
         print()
         print_separator_line()
         print("The user main data: ")
         print()
-        print(person.data_dictionary()['name'], '\n',
-              str(person.data_dictionary()['weight']), ' kg\n',
-              person.data_dictionary()['date of birth'], ' - ', person.data_dictionary()['age'], ' years old\n',
-              person.data_dictionary()['e-mail'])
+        print(person.print_donor_info()['name'], '\n',
+              str(person.print_donor_info()['weight']), ' kg\n',
+              person.print_donor_info()['date of birth'], ' - ', person.print_donor_info()['age'], ' years old\n',
+              person.print_donor_info()['e-mail'])
         print()
         print("Thank for your registration (and your blood)!")
     if Picked_option_string == "2":
@@ -57,7 +57,7 @@ if __name__ == "__main__":
         print_separator_line()
         print("Welcome in Donation event registration application!")
         print()
-        location = location.User_Data()
+        location = location.UserData()
         print()
         print("Thank for your registration (and your blood)!")
 
