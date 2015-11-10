@@ -37,6 +37,7 @@ if __name__ == "__main__":
     greetings()
     Main_Menu()
 
+
     if Picked_Option() == "1":
         import Donation_User as user
         print_separator_line()
@@ -64,7 +65,12 @@ if __name__ == "__main__":
         print("Thank for your registration (and your blood)!")
 
     if Picked_Option() == "3":
-        pass
+        if Picked_Option() == "3":
+            import Donor_delete as deleter
+        print_separator_line()
+        print("Welcome in the donor delete application!")
+        print()
+        deleter = deleter.DeleteDonor()
 
     if Picked_Option() == "4":
         pass
