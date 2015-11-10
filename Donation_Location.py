@@ -7,13 +7,14 @@ class UserData(object):
         self.get_date_of_event()
         self.get_start_and_end_time()
         self.calculate_duration_in_minutes()
+        self.get_beds_available()
         self.calculate_max_donor_number()
         self.get_zip_code()
         self.get_city()
         self.get_address()
-        self.get_beds_available()
         self.get_planned_donor_number()
         self.get_number_of_successful_donations()
+        self.calculate_result_of_donation_by_percentage()
 
     def get_date_of_event(self):
         date_of_event = ""
@@ -94,7 +95,7 @@ class UserData(object):
             if available_beds == "0":
                 print("You should enter a positive integer!")
                 available_beds = ""
-        self.available_beds = available_beds
+        self.available_beds = int(available_beds)
 
     def get_planned_donor_number(self):
         planned_donor_number = ""
@@ -116,17 +117,18 @@ class UserData(object):
 
     def calculate_duration_in_minutes(self):
         duration_in_minutes = (self.end_time - self.start_time).total_seconds() // 60
-        self.duration_in_minutes = duration_in_minutes
+        self.duration_in_minutes = int(duration_in_minutes)
 
     def calculate_max_donor_number(self):
         preparation_time = 30
         donation_time = 30
+
         max_donor_number = ((self.duration_in_minutes - preparation_time) / donation_time) * self.available_beds
         self.maximum_donor_number = max_donor_number
 
     def calculate_result_of_donation_by_percentage(self):
         result_of_donation_by_percentage = int(100 * int(self.number_of_successful_donations) / int(self.maximum_donor_number))
-        print("This is %d%% of the Planned Number of Donors." % result_of_donation_by_percentage)
+        print("This is %d%% of the planned number of donors." % result_of_donation_by_percentage)
         if result_of_donation_by_percentage < 20:
             print("This donation was unsuccessful, not worth to organise there again.")
         elif 20 <= result_of_donation_by_percentage < 75:

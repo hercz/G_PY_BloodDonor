@@ -230,7 +230,7 @@ class UserData(object):
 
     def random_hemoglobin_donor_is_suitable_or_not(self):
         random_hemoglobin = random.randrange(80, 200, 1)
-        self.hemogoblin= random_hemoglobin
+        self.hemoglobin= random_hemoglobin
         if random_hemoglobin >= 110:
             print("You are suitable for donation, your hemoglobin level is:", random_hemoglobin)
         else:
@@ -252,7 +252,7 @@ class UserData(object):
                     + ", " + str(self.weight) + ", " + str(
             self.last_donation_date) + ", " + \
                     str(self.id_expiration) + ", " + str(
-            self.hemogoblin) + ", " + (self.was_she_he_sick)
+            self.hemoglobin) + ", " + (self.was_she_he_sick)
 
         self.full_data = full_data
 
