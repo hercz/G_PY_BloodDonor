@@ -1,74 +1,55 @@
-__author__ = 'Gazdik_Zsolt'
-import datetime
+from datetime import datetime
+__author__ = 'Stark_Industries'
 
-
-class User_Data(object):
-    @staticmethod
-    def date_string_is_valid(date_string: str):
-        splitted_date = date_string.split(".")
-        if not (len(splitted_date) == 3 and splitted_date[0].isdigit() and
-                    splitted_date[1].isdigit() and splitted_date[2].isdigit()):
-            return False
-        try:
-            datetime.date(int(splitted_date[0]), int(splitted_date[1]), int(splitted_date[2]))
-            return True
-        except ValueError as vex:
-            print("This date is not correct!")
-            return False
+class UserData(object):
 
     def __init__(self):
+        self.get_date_of_event()
+        self.get_start_and_end_time()
+        self.calculate_duration_in_minutes()
+        self.calculate_max_donor_number()
+        self.get_zip_code()
+        self.get_city()
+        self.get_address()
+        self.get_beds_available()
+        self.get_planned_donor_number()
+        self.get_number_of_successful_donations()
 
-        self.get_Date_of_Event()
-
-        self.get_Start_Time()
-        self.get_Zip_Code()
-        self.get_City()
-        self.get_Address()
-        self.get_Beds_Available()
-        self.get_Planned_Donor_Number()
-
-    # Inputs, gets
-
-
-    def get_Date_of_Event(self):
+    def get_date_of_event(self):
         date_of_event = ""
-        while date_of_event == "":
-            date_of_event = input("Please enter the date of your birth in format YYYY.MM.DD: ")
-            if User_Data.date_string_is_valid(date_of_event) is False:
-                print("Please enter a valid date (e. g. 1991.05.26)! ")
-                date_of_event = ""
-            else:
-                self.date_of_event = date_of_event
-            if User_Data.date_string_is_valid(date_of_event) is True:
-                self.date_of_event_ten_days_before()
-                self.date_weekdays()
+        while True:
+            date = input("Please enter the date of the donation (YYYY.MM.DD): ")
+            try:
+                date_of_event = datetime.strptime(date, "%Y.%m.%d").date()
+                weekday = date_of_event.isoweekday()
+                days_left = (date_of_event - datetime.now().date()).days
+                if weekday <= 5 and days_left >= 10:
+                    break
+                else:
+                    print("Blood donations should be only on weekdays and at least 10 days from the current date.")
+            except ValueError:
+                print("You have entered a wrong date type! It should be YYYY.MM.DD!")
+        self.date_of_event = date_of_event
 
-    def date_of_event_ten_days_before(self):
-        today = datetime.date.today()
-        date_of_event = datetime.datetime.strptime(self.date_of_event, "%Y.%m.%d").date()
-        if (date_of_event - today).days < 10:
-            print("Sorry you must organize it at least 10 days from now!!")
-            self.get_Date_of_Event()
-
-    def date_weekdays(self):
-        date_of_event = datetime.datetime.strptime(self.date_of_event, "%Y.%m.%d").date()
-        if datetime.datetime.isoweekday(date_of_event) > 5:
-            print("Sorry you must organize it on weekdays (Monday-Friday!")
-            self.get_Date_of_Event()
-
-    def get_Start_Time(self):
+    def get_start_and_end_time(self):
         start_time = ""
-        while start_time == "":
-            start_time = input("Please enter the start time of event: ")
-            while not start_time.isdigit and (24 > start_time >= 0):
-                print("Please write in correct form HH!")
-                start_time = ""
+        end_time = ""
+        while True:
+            start = input("Please enter the start time of the donation (HH:MM): ")
+            end = input("Please enter the end time of the donation (HH:MM): ")
+            try:
+                start_time = datetime.strptime(start, "%H:%M")
+                end_time = datetime.strptime(end, "%H:%M")
+                if start_time < end_time:
+                    break
+                else:
+                    print("Start time can not be later than end time!")
+            except ValueError:
+                print("You have entered a wrong time type! It should be HH:MM!")
         self.start_time = start_time
+        self.end_time = end_time
 
-    def get_End_Time(self):
-        pass
-
-    def get_Zip_Code(self):
+    def get_zip_code(self):
         zip_code = ""
         while zip_code == "":
             zip_code = input("Please enter your ZIP code ")
@@ -84,7 +65,7 @@ class User_Data(object):
             elif len(zip_code) == 4:
                 self.zip_code = zip_code
 
-    def get_City(self):
+    def get_city(self):
         city = ""
         city_names = ("miskolc", "kazincbarcika", "szerencs", "sarospatak")
         while city == "":
@@ -94,7 +75,7 @@ class User_Data(object):
                 city = ""
         self.city = city.lower()
 
-    def get_Address(self):
+    def get_address(self):
         address = ""
         while address == "":
             address = input("Please enter your address: ")
@@ -103,42 +84,57 @@ class User_Data(object):
                 address = ""
         self.address = address
 
-    def get_Beds_Available(self):
+    def get_beds_available(self):
         available_beds = ""
         while available_beds == "":
             available_beds = input("Please enter the number of available beds: ")
             if not available_beds.isdigit():
-                print("Please enter a positive intiger!")
+                print("Please enter a positive integer!")
                 available_beds = ""
             if available_beds == "0":
-                print("You should enter a positive intiger!")
+                print("You should enter a positive integer!")
                 available_beds = ""
         self.available_beds = available_beds
 
-    def get_Planned_Donor_Number(self):
+    def get_planned_donor_number(self):
         planned_donor_number = ""
         while planned_donor_number == "":
-            planned_donor_number = input("Please enter th planned donor number: ")
-            if not planned_donor_number.isdigit():
-                print("Please enter a positive intiger!")
-                planned_donor_number = ""
-            if planned_donor_number == "0":
-                print("You should enter a positive intiger!")
+            planned_donor_number = input("Please enter the planned donor number: ")
+            if not planned_donor_number.isdigit() or planned_donor_number <= "0":
+                print("Please enter a positive integer!")
                 planned_donor_number = ""
         self.planned_donor_number = planned_donor_number
 
-    # FUNCTIONS
+    def get_number_of_successful_donations(self):
+        number_of_successful_donations = ""
+        while number_of_successful_donations == "":
+            number_of_successful_donations = input("Please enter the number of the successful donations here: ")
+            if not number_of_successful_donations.isdigit() or number_of_successful_donations <= "0":
+                print("Please enter a positive integer!")
+                number_of_successful_donations = ""
+        self.number_of_successful_donations = number_of_successful_donations
 
-    def Calculate_Duration_in_Minutes(self):
-        pass
+    def calculate_duration_in_minutes(self):
+        duration_in_minutes = (self.end_time - self.start_time).total_seconds() // 60
+        self.duration_in_minutes = duration_in_minutes
 
-    def Maximum_Donor_Number(self):
-        pass
+    def calculate_max_donor_number(self):
+        preparation_time = 30
+        donation_time = 30
+        max_donor_number = ((self.duration_in_minutes - preparation_time) / donation_time) * self.available_beds
+        self.maximum_donor_number = max_donor_number
 
-    def print_donor(self):
-        print(self.planned_donor_number)
-
+    def calculate_result_of_donation_by_percentage(self):
+        result_of_donation_by_percentage = int(100 * int(self.number_of_successful_donations) / int(self.maximum_donor_number))
+        print("This is %d%% of the Planned Number of Donors." % result_of_donation_by_percentage)
+        if result_of_donation_by_percentage < 20:
+            print("This donation was unsuccessful, not worth to organise there again.")
+        elif 20 <= result_of_donation_by_percentage < 75:
+            print("This donation was a normal event.")
+        elif 75 <= result_of_donation_by_percentage < 110:
+            print("This donation was successful!")
+        elif 75 <= result_of_donation_by_percentage:
+            print("This donation was outstanding!")
 
 if __name__ == "__main__":
-    gaspar = User_Data()
-    gaspar.print_donor()
+    UserData()

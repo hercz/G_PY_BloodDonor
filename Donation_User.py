@@ -1,27 +1,16 @@
-__author__ = 'Gazdik_Zsolt'
 import random
-import datetime
+from datetime import datetime
+
+__author__ = 'Stark_Industries'
 
 
-class User_Data(object):
-    # data from the user
-
-    @staticmethod
-    def date_string_is_valid(date_string: str):
-        splitted_date = date_string.split(".")
-        if not (len(splitted_date) == 3 and splitted_date[0].isdigit() and
-                    splitted_date[1].isdigit() and splitted_date[2].isdigit()):
-            return False
-        try:
-            datetime.date(int(splitted_date[0]), int(splitted_date[1]), int(splitted_date[2]))
-            return True
-        except ValueError as vex:
-            print("This date is not correct!")
-            return False
+class UserData(object):
 
     def __init__(self):
 
         self.available_for_donation()
+
+        self.print_separator_line()
 
         self.get_title()
         self.get_first_name()
@@ -30,21 +19,26 @@ class User_Data(object):
         self.get_gender()
         self.get_unique_identifier()
         self.get_email_address()
+        self.get_mobil_number()
         self.get_blood_type()
-        self.make_data_into_one_string()
-        self.data_to_file()
+
+        self.print_separator_line()
+
+        self.print_donor_info()
 
     def available_for_donation(self):
-        print("We need these data before you can go on!")
-        self.get_date_of_birth()
-        self.donor_age()
+        print("First we need some data from you to decide if you are suitable for donation.")
+        self.get_birth_date_and_calculate_age()
         self.get_weight()
         self.get_last_donation_date()
-        self.random_hemogoblin_donor_is_suitable_or_not()
-        self.get_expiration_id()
-
+        self.random_hemoglobin_donor_is_suitable_or_not()
+        self.get_id_expiration()
         self.get_was_she_he_sick()
-        print("Congratulations you are available for donation, now we need your other data")
+        print("Congratulations you are available for donation!")
+        print("Now we need further more data from you to complete your registration.")
+
+    def print_separator_line(self):
+        print("-" * 50)
 
     def get_title(self):
         answer = ""
@@ -106,31 +100,39 @@ class User_Data(object):
             else:
                 self.gender = gender
 
-    def get_date_of_birth(self):
-        date = ""
-        while date == "":
-            date = input("Please enter the date of your birth in format YYYY.MM.DD: ")
-            if User_Data.date_string_is_valid(date) is False:
-                print("Please enter a valid date (e. g. 1991.05.26)! ")
-                date = ""
-            else:
-                self.date_of_birth = date
+    def get_birth_date_and_calculate_age(self):
+        birth_date = ""
+        age = ""
+        while True:
+            date = input("Please enter the date of your birth (YYYY.MM.DD): ")
+            try:
+                birth_date = datetime.strptime(date, "%Y.%m.%d").date()
+                age = (datetime.now().date() - birth_date).days // 365
+                if age > 18:
+                    break
+                else:
+                    print("Sorry, you are too young for blood donation!")
+                    exit()
+            except ValueError:
+                print("Please enter a valid date!")
+        self.birth_date = birth_date
+        self.age = age
 
     def get_last_donation_date(self):
-        donation_date = ""
-        today = datetime.date.today()
-        while donation_date == "":
-            donation_date = input("Please enter the date of your last donation: ")
-            if User_Data.date_string_is_valid(donation_date) is False:
-                print("Please enter a valid date (e.g: 1991.05.26)! ")
-                donation_date = ""
-            else:
-                donation_date = datetime.datetime.strptime(donation_date, "%Y.%m.%d").date()
-                self.string_donation_date_for_data_to_file_save_method = donation_date
-                donation_date = (today - donation_date).days > 90
-                if donation_date is False:
+        last_donation_date = ""
+        while True:
+            date = input("Please enter the date of your last donation: ")
+            try:
+                last_donation_date = datetime.strptime(date, "%Y.%m.%d").date()
+                elapsed_months = (datetime.now().date() - last_donation_date).days // 30
+                if elapsed_months >= 3:
+                    break
+                else:
                     print("You are not suitable because you was on donation not long ago.")
                     exit()
+            except ValueError:
+                print("Please enter a valid date!")
+        self.last_donation_date = last_donation_date
 
     def get_was_she_he_sick(self):
         was_she_he_sick = ""
@@ -141,7 +143,7 @@ class User_Data(object):
                 print("This is an important question! Please write here the TRUTH!")
                 was_she_he_sick = ""
             else:
-                self.was_she_he_sick = was_she_he_sick
+                self.get_was_she_he_sick = was_she_he_sick
 
     def get_unique_identifier(self):
         identifier = ""
@@ -160,21 +162,21 @@ class User_Data(object):
                 print("Your ID is wrong, type in again(It must be an ID or Passport number): ")
                 identifier = ""
 
-    def get_expiration_id(self):
-        user_id = ""
-        today = datetime.date.today()
-        while user_id == "":
-            user_id = input("Enter the expiration date of your unique identifier: ")
-            if User_Data.date_string_is_valid(user_id) is False:
-                print("Please enter a valid date (e. g. 1991.05.26)! ")
-                user_id = ""
-            else:
-                user_id = datetime.datetime.strptime(user_id, "%Y.%m.%d").date()
-                self.string_expiration_date_for_data_to_file_save_method = user_id
-                expiration = today < user_id
-                if expiration is False:
+    def get_id_expiration(self):
+        id_expiration = ""
+        while True:
+            date = input("Enter the expiration date of your unique identifier: ")
+            try:
+                id_expiration = datetime.strptime(date, "%Y.%m.%d").date()
+                if datetime.now().date() < id_expiration:
+                    break
+                else:
                     print("Sorry you can't donate because your ID is expired.")
                     exit()
+            except ValueError:
+                print("You have entered a wrong date type! It should be YYYY.MM.DD!")
+        self.id_expiration = id_expiration
+
 
     def get_blood_type(self):
         blood_types = ('a', 'b', 'ab', '0')
@@ -224,49 +226,21 @@ class User_Data(object):
         mobil_string = mobil_3606_string + mobil_203060_string + mobil_num_str
         self.mobil_string = mobil_string
 
-    def donor_age(self):
-        today = datetime.date.today()
-        birth_date = datetime.datetime.strptime(self.date_of_birth, "%Y.%m.%d").date()
-        age = (today - birth_date).days // 365
-        if age < 18:
-            print("Sorry you are too young! ")
-            exit()
+    def random_hemoglobin_donor_is_suitable_or_not(self):
+        random_hemoglobin = random.randrange(80, 200, 1)
+        if random_hemoglobin >= 110:
+            print("You are suitable for donation, your hemoglobin level is:", random_hemoglobin)
         else:
-            self.age = age
-
-    def random_hemogoblin_donor_is_suitable_or_not(self):
-        random_hemogoblin = random.randrange(80, 200, 1)
-        self.hemogoblin = random_hemogoblin
-        if random_hemogoblin >= 110:
-            print("Donor is suitable for donation, your hemogoblin:", random_hemogoblin)
-        else:
-            print("Sorry you are not suitable for donation, your hemogoblin:", random_hemogoblin)
+            print("Sorry you are not suitable for donation, your hemoglobin level is:", random_hemoglobin)
             exit()
 
-    def data_dictionary(self):
-        data = {"name": self.full_name,
-                "weight": self.weight,
-                "date of birth": self.date_of_birth,
-                "age": self.age,
-                "e-mail": self.email_string}
-        return data
+    def print_donor_info(self):
+        print("""Name:       {0}\nWeight:     {1} kg\nBirth date: {2}\nAge:        {3} years old\nEmail:      {4}
+        """.format(self.full_name,
+                   self.weight,
+                   self.birth_date,
+                   self.age,
+                   self.email_string))
 
-    def make_data_into_one_string(self):
-        full_data = str(self.full_name) + ", " + str(self.gender) + ", " + str(self.identifier) + ", " + \
-                    str(self.email_string) + ", " + str(self.blood_type) + ", " + str(self.date_of_birth) + ", " + str(
-            self.age) \
-                    + ", " + str(self.weight) + ", " + str(
-            self.string_donation_date_for_data_to_file_save_method) + ", " + \
-                    str(self.string_expiration_date_for_data_to_file_save_method) + ", " + str(
-            self.hemogoblin) + ", " + (self.was_she_he_sick)
-
-        self.full_data = full_data
-
-    def data_to_file(self):
-        with open("./Data/Donor_Data.txt", "r+") as Donor_Text_File:
-            Donor_Text_File.write(self.full_data + "\n")
-
-
-if __name__ == "__main__":
-    bela = User_Data()
-    print(bela.data_dictionary())
+if __name__ == '__main__':
+    UserData()
