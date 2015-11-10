@@ -2,7 +2,7 @@ __author__ = 'Gazdik_Zsolt'
 
 import unittest
 from Donation_User import User_Data
-
+#felesleges comment
 class MyTestCase(unittest.TestCase):
     def test_get_title_return_false_with_numbers(self):
         person1 = User_Data()
