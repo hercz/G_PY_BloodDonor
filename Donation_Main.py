@@ -21,22 +21,24 @@ def Main_Menu():
     #print("\n Choose what you want: ")
     #print("If you want to use Donation event registration application, type in: loc")
 
-if __name__ == "__main__":
-    print_separator_line()
-    greetings()
-    Main_Menu()
+def Picked_Option():
     Picked_option_string = ""
     while Picked_option_string == "":
-        #Main_Menu()
         Picked_option_string = input("Pick an option: ")
         if not (Picked_option_string == "1" or Picked_option_string == "2" or Picked_option_string == "3" or \
                 Picked_option_string == "4" or Picked_option_string == "5" or Picked_option_string == "6" or \
                 Picked_option_string == "7"):
             print("Your input is invalid, choose from the available menus!")
             Picked_option_string = ""
-    if Picked_option_string == "1":
-        import Donation_User as user
+    return Picked_option_string
 
+if __name__ == "__main__":
+    print_separator_line()
+    greetings()
+    Main_Menu()
+
+    if Picked_Option() == "1":
+        import Donation_User as user
         print_separator_line()
         print("Welcome in Donor registration application!")
         print()
@@ -51,9 +53,9 @@ if __name__ == "__main__":
               person.print_donor_info()['e-mail'])
         print()
         print("Thank for your registration (and your blood)!")
-    if Picked_option_string == "2":
-        import Donation_Location as location
 
+    elif Picked_Option() == "2":
+        import Donation_Location as location
         print_separator_line()
         print("Welcome in Donation event registration application!")
         print()
@@ -61,17 +63,17 @@ if __name__ == "__main__":
         print()
         print("Thank for your registration (and your blood)!")
 
-    if Picked_option_string == "3":
+    if Picked_Option() == "3":
         pass
 
-    if Picked_option_string == "4":
+    if Picked_Option() == "4":
         pass
 
-    if Picked_option_string == "5":
+    if Picked_Option() == "5":
         pass
 
-    if Picked_option_string == "6":
+    if Picked_Option() == "6":
         pass
 
-    if Picked_option_string == "7":
+    if Picked_Option() == "7":
         exit()
