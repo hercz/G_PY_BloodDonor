@@ -10,9 +10,9 @@ class DeleteDonor(object):
 
     def get_user_input(self):
         user_input = input(print("Do you want to delete another donor from the database? (Y/N)"))
-        if user_input == "Y":
+        if user_input.lower() == "y":
             return self.get_delete_id()
-        elif user_input == "N":
+        elif user_input.lower() == "n":
              Menu.Main_Menu()
              Menu.Picked_option()
         else:
