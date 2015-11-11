@@ -2,6 +2,7 @@ import Donation_User
 import Donation_Location
 import Donor_delete
 
+
 def print_separator_line():
     print("-" * 32)
 
@@ -25,14 +26,13 @@ def Main_Menu():
     # print("\n Choose what you want: ")
     # print("If you want to use Donation event registration application, type in: loc")
 
-
 def Picked_option():
     Picked_option_string = ""
     while Picked_option_string == "":
         Picked_option_string = input("Pick an option: ")
         if not (Picked_option_string == "1" or Picked_option_string == "2" or Picked_option_string == "3" or
-                    Picked_option_string == "4" or Picked_option_string == "5" or Picked_option_string == "6" or
-                    Picked_option_string == "7"):
+                        Picked_option_string == "4" or Picked_option_string == "5" or Picked_option_string == "6" or
+                        Picked_option_string == "7"):
             print("Your input is invalid, choose from the available menus!")
             Picked_option_string = ""
 
@@ -43,16 +43,18 @@ def Picked_option():
         print("Welcome in Donor registration application!")
         print()
         person = user.UserData()
-        print()
-        print_separator_line()
-        print("The user main data: ")
-        print()
-        print(person.print_donor_info()['name'], '\n',
-              str(person.print_donor_info()['weight']), ' kg\n',
-              person.print_donor_info()['date of birth'], ' - ', person.print_donor_info()['age'], ' years old\n',
-              person.print_donor_info()['e-mail'])
-        print()
-        print("Thank for your registration (and your blood)!")
+        # print()
+        # print_separator_line()
+        # print("The user main data: ")
+        # print()
+        # print(person.print_donor_info()['name'], '\n',
+        #       str(person.print_donor_info()['weight']), ' kg\n',
+        #       person.print_donor_info()['date of birth'], ' - ', person.print_donor_info()['age'], ' years old\n',
+        #       person.print_donor_info()['e-mail'])
+        # print()
+        # print("Thank for your registration (and your blood)!")
+        ask_answer()
+
 
     elif Picked_option_string == "2":
         import Donation_Location as location
@@ -63,6 +65,8 @@ def Picked_option():
         location = location.UserData()
         print()
         print("Thank for your registration (and your blood)!")
+        ask_answer()
+
 
     elif Picked_option_string == "3":
         import Donor_delete as deleter
@@ -70,15 +74,36 @@ def Picked_option():
         print("Welcome in the donor delete application!")
         print()
         deleter = deleter.DeleteDonor()
+        ask_answer()
 
-    # elif Picked_Option() == "4":
-    #     pass
-    #
-    # elif Picked_Option() == "5":
-    #     pass
-    #
-    # elif Picked_Option() == "6":
-    #     pass
-    #
-    # elif Picked_Option() == "7":
-    #     exit()
+    elif Picked_option_string == "4":
+
+        ask_answer()
+        pass
+
+    elif Picked_option_string == "5":
+
+        ask_answer()
+        pass
+
+    elif Picked_option_string == "6":
+
+        ask_answer()
+        pass
+
+    elif Picked_option_string == "7":
+        exit()
+
+
+def ask_answer():
+    answer = ""
+    while answer == "":
+        answer = input("Do you want to add other changes? Y/N")
+        if answer == "Y":
+            Main_Menu()
+            Picked_option()
+        elif answer == "N":
+            exit()
+        else:
+            print("You answer must be Y or N")
+            answer = ""
