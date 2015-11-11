@@ -257,7 +257,7 @@ class UserData(object):
         self.full_data = full_data
 
     def data_to_file(self):
-        with open("./Data/Donor_Data.csv", "r+") as Donor_Text_File:
+        with open("./Data/Donor_Data.csv", "a") as Donor_Text_File:
             Donor_Text_File.write(self.full_data + "\n")
 
 if __name__ == '__main__':
