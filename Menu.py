@@ -1,6 +1,7 @@
 import Donation_User
 import Donation_Location
 import Donor_delete
+import csv
 
 
 def print_separator_line():
@@ -82,9 +83,45 @@ def Picked_option():
         pass
 
     elif Picked_option_string == "5":
+        list_options = ""
+        while list_options == "":
+            print("Please choose which one you want to List: ")
+            print("     1.Donor")
+            print("     2.Donation")
+            list_options = input("")
+            if list_options == "1":
+                with open("./Data/Donor_Data.csv", "r") as TextFile:
+                    csv_text = csv.reader(TextFile)
+                    counter = 0
+                    end_counter = 3
+                    for line in csv_text:
+                        while counter < end_counter:
+                            first_name_to_print = line[0]
+                            title_to_print = line[1]
+                            last_name_to_print = line[2]
+                            weight_to_print = line[9]
+                            birth_date_to_print = line[7]
+                            age_to_print = line[8]
+                            email_to_print = line[5]
+                            print_separator_line()
+                            print("""{0}\n{1} kg\n{2} - {3}\n{4}
+            """.format(title_to_print + first_name_to_print + last_name_to_print,
+                       weight_to_print,
+                       birth_date_to_print,
+                       age_to_print,
+                       email_to_print))
+                            print_separator_line()
+                            counter += 1
+                        next_page = input(print("For next page press: N"))
 
-        ask_answer()
-        pass
+                        if next_page == "N" or next_page == "n":
+                            end_counter += 3
+                        else:
+                            ask_answer()
+
+
+
+
 
     elif Picked_option_string == "6":
 
@@ -99,10 +136,10 @@ def ask_answer():
     answer = ""
     while answer == "":
         answer = input("Do you want to add other changes? Y/N")
-        if answer == "Y":
+        if answer == "Y" or answer == "y":
             Main_Menu()
             Picked_option()
-        elif answer == "N":
+        elif answer == "N" or answer == "n":
             exit()
         else:
             print("You answer must be Y or N")

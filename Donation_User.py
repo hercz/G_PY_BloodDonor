@@ -43,16 +43,9 @@ class UserData(object):
         print("-" * 50)
 
     def get_title(self):
-        answer = ""
-        while answer == "":
-            answer = input("Do you have a title? (Y/N): ")
-            if answer == "Y" or answer == "y":
-                self.title = input("In that Case enter your title: ") + " "
-            elif answer == "N" or answer == "n":
-                print("I see, you don't even have a title, poor boy!")
-                self.title = ""
-            else:
-                answer = ""
+        answer = input("Do you have a title? (Y/N): ")
+        self.answer = answer
+
 
     def get_first_name(self):
         first_name = ""
@@ -262,3 +255,17 @@ class UserData(object):
 
 if __name__ == '__main__':
     UserData()
+
+
+
+def valid_title():
+    while UserData.get_title() == "":
+        answer = input("Do you have a title? (Y/N): ")
+        if UserData.self.answer == "Y" or UserData.self.answer == "y":
+            title = input("In that Case enter your title: ") + " "
+        elif UserData.self.answer == "N" or UserData.self.answer == "n":
+            print("I see, you don't even have a title, poor boy!")
+            title = ""
+        else:
+            UserData.self.answer = ""
+
