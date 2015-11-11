@@ -1,1 +1,4 @@
-
+first_name,title,last_name,gender,identifier,email_string,blood_type,birth_date,age,weight,last_donation_date,id_expiration,hemoglobin,was_she_he_sick
+Karoly, , Batyja, M, 123456lp, asdas@gmail.hu, A, 1996-01-01, 19, 89, 2010-01-01, 2018-01-01, 137, n
+Bela, , AAlma, M, 123456lp, asdas@gmail.hu, A, 1996-01-01, 19, 89, 2010-01-01, 2018-01-01, 137, n
+Geza, , Kutya, M, 123456lp, asdas@gmail.hu, A, 1996-01-01, 19, 89, 2010-01-01, 2018-01-01, 137, n
