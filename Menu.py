@@ -1,6 +1,6 @@
 import Donation_User
 import Donation_Location
-import Donor_delete
+import User_delete
 
 
 def print_separator_line():
@@ -69,7 +69,7 @@ def Picked_option():
 
 
     elif Picked_option_string == "3":
-        import Donor_delete as deleter
+        import User_delete as deleter
         print_separator_line()
         print("Welcome in the donor delete application!")
         print()
