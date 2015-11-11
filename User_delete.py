@@ -10,9 +10,9 @@ class DeleteDonor(object):
 
     def get_user_input(self):
         user_input = input(print("Do you want to delete another donor from the database? (Y/N)"))
-        if user_input == "Y":
+        if user_input.lower() == "y":
             return self.get_delete_id()
-        elif user_input == "N":
+        elif user_input.lower() == "n":
              Menu.Main_Menu()
              Menu.Picked_option()
         else:
@@ -46,7 +46,7 @@ class DeleteDonor(object):
                     reader = csv.reader(file, delimiter=",")
                     ids = []
                     for row in reader:
-                        ids.append(row[3])
+                        ids.append(row[4])
                     if id_to_delete in str(ids):
                         self.delete_id()
                     else:
