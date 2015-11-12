@@ -3,7 +3,7 @@ import Donation_User
 import Donation_Location
 import csv
 import User_delete
-
+import Search
 
 def print_separator_line():
     print("-" * 32)
@@ -128,6 +128,14 @@ def Picked_option():
 
 
     elif Picked_option_string == "6":
+        import Search as search_option
+        os.system("cls")
+        print_separator_line()
+        print("Welcome to Search")
+        print()
+        search_option = Search.Search()
+        print()
+        print("Thank for your registration (and your blood)!")
 
         ask_answer()
         pass
@@ -138,15 +146,14 @@ def Picked_option():
 
 def print_one_donor(line):
     first_name_to_print = line[0]
-    title_to_print = line[1]
-    last_name_to_print = line[2]
-    weight_to_print = line[9]
-    birth_date_to_print = line[7]
-    age_to_print = line[8]
-    email_to_print = line[5]
+    last_name_to_print = line[1]
+    weight_to_print = line[8]
+    birth_date_to_print = line[6]
+    age_to_print = line[7]
+    email_to_print = line[4]
     print_separator_line()
     print("""{0}\n{1} kg\n{2} - {3}\n{4}
-            """.format(title_to_print + first_name_to_print + last_name_to_print,
+            """.format(first_name_to_print + last_name_to_print,
                        weight_to_print,
                        birth_date_to_print,
                        age_to_print,
@@ -158,7 +165,7 @@ def print_one_location(line):
     city_to_print = line[5]
     date_of_event_to_print = line[1]
     for char in date_of_event_to_print:
-        date_of_event_corrected = date_of_event_to_print.replace("-",".")
+        date_of_event_corrected = date_of_event_to_print.replace("-", ".")
 
     address_to_print = line[6]
     print_separator_line()

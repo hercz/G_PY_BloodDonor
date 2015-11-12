@@ -1,8 +1,9 @@
-first_name,title,last_name,gender,identifier,email_string,blood_type,birth_date,age,weight,last_donation_date,id_expiration,hemoglobin,was_she_he_sick
-Geza,Dr. , Kutya, M, 123456lp, asdas@gmail.hu, A, 1996-01-01, 19, 89, 2010-01-01, 2018-01-01, 137, n
-Karoly, , Batyja, M, 123456lp, asdas@gmail.hu, A, 1996-01-01, 19, 89, 2010-01-01, 2018-01-01, 137, n
-Bela, , AAlma, M, 123456lp, asdas@gmail.hu, A, 1996-01-01, 19, 89, 2010-01-01, 2018-01-01, 137, n
-Amateur,Dr. , Kutya, M, 123456lp, asdas@gmail.hu, A, 1996-01-01, 19, 89, 2010-01-01, 2018-01-01, 137, n
-Loko,Dr. , Kutya, M, 123456lp, asdas@gmail.hu, A, 1996-01-01, 19, 89, 2010-01-01, 2018-01-01, 137, n
-Poko,Dr. , Kutya, M, 123456lp, asdas@gmail.hu, A, 1996-01-01, 19, 89, 2010-01-01, 2018-01-01, 137, n
-TUpleember,Dr. , Kutya, M, 123456lp, asdas@gmail.hu, A, 1996-01-01, 19, 89, 2010-01-01, 2018-01-01, 137, n2015-12-14,2015-12-14, 
+first_name,last_name,gender,identifier,email_string,blood_type,birth_date,age,weight,last_donation_date,id_expiration,hemoglobin,was_she_he_sick,,,
+Geza, Kutya, M, 123456lp, asdas@gmail.hu, A, 1996-01-01, 19, 89, 2010-01-01, 2018-01-01, 137, n,,,
+Karoly, Batyja, M, 123456lp, asdas@gmail.hu, A, 1996-01-01, 19, 89, 2010-01-01, 2018-01-01, 137, n,,,
+Bela, AAlma, M, 123456lp, asdas@gmail.hu, A, 1996-01-01, 19, 89, 2010-01-01, 2018-01-01, 137, n,,,
+Amateur, Kutya, M, 123456lp, asdas@gmail.hu, A, 1996-01-01, 19, 89, 2010-01-01, 2018-01-01, 137, n,,,
+Loko, Kutya, M, 123456lp, asdas@gmail.hu, A, 1996-01-01, 19, 89, 2010-01-01, 2018-01-01, 137, n,,,
+Poko, Kutya, M, 123456lp, asdas@gmail.hu, A, 1996-01-01, 19, 89, 2010-01-01, 2018-01-01, 137, n,,,
+TUpleember, Kutya, M, 123456lp, asdas@gmail.hu, A, 1996-01-01, 19, 89, 2010-01-01, 2018-01-01, 137,n,,, 
+asd, asd, m, 123456jh, tbmbrito@gmail.hu, B, 1991-05-26, 24, 56, 2012-12-12, 2018-12-12, 156, n,,,

@@ -10,3 +10,4 @@ id,date_of_event,start_time,end_time,zip_code,city,address,available_beds,planne
 9, 2016-12-12, 10, 15, 3752, miskolc, asd asd 7, 2, 60, 45, 300, 18.0
 10, 2018-12-12, 10:0, 18:0, 4587, miskolc, asd asd 7, 2, 60, 45, 480, 30.0
 11, 2018-12-12, 10:15, 12:46, 6589, miskolc, rmgkkr reger 9, 40, 30, 15, 151, 161.33333333333331
+12, 2018-12-12, 10:0, 18:0, 5268, miskolc, asdas asdasd 76, 2, 6, 45, 480, 30.0

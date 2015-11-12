@@ -77,6 +77,8 @@ class UserData(object):
     def get_full_name(self):
         full_name = self.first_name + ", " + self.title + " " + self.last_name
         self.full_name = full_name
+        full_name_without_title = self.first_name + ", " + self.last_name
+        self.name_without_title = full_name_without_title
 
     def get_weight(self):
         weight = ""
@@ -246,7 +248,7 @@ class UserData(object):
                    self.email_string))
 
     def make_data_into_one_string(self):
-        full_data = str(self.full_name) + ", " + str(self.gender) + ", " + str(self.identifier) + ", " + \
+        full_data = str(self.name_without_title) + ", " + str(self.gender) + ", " + str(self.identifier) + ", " + \
                     str(self.email_string) + ", " + str(self.blood_type) + ", " + str(self.birth_date) + ", " + str(
             self.age) \
                     + ", " + str(self.weight) + ", " + str(
