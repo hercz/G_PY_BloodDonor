@@ -1,5 +1,4 @@
 import os
-
 import Donation_User
 import Donation_Location
 import csv
@@ -28,6 +27,7 @@ def Main_Menu():
 
     # print("\n Choose what you want: ")
     # print("If you want to use Donation event registration application, type in: loc")
+
 
 def Picked_option():
     Picked_option_string = ""
@@ -99,7 +99,7 @@ def Picked_option():
                     record_list = list(csv_text)
                     for line in record_list[1:]:
                         counter += 1
-                        print_one_record(line)
+                        print_one_donor(line)
                         if counter % page_size == 0 and counter <= len(record_list):
                             next_page = input("For next page press: N ")
                             if next_page.lower() == "n":
@@ -115,7 +115,7 @@ def Picked_option():
                     record_list = list(csv_text)
                     for line in record_list[1:]:
                         counter += 1
-                        print_one_record(line)
+                        print_one_location(line)
                         if counter % page_size == 0 and counter <= len(record_list):
                             next_page = input("For next page press: N ")
                             if next_page.lower() == "n":
@@ -136,7 +136,7 @@ def Picked_option():
         exit()
 
 
-def print_one_record(line):
+def print_one_donor(line):
     first_name_to_print = line[0]
     title_to_print = line[1]
     last_name_to_print = line[2]
@@ -152,6 +152,15 @@ def print_one_record(line):
                        age_to_print,
                        email_to_print))
     print_separator_line()
+
+
+def print_one_location(line):
+    city_to_print = line[5]
+    date_of_event_to_print = line[1]
+    address_to_print = line[6]
+    print_separator_line()
+    print("""{0} ,{1} , {2}
+            """.format(city_to_print, date_of_event_to_print, address_to_print))
 
 
 def ask_answer():
