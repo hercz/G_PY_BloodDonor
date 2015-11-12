@@ -38,15 +38,15 @@ class DeleteLocation(object):
         while id_to_delete == "":
             id_to_delete = input("Please write here the location ID which you want to delete from the database: ")
             self.to_delete = id_to_delete
-            # if len(id_to_delete) != 8:            # REFAKTORALNI HA MMEGVAN DANI
-            #     print("Invalid ID format!")
-            #     self.get_user_input()
+            if id_to_delete == "id":            # ATIRNI MERT MINDENT TOROL
+                print("Invalid ID format!")
+                self.get_user_input()
             try:
                 with open("./Data/Location_Data.csv", newline="") as file:
                     reader = csv.reader(file, delimiter=",")
                     ids = []
                     for row in reader:
-                        ids.append(row[4]) # REFFAKTORALNI KELL, HA MEGVAN A DANI!!!!
+                        ids.append(row[0])
                     if id_to_delete in str(ids):
                         self.delete_id()
                     else:

@@ -80,9 +80,12 @@ def Picked_option():
         ask_answer()
 
     elif Picked_option_string == "4":
-
+        import Location_delete as location_deleter
+        print_separator_line()
+        print("Welcome in the location delete application!")
+        print()
+        user_deleter = location_deleter.DeleteLocation()
         ask_answer()
-        pass
 
     elif Picked_option_string == "5":
         list_options = ""
