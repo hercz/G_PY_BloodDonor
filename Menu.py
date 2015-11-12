@@ -36,7 +36,7 @@ def Picked_option():
         if not (Picked_option_string == "1" or Picked_option_string == "2" or Picked_option_string == "3" or
                         Picked_option_string == "4" or Picked_option_string == "5" or Picked_option_string == "6" or
                         Picked_option_string == "7"):
-            print("Your input is invalid, choose from the available menus!")
+            print("Your input is invalid, choose from the available menus! ")
             Picked_option_string = ""
 
     if Picked_option_string == "1":
@@ -101,7 +101,23 @@ def Picked_option():
                         counter += 1
                         print_one_record(line)
                         if counter % page_size == 0 and counter <= len(record_list):
-                            next_page = input("For next page press: N")
+                            next_page = input("For next page press: N ")
+                            if next_page.lower() == "n":
+                                os.system("cls")
+
+                    ask_answer()
+
+            if list_options == "2":
+                with open("./Data/Location_Data.csv", "r") as TextFile:
+                    csv_text = csv.reader(TextFile)
+                    counter = 0
+                    page_size = 3
+                    record_list = list(csv_text)
+                    for line in record_list[1:]:
+                        counter += 1
+                        print_one_record(line)
+                        if counter % page_size == 0 and counter <= len(record_list):
+                            next_page = input("For next page press: N ")
                             if next_page.lower() == "n":
                                 os.system("cls")
 
@@ -141,12 +157,12 @@ def print_one_record(line):
 def ask_answer():
     answer = ""
     while answer == "":
-        answer = input("Do you want to add other changes? Y/N")
+        answer = input("Do you want to go back to the Main Menu? Y/N ")
         if answer == "Y" or answer == "y":
             Main_Menu()
             Picked_option()
         elif answer == "N" or answer == "n":
             exit()
         else:
-            print("You answer must be Y or N")
+            print("You answer must be Y or N ")
             answer = ""
