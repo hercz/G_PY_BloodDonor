@@ -157,10 +157,13 @@ def print_one_donor(line):
 def print_one_location(line):
     city_to_print = line[5]
     date_of_event_to_print = line[1]
+    for char in date_of_event_to_print:
+        date_of_event_corrected = date_of_event_to_print.replace("-",".")
+
     address_to_print = line[6]
     print_separator_line()
-    print("""{0} ,{1} , {2}
-            """.format(city_to_print, date_of_event_to_print, address_to_print))
+    print("""{0},{1},{2}
+            """.format(city_to_print, date_of_event_corrected, address_to_print))
 
 
 def ask_answer():
