@@ -1,3 +1,5 @@
+import os
+
 import Donation_User
 import Donation_Location
 import csv
@@ -93,34 +95,17 @@ def Picked_option():
                 with open("./Data/Donor_Data.csv", "r") as TextFile:
                     csv_text = csv.reader(TextFile)
                     counter = 0
-                    end_counter = 3
-                    for line in csv_text:
-                        line1 = line
-                        line2 = line
-                        line3 = line #a line 1,2,3, között váltogatni és úgy kiiratni
-                        while counter < end_counter:
-                            first_name_to_print = line[0]
-                            title_to_print = line[1]
-                            last_name_to_print = line[2]
-                            weight_to_print = line[9]
-                            birth_date_to_print = line[7]
-                            age_to_print = line[8]
-                            email_to_print = line[5]
-                            print_separator_line()
-                            print("""{0}\n{1} kg\n{2} - {3}\n{4}
-            """.format(title_to_print + first_name_to_print + last_name_to_print,
-                       weight_to_print,
-                       birth_date_to_print,
-                       age_to_print,
-                       email_to_print))
-                            print_separator_line()
-                            counter += 1
-                        next_page = input(print("For next page press: N"))
+                    page_size = 3
+                    record_list = list(csv_text)
+                    for line in record_list[1:]:
+                        counter += 1
+                        print_one_record(line)
+                        if counter % page_size == 0 and counter <= len(record_list):
+                            next_page = input("For next page press: N")
+                            if next_page.lower() == "n":
+                                os.system("cls")
 
-                        if next_page == "N" or next_page == "n":
-                            end_counter += 3
-                        else:
-                            ask_answer()
+                    ask_answer()
 
 
 
@@ -133,6 +118,24 @@ def Picked_option():
 
     elif Picked_option_string == "7":
         exit()
+
+
+def print_one_record(line):
+    first_name_to_print = line[0]
+    title_to_print = line[1]
+    last_name_to_print = line[2]
+    weight_to_print = line[9]
+    birth_date_to_print = line[7]
+    age_to_print = line[8]
+    email_to_print = line[5]
+    print_separator_line()
+    print("""{0}\n{1} kg\n{2} - {3}\n{4}
+            """.format(title_to_print + first_name_to_print + last_name_to_print,
+                       weight_to_print,
+                       birth_date_to_print,
+                       age_to_print,
+                       email_to_print))
+    print_separator_line()
 
 
 def ask_answer():
