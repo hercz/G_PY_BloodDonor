@@ -72,11 +72,11 @@ def Picked_option():
 
 
     elif Picked_option_string == "3":
-        import Donor_delete as deleter
+        import User_delete as user_deleter
         print_separator_line()
         print("Welcome in the donor delete application!")
         print()
-        deleter = deleter.DeleteDonor()
+        user_deleter = user_deleter.DeleteDonor()
         ask_answer()
 
     elif Picked_option_string == "4":
