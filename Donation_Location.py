@@ -1,8 +1,9 @@
 from datetime import datetime
+
 __author__ = 'Stark_Industries'
 
-class UserData(object):
 
+class UserData(object):
     def __init__(self):
         self.get_date_of_event()
         self.get_start_and_end_time()
@@ -15,6 +16,9 @@ class UserData(object):
         self.get_planned_donor_number()
         self.get_number_of_successful_donations()
         self.calculate_result_of_donation_by_percentage()
+        self.print_location_info()
+        self.make_data_into_string()
+        self.data_to_file()
 
     def get_date_of_event(self):
         date_of_event = ""
@@ -83,7 +87,8 @@ class UserData(object):
             if len(address) > 25:
                 print("Address should be less then 25 characters!")
                 address = ""
-        self.address = address
+        address_list = address.replace(","," ").split(',')
+        self.address = address_list
 
     def get_beds_available(self):
         available_beds = ""
@@ -127,7 +132,8 @@ class UserData(object):
         self.maximum_donor_number = max_donor_number
 
     def calculate_result_of_donation_by_percentage(self):
-        result_of_donation_by_percentage = int(100 * int(self.number_of_successful_donations) / int(self.maximum_donor_number))
+        result_of_donation_by_percentage = int(
+            100 * int(self.number_of_successful_donations) / int(self.maximum_donor_number))
         print("This is %d%% of the planned number of donors." % result_of_donation_by_percentage)
         if result_of_donation_by_percentage < 20:
             print("This donation was unsuccessful, not worth to organise there again.")
@@ -137,6 +143,25 @@ class UserData(object):
             print("This donation was successful!")
         elif 75 <= result_of_donation_by_percentage:
             print("This donation was outstanding!")
+
+    def print_location_info(self):
+        print("{0}, {1}, {2}"
+              .format(self.city, self.date_of_event, self.address))
+
+    def make_data_into_string(self):
+        full_data = str(self.date_of_event) + ", " + \
+        str(self.start_time) + ", " + str(self.end_time) + ", " + \
+        str(self.zip_code) + ", " + str(self.city) + ", " + str(self.address) + ", " + \
+        str(self.available_beds) + ", " + str(self.planned_donor_number) + ", " + \
+        str(self.number_of_successful_donations) + ", " + str(self.duration_in_minutes) + ", " + \
+        str(self.maximum_donor_number)
+
+        self.full_data_string = full_data
+
+    def data_to_file(self):
+        with open("./Data/Location_Data.csv", "a") as Location_Text_File:
+            Location_Text_File.write(self.full_data_string + "\n")
+
 
 if __name__ == "__main__":
     UserData()

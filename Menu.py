@@ -1,6 +1,5 @@
 import Donation_User
 import Donation_Location
-import Donor_delete
 import csv
 import User_delete
 
@@ -96,6 +95,9 @@ def Picked_option():
                     counter = 0
                     end_counter = 3
                     for line in csv_text:
+                        line1 = line
+                        line2 = line
+                        line3 = line #a line 1,2,3, között váltogatni és úgy kiiratni
                         while counter < end_counter:
                             first_name_to_print = line[0]
                             title_to_print = line[1]

@@ -6,7 +6,7 @@ __author__ = 'Stark_Industries'
 
 class UserData(object):
 
-    def __init__(self):
+    def __init__(self   ):
 
         self.available_for_donation()
 
@@ -254,11 +254,11 @@ class UserData(object):
                     str(self.id_expiration) + ", " + str(
             self.hemoglobin) + ", " + (self.was_she_he_sick)
 
-        self.full_data = full_data
+        self.full_data_string = full_data
 
     def data_to_file(self):
         with open("./Data/Donor_Data.csv", "a") as Donor_Text_File:
-            Donor_Text_File.write(self.full_data + "\n")
+            Donor_Text_File.write(self.full_data_string + "\n")
 
 if __name__ == '__main__':
     UserData()
