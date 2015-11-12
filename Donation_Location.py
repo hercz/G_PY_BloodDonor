@@ -1,5 +1,6 @@
 from datetime import datetime
 import csv
+
 __author__ = 'Stark_Industries'
 
 
@@ -87,7 +88,7 @@ class UserData(object):
             if len(address) > 25:
                 print("Address should be less then 25 characters!")
                 address = ""
-        address_list = address.replace(",",'')
+        address_list = address.replace(",", '')
         self.address = address_list
 
     def get_beds_available(self):
@@ -154,11 +155,12 @@ class UserData(object):
             line_number = list(csv_text)
             location_id = len(line_number)
         full_data = str(location_id) + ", " + str(self.date_of_event) + ", " + \
-        str(self.start_time) + ", " + str(self.end_time) + ", " + \
-        str(self.zip_code) + ", " + str(self.city) + ", " + str(self.address) + ", " + \
-        str(self.available_beds) + ", " + str(self.planned_donor_number) + ", " + \
-        str(self.number_of_successful_donations) + ", " + str(self.duration_in_minutes) + ", " + \
-        str(self.maximum_donor_number)
+                    str(self.start_time.hour) + ":" + str(self.start_time.minute) + ", " + str(
+            self.end_time.hour) + ":" + str(self.end_time.minute) + ", " + \
+                    str(self.zip_code) + ", " + str(self.city) + ", " + str(self.address) + ", " + \
+                    str(self.available_beds) + ", " + str(self.planned_donor_number) + ", " + \
+                    str(self.number_of_successful_donations) + ", " + str(self.duration_in_minutes) + ", " + \
+                    str(self.maximum_donor_number)
 
         self.full_data_string = full_data
 
