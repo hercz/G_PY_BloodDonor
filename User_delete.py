@@ -13,18 +13,16 @@ class DeleteDonor(object):
         if user_input.lower() == "y":
             return self.get_delete_id()
         elif user_input.lower() == "n":
-             Menu.Main_Menu()
-             Menu.Picked_option()
+            Menu.Main_Menu()
+            Menu.Picked_option()
         else:
             print("Invalid input!")
             self.get_user_input()
 
 
     def delete_id(self):
-        donor_data = open("./Data/Donor_Data.csv", "r")
+        donor_data = open("./Data/Donor_Data.csv", "r+")
         lines = donor_data.readlines()
-        donor_data.close()
-        donor_data = open("./Data/Donor_Data.csv", "w")
         for line in lines:
             if self.to_delete not in line:
                 donor_data.write(line)
