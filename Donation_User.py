@@ -75,9 +75,9 @@ class UserData(object):
                 self.last_name = last_name
 
     def get_full_name(self):
-        full_name = self.first_name + ", " + self.title + " " + self.last_name
+        full_name = self.first_name + "," + self.title + " " + self.last_name
         self.full_name = full_name
-        full_name_without_title = self.first_name + ", " + self.last_name
+        full_name_without_title = self.first_name + "," + self.last_name
         self.name_without_title = full_name_without_title
 
     def get_weight(self):
