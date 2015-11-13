@@ -75,9 +75,9 @@ class UserData(object):
                 self.last_name = last_name
 
     def get_full_name(self):
-        full_name = self.first_name + ", " + self.title + " " + self.last_name
+        full_name = self.first_name + "," + self.title + " " + self.last_name
         self.full_name = full_name
-        full_name_without_title = self.first_name + ", " + self.last_name
+        full_name_without_title = self.first_name + "," + self.last_name
         self.name_without_title = full_name_without_title
 
     def get_weight(self):
@@ -248,13 +248,10 @@ class UserData(object):
                    self.email_string))
 
     def make_data_into_one_string(self):
-        full_data = str(self.name_without_title) + ", " + str(self.gender) + ", " + str(self.identifier) + ", " + \
-                    str(self.email_string) + ", " + str(self.blood_type) + ", " + str(self.birth_date) + ", " + str(
-            self.age) \
-                    + ", " + str(self.weight) + ", " + str(
-            self.last_donation_date) + ", " + \
-                    str(self.id_expiration) + ", " + str(
-            self.hemoglobin) + ", " + (self.was_she_he_sick)
+        full_data = str(self.name_without_title) + "," + str(self.gender) + "," + str(self.identifier) + "," + \
+                    str(self.email_string) + "," + str(self.blood_type) + "," + str(self.birth_date) + "," + \
+                    str(self.age) + "," + str(self.weight) + "," + str(self.last_donation_date) + "," + \
+                    str(self.id_expiration) + "," + str(self.hemoglobin) + "," + str(self.was_she_he_sick)
 
         self.full_data_string = full_data
 
