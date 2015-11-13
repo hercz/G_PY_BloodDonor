@@ -46,7 +46,7 @@ class DeleteDonor(object):
                     reader = csv.reader(file, delimiter=",")
                     ids = []
                     for row in reader:
-                        ids.append(row[4])
+                        ids.append(row[3])
                     if id_to_delete in str(ids):
                         self.delete_id()
                     else:
