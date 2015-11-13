@@ -248,13 +248,10 @@ class UserData(object):
                    self.email_string))
 
     def make_data_into_one_string(self):
-        full_data = str(self.name_without_title) + ", " + str(self.gender) + ", " + str(self.identifier) + ", " + \
-                    str(self.email_string) + ", " + str(self.blood_type) + ", " + str(self.birth_date) + ", " + str(
-            self.age) \
-                    + ", " + str(self.weight) + ", " + str(
-            self.last_donation_date) + ", " + \
-                    str(self.id_expiration) + ", " + str(
-            self.hemoglobin) + ", " + (self.was_she_he_sick)
+        full_data = str(self.name_without_title) + "," + str(self.gender) + "," + str(self.identifier) + "," + \
+                    str(self.email_string) + "," + str(self.blood_type) + "," + str(self.birth_date) + "," + \
+                    str(self.age) + "," + str(self.weight) + "," + str(self.last_donation_date) + "," + \
+                    str(self.id_expiration) + "," + str(self.hemoglobin) + "," + str(self.was_she_he_sick)
 
         self.full_data_string = full_data
 
