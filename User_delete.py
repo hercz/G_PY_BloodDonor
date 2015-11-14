@@ -9,24 +9,25 @@ class DeleteDonor(object):
         self.get_delete_id()
 
     def get_user_input(self):
-        user_input = input("Do you want to delete another donor from the database? (Y/N)")
+        user_input = input(print("Do you want to delete another donor from the database? (Y/N)"))
         if user_input.lower() == "y":
-            self.get_delete_id()
+            return self.get_delete_id()
         elif user_input.lower() == "n":
-            Menu.Main_Menu()
-            Menu.Picked_option()
+             Menu.Main_Menu()
+             Menu.Picked_option()
         else:
             print("Invalid input!")
             self.get_user_input()
 
 
     def delete_id(self):
-        donor_data = open("./Data/Donor_Data.csv", "r+")
+        donor_data = open("./Data/Donor_Data.csv", "r")
         lines = donor_data.readlines()
+        donor_data.close()
+        donor_data = open("./Data/Donor_Data.csv", "w")
         for line in lines:
             if self.to_delete not in line:
-                print("This ID is not found!")
-                self.get_delete_id()
+                donor_data.write(line)
         donor_data.close()
         print("The user with {} Id is deleted".format(self.to_delete))
         self.get_user_input()
