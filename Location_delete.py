@@ -22,16 +22,27 @@ class DeleteLocation(object):
 
 
     def delete_id(self):
-        location_data = open("./Data/Location_data.csv", "r")
-        lines = location_data.readlines()
-        location_data.close()
-        location_data = open("./Data/Location_data.csv", "w")
-        for line in lines:
-            if self.to_delete not in line[0]:
-                location_data.write(line)
-        location_data.close()
-        print("The location with {} Id is deleted".format(self.to_delete))
+        location_file = open("./Data/Location_data.csv", "r+")
+        read_line = location_file.readlines()
+        location_file.seek(0)
+        for i in read_line:
+            splitted = i.split(",")
+            if self.to_delete != splitted[0]:
+                location_file.write(i)
+        location_file.truncate()
+        location_file.close()
+        print("the location with {} id was deleted".format(self.to_delete))
         self.get_user_input()
+        # location_data = open("./Data/Location_data.csv", "r")
+        # lines = location_data.readlines()
+        # location_data.close()
+        # location_data = open("./Data/Location_data.csv", "w")
+        # for line in lines:
+        #     if self.to_delete not in line[0]:
+        #         location_data.write(line)
+        # location_data.close()
+        # print("The location with {} Id is deleted".format(self.to_delete))
+        # self.get_user_input()
 
 
     def get_delete_id(self):
@@ -39,7 +50,7 @@ class DeleteLocation(object):
         while id_to_delete == "":
             id_to_delete = input("Please write here the location ID which you want to delete from the database: ")
             self.to_delete = id_to_delete
-            if id_to_delete == "id":            # ATIRNI MERT MINDENT TOROL
+            if id_to_delete == "id":
                 print("Invalid ID format!")
                 self.get_user_input()
             try:
