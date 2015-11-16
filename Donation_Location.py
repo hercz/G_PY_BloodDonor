@@ -152,7 +152,7 @@ class UserData(object):
 
     def make_data_into_string(self):
         with open("./Data/Location_Data.csv", "r") as TextFile:
-            csv_text = csv.reader(TextFile, delimiter=",")
+            csv_text = csv.reader(TextFile, delimiter =",")
             location_id = random.randint(0, 5000)
             location_ids = []
             for line in csv_text:
