@@ -152,9 +152,15 @@ class UserData(object):
 
     def make_data_into_string(self):
         with open("./Data/Location_Data.csv", "r") as TextFile:
-            csv_text = csv.reader(TextFile)
-            line_number = list(csv_text)
-            location_id = len(line_number)
+            csv_text = csv.reader(TextFile, delimiter=",")
+            location_id = 1176
+            location_ids = []
+            for line in csv_text:
+                location_ids.append(line[0])
+                if not str(location_id) in str(location_ids):
+                    location_id = location_id
+                else:
+                    location_id = random.randint(0, 5000)
         full_data = str(location_id) + ", " + str(self.date_of_event) + ", " + \
                     str(self.start_time.hour) + ":" + str(self.start_time.minute) + ", " + str(
             self.end_time.hour) + ":" + str(self.end_time.minute) + ", " + \
