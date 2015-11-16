@@ -1,9 +1,8 @@
-
 import csv
 import Menu
 
-class DeleteLocation(object):
 
+class DeleteLocation(object):
     id_to_delete = ""
 
     def __init__(self):
@@ -14,12 +13,11 @@ class DeleteLocation(object):
         if user_input.lower() == "y":
             return self.get_delete_id()
         elif user_input.lower() == "n":
-             Menu.Main_Menu()
-             Menu.Picked_option()
+            Menu.Main_Menu()
+            Menu.Picked_option()
         else:
             print("Invalid input!")
             self.get_user_input()
-
 
     def delete_id(self):
         location_file = open("./Data/Location_data.csv", "r+")
@@ -33,17 +31,6 @@ class DeleteLocation(object):
         location_file.close()
         print("the location with {} id was deleted".format(self.to_delete))
         self.get_user_input()
-        # location_data = open("./Data/Location_data.csv", "r")
-        # lines = location_data.readlines()
-        # location_data.close()
-        # location_data = open("./Data/Location_data.csv", "w")
-        # for line in lines:
-        #     if self.to_delete not in line[0]:
-        #         location_data.write(line)
-        # location_data.close()
-        # print("The location with {} Id is deleted".format(self.to_delete))
-        # self.get_user_input()
-
 
     def get_delete_id(self):
         id_to_delete = ""

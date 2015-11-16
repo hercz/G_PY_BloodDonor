@@ -5,6 +5,7 @@ import csv
 import User_delete
 import Search
 
+
 def print_separator_line():
     print("-" * 32)
 
@@ -15,18 +16,14 @@ def greetings():
 
 
 def Main_Menu():
-    # print("If you want to use Donor registration application, type in: user")
     print("Main menu")
-    print("     1. I want to add a new guy, bro!!")
-    print("     2. How about a new donation event? Yeah! That's what i want!")
-    print("     3. Genie make a donor disappear!")
-    print("     4. Obama destroy event protocol..")
-    print("     5. Show me everyone and everything The way I want!")
-    print("     6. Search and...? SEARCH")
+    print("     1. Add new donor")
+    print("     2. Add new donation event")
+    print("     3. Delete a donor")
+    print("     4. Delete a donation event")
+    print("     5. List donor or donation events")
+    print("     6. Search")
     print("     7. Exit \n")
-
-    # print("\n Choose what you want: ")
-    # print("If you want to use Donation event registration application, type in: loc")
 
 
 def Picked_option():
@@ -46,16 +43,6 @@ def Picked_option():
         print("Welcome in Donor registration application!")
         print()
         person = user.UserData()
-        # print()
-        # print_separator_line()
-        # print("The user main data: ")
-        # print()
-        # print(person.print_donor_info()['name'], '\n',
-        #       str(person.print_donor_info()['weight']), ' kg\n',
-        #       person.print_donor_info()['date of birth'], ' - ', person.print_donor_info()['age'], ' years old\n',
-        #       person.print_donor_info()['e-mail'])
-        # print()
-        # print("Thank for your registration (and your blood)!")
         ask_answer()
 
 
@@ -126,10 +113,6 @@ def Picked_option():
 
                     ask_answer()
 
-
-
-
-
     elif Picked_option_string == "6":
         import Search as search_option
         os.system("cls")
@@ -138,7 +121,7 @@ def Picked_option():
         print()
         search_option = Search.Search()
         print()
-        print("Thank for your registration (and your blood)!")
+        print("Thank for using our Search Engine")
 
         ask_answer()
         pass
@@ -155,7 +138,7 @@ def print_one_donor(line):
     age_to_print = line[7]
     email_to_print = line[4]
     print_separator_line()
-    print("""{0}\n{1} kg\n{2} - {3}\n{4}
+    print("""{0}\n{1} kg\n{2} - {3} years old\n{4}
             """.format(first_name_to_print + last_name_to_print,
                        weight_to_print,
                        birth_date_to_print,

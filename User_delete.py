@@ -1,8 +1,8 @@
 import csv
 import Menu
 
-class DeleteDonor(object):
 
+class DeleteDonor(object):
     id_to_delete = ""
 
     def __init__(self):
@@ -13,12 +13,11 @@ class DeleteDonor(object):
         if user_input.lower() == "y":
             return self.get_delete_id()
         elif user_input.lower() == "n":
-             Menu.Main_Menu()
-             Menu.Picked_option()
+            Menu.Main_Menu()
+            Menu.Picked_option()
         else:
             print("Invalid input!")
             self.get_user_input()
-
 
     def delete_id(self):
         donor_data = open("./Data/Donor_Data.csv", "r")
@@ -31,7 +30,6 @@ class DeleteDonor(object):
         donor_data.close()
         print("The user with {} Id is deleted".format(self.to_delete))
         self.get_user_input()
-
 
     def get_delete_id(self):
         id_to_delete = ""
@@ -61,4 +59,3 @@ class DeleteDonor(object):
 
 if __name__ == '__main__':
     DeleteDonor()
-

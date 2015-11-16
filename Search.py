@@ -1,6 +1,7 @@
-__author__ = 'Vegh Adam'
+__author__ = 'Stark Industries'
 import csv
 import os
+
 
 class Search():
     @staticmethod
@@ -22,6 +23,7 @@ class Search():
         print("""{0},{1},{2}
                 """.format(city_to_print, date_of_event_corrected, address_to_print))
         print("-" * 32)
+
     @staticmethod
     def print_one_donor(line):
         first_name_to_print = line[0]
@@ -86,7 +88,5 @@ class Search():
                                     os.system("cls")
 
 
-
-            pass
 if __name__ == "__main__":
     Search()
