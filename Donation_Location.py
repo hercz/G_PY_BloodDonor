@@ -171,6 +171,7 @@ class UserData(object):
 
         self.full_data_string = full_data
 
+
     def data_to_file(self):
         with open("./Data/Location_Data.csv", "a") as Location_Text_File:
             Location_Text_File.write(self.full_data_string + "\n")
