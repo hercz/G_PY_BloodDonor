@@ -31,6 +31,7 @@ class DeleteDonor(object):
         print("The user with {} Id is deleted".format(self.to_delete))
         self.get_user_input()
 
+
     def get_delete_id(self):
         id_to_delete = ""
         while id_to_delete == "":

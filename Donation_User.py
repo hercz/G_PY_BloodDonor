@@ -49,7 +49,6 @@ class UserData(object):
             if answer == "Y" or answer == "y":
                 self.title = input("In that Case enter your title: ") + " "
             elif answer == "N" or answer == "n":
-                print("I see, you don't even have a title, poor boy!")
                 self.title = ""
             else:
                 answer = ""
