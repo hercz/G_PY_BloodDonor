@@ -156,8 +156,8 @@ class UserData(object):
             line_number = list(csv_text)
             location_id = len(line_number)
         full_data = str(location_id) + ", " + str(self.date_of_event) + ", " + \
-                    str(self.start_time.hour) + ":" + str(self.start_time.minute) + ", " + str(
-            self.end_time.hour) + ":" + str(self.end_time.minute) + ", " + \
+                    self.start_time.strftime("%I") + ":" + self.start_time.strftime("%M") + ", " + \
+                    self.end_time.strftime("%I") + ":" + self.end_time.strftime("%M") + ", " + \
                     str(self.zip_code) + ", " + str(self.city) + ", " + str(self.address) + ", " + \
                     str(self.available_beds) + ", " + str(self.planned_donor_number) + ", " + \
                     str(self.number_of_successful_donations) + ", " + str(self.duration_in_minutes) + ", " + \
