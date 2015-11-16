@@ -1,3 +1,4 @@
+import webbrowser
 import os
 import Donation_User
 import Donation_Location
@@ -32,7 +33,7 @@ def Picked_option():
         Picked_option_string = input("Pick an option: ")
         if not (Picked_option_string == "1" or Picked_option_string == "2" or Picked_option_string == "3" or
                         Picked_option_string == "4" or Picked_option_string == "5" or Picked_option_string == "6" or
-                        Picked_option_string == "7"):
+                        Picked_option_string == "7" or Picked_option_string == "8"):
             print("Your input is invalid, choose from the available menus! ")
             Picked_option_string = ""
 
@@ -129,6 +130,8 @@ def Picked_option():
     elif Picked_option_string == "7":
         exit()
 
+    elif Picked_option_string == "8":
+        webbrowser.open("https://www.youtube.com/watch?v=_uUBQeJ61nw")
 
 def print_one_donor(line):
     first_name_to_print = line[0]
