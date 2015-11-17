@@ -26,15 +26,21 @@ def Main_Menu():
     print("     6. Search")
     print("     7. Exit \n")
 
+def check_picked_option(input_str: str):
+    return input_str.isdigit()
+
+def valid_picked_option(input_str: str):
+    return int(input_str) in range(1, 9)
 
 def Picked_option():
     Picked_option_string = ""
     while Picked_option_string == "":
         Picked_option_string = input("Pick an option: ")
-        if not (Picked_option_string == "1" or Picked_option_string == "2" or Picked_option_string == "3" or
-                        Picked_option_string == "4" or Picked_option_string == "5" or Picked_option_string == "6" or
-                        Picked_option_string == "7" or Picked_option_string == "8"):
-            print("Your input is invalid, choose from the available menus! ")
+        if not check_picked_option(Picked_option_string):
+            print("Your input is not a number, choose from the available menus!")
+            Picked_option_string = ""
+        elif not valid_picked_option(Picked_option_string):
+            print("The menu number is not found, choose from the available menus!")
             Picked_option_string = ""
 
     if Picked_option_string == "1":
