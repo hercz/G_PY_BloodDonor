@@ -53,7 +53,7 @@ class Search():
                 search_number = ""
         if search_number == '1':
             os.system("cls")
-            keyword = input("Please enter keyword to search for: ")
+            keyword = input("Please enter keyword to search for: ").lower()
             with open("./Data/Donor_Data.csv", "r") as TextFile:
                 csv_text = csv.reader(TextFile)
                 counter = 0
@@ -61,7 +61,7 @@ class Search():
                 record_list = list(csv_text)
                 for line in record_list[1:]:
                     for char in line:
-                        if keyword in char:
+                        if keyword in char.lower():
                             counter += 1
                             Search.print_one_donor(line)
                             if counter % page_size == 0 and counter <= len(record_list):
@@ -71,7 +71,7 @@ class Search():
 
         elif search_number == '2':
             os.system("cls")
-            keyword = input("Please enter keyword to search for: ")
+            keyword = input("Please enter keyword to search for: ").lower()
             with open("./Data/Location_Data.csv", "r") as TextFile:
                 csv_text = csv.reader(TextFile)
                 counter = 0
@@ -79,7 +79,7 @@ class Search():
                 record_list = list(csv_text)
                 for line in record_list[1:]:
                     for char in line:
-                        if keyword in char:
+                        if keyword in char.lower():
                             counter += 1
                             Search.print_one_location(line)
                             if counter % page_size == 0 and counter <= len(record_list):
