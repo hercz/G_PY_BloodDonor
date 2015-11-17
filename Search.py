@@ -59,10 +59,11 @@ class Search():
                         if keyword in char.lower():
                             counter += 1
                             Search.print_one_donor(line)
-                            if counter % page_size == 0:# and counter < len(record_list):
+                            if counter % page_size == 0:
                                 next_page = input("For next page press: N ")
                                 if next_page.lower() == "n":
                                     os.system("cls")
+                            break
                 if counter == 0:
                     print("The '{0}' term is not found".format(keyword))
 
@@ -78,10 +79,11 @@ class Search():
                         if keyword in char.lower():
                             counter += 1
                             Search.print_one_location(line)
-                            if counter % page_size == 0:# and counter < len(record_list):
+                            if counter % page_size == 0:
                                 next_page = input("For next page press: N ")
                                 if next_page.lower() == "n":
                                     os.system("cls")
+                            break
                 if counter == 0:
                     print("The '{0}' term is not found".format(keyword))
 
