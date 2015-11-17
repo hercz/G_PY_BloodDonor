@@ -51,9 +51,9 @@ class UserData(object):
             print("The end time must be later than star time! "
                   "(I think you don't want to stay to the fallowing day... Idiot!)")
             return False
-        elif ((UserData.parse_time(end_time_str) -
-                UserData.parse_time(start_time_str)).total_seconds() / 60) < preparation_time:
-            print("The duration of event must be at least 30 minutes!")
+        elif ((UserData.parse_time(end_time_str) - UserData.parse_time(start_time_str))
+                .total_seconds() / 60) <= preparation_time:
+            print("The duration of event must be more than 30 minutes!")
             return False
         return True
 
@@ -148,7 +148,7 @@ class UserData(object):
             if not planned_donor_number.isdigit() or planned_donor_number <= "0":
                 print("Please enter a positive integer!")
                 planned_donor_number = ""
-        self.planned_donor_number = planned_donor_number
+        self.planned_donor_number = int(planned_donor_number)
 
     def get_number_of_successful_donations(self):
         number_of_successful_donations = ""
@@ -157,12 +157,12 @@ class UserData(object):
             if not number_of_successful_donations.isdigit() or number_of_successful_donations <= "0":
                 print("Please enter a positive integer!")
                 number_of_successful_donations = ""
-        self.number_of_successful_donations = number_of_successful_donations
+        self.number_of_successful_donations = int(number_of_successful_donations)
 
     def calculate_duration_in_minutes(self):
         duration_in_minutes = (UserData.parse_time(self.end_time) -
                                UserData.parse_time(self.start_time)).total_seconds() / 60
-        self.duration_in_minutes = int(duration_in_minutes)
+        self.duration_in_minutes = duration_in_minutes
 
     def calculate_max_donor_number(self):
         preparation_time = 30
@@ -172,8 +172,7 @@ class UserData(object):
         self.maximum_donor_number = max_donor_number
 
     def calculate_result_of_donation_by_percentage(self):
-        result_of_donation_by_percentage = int(
-            100 * int(self.number_of_successful_donations) / int(self.maximum_donor_number))
+        result_of_donation_by_percentage = int(100 * self.number_of_successful_donations / self.maximum_donor_number)
         print("This is %d%% of the planned number of donors." % result_of_donation_by_percentage)
         if result_of_donation_by_percentage < 20:
             print("This donation was unsuccessful, not worth to organise there again.")
