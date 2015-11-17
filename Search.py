@@ -26,13 +26,15 @@ class Search():
         birth_date_to_print = line[6].replace("-", ".")
         age_to_print = line[7]
         email_to_print = line[4]
-        print("""{0}\n{1} kg\n{2} - {3}\n{4}
-                """.format(first_name_to_print + last_name_to_print,
-                           weight_to_print,
-                           birth_date_to_print,
-                           age_to_print,
-                           email_to_print))
-        print("-" * 32)
+        print('-' * 36)
+        print("""{0}, {1}\n{2} kg\n{3} - {4} years old\n{5}
+        """.format(
+            first_name_to_print,
+            last_name_to_print,
+            weight_to_print,
+            birth_date_to_print,
+            age_to_print,
+            email_to_print))
 
     def get_search(self):
         print('-' * 36)
