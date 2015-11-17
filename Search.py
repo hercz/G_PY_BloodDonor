@@ -4,10 +4,6 @@ import os
 
 
 class Search():
-    @staticmethod
-    def separator_line():
-        print("-" * 32)
-
     def __init__(self):
         self.get_search()
 
