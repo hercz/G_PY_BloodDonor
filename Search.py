@@ -19,7 +19,7 @@ class Search():
                 """.format(city_to_print, date_of_event_corrected, address_to_print))
 
     @staticmethod
-    def print_one_donor(line):
+    def print_one_donor(line, counter):
         first_name_to_print = line[0]
         last_name_to_print = line[1]
         weight_to_print = line[8]
@@ -27,8 +27,9 @@ class Search():
         age_to_print = line[7]
         email_to_print = line[4]
         print('-' * 36)
-        print("""{0}, {1}\n{2} kg\n{3} - {4} years old\n{5}
+        print("""{0}.\t{1}, {2}\n\t{3} kg\n\t{4} - {5} years old\n\t{6}
         """.format(
+            counter,
             first_name_to_print,
             last_name_to_print,
             weight_to_print,
@@ -58,7 +59,7 @@ class Search():
                     for char in line:
                         if keyword in char.lower():
                             counter += 1
-                            Search.print_one_donor(line)
+                            Search.print_one_donor(line, counter)
                             if counter % page_size == 0:
                                 next_page = input("For next page press: N ")
                                 if next_page.lower() == "n":
