@@ -8,7 +8,8 @@ __author__ = 'Stark_Industries'
 class UserData(object):
     def __init__(self):
         self.get_date_of_event()
-        self.get_start_and_end_time()
+        self.get_start_time()
+        self.get_end_time()
         self.calculate_duration_in_minutes()
         self.get_beds_available()
         self.calculate_max_donor_number()
@@ -21,6 +22,40 @@ class UserData(object):
         self.print_location_info()
         self.make_data_into_string()
         self.data_to_file()
+
+    @staticmethod
+    def parse_time(time_str):
+        return datetime.strptime(time_str, '%H:%M')
+
+    @staticmethod
+    def check_time(time_str):
+        time_list = time_str.split(":")
+        if len(time_list) != 2:
+            print("Bad time format! It should be HH:MM (e.g. 09:05)!")
+            return False
+        for time in time_list:
+            if not time.isdigit():
+                print("The time must be a number!")
+                return False
+        try:
+            UserData.parse_time(time_str)
+            return True
+        except ValueError:
+            print("This time doesn't exist!")
+            return False
+
+    @staticmethod
+    def validate_end_time(start_time_str, end_time_str):
+        preparation_time = 30
+        if ((UserData.parse_time(end_time_str) - UserData.parse_time(start_time_str)).total_seconds() / 60) < 0:
+            print("The end time must be later than star time! "
+                  "(I think you don't want to stay to the fallowing day... Idiot!)")
+            return False
+        elif ((UserData.parse_time(end_time_str) -
+                UserData.parse_time(start_time_str)).total_seconds() / 60) < preparation_time:
+            print("The duration of event must be at least 30 minutes!")
+            return False
+        return True
 
     def get_date_of_event(self):
         date_of_event = ""
@@ -38,36 +73,38 @@ class UserData(object):
                 print("You have entered a wrong date type! It should be YYYY.MM.DD!")
         self.date_of_event = date_of_event
 
-    def get_start_and_end_time(self):
+    def get_start_time(self):
         start_time = ""
-        end_time = ""
-        while True:
-            start = input("Please enter the start time of the donation (HH:MM): ")
-            end = input("Please enter the end time of the donation (HH:MM): ")
-            try:
-                start_time = datetime.strptime(start, "%H:%M")
-                end_time = datetime.strptime(end, "%H:%M")
-                if start_time < end_time:
-                    break
-                else:
-                    print("Start time can not be later than end time!")
-            except ValueError:
-                print("You have entered a wrong time type! It should be HH:MM!")
+        while start_time == "":
+            start_time = input("Start time (HH:MM): ")
+            if start_time == "":
+                print("Start time cannot be empty !")
+            elif not UserData.check_time(start_time):
+                start_time = ""
         self.start_time = start_time
+
+    def get_end_time(self):
+        end_time = ""
+        while end_time == "":
+            end_time = input("End time (HH:MM): ")
+            if end_time == "":
+                print("End time cannot be empty !")
+            elif not (UserData.check_time(end_time) and UserData.validate_end_time(self.start_time, end_time)):
+                end_time = ""
         self.end_time = end_time
 
     def get_zip_code(self):
         zip_code = ""
         while zip_code == "":
-            zip_code = input("Please enter your ZIP code ")
+            zip_code = input("Please enter your ZIP code: ")
             if len(zip_code) != 4:
-                print("You must enter a valid ZIP code")
+                print("You must enter a valid ZIP code: ")
                 zip_code = ""
             elif zip_code[0] == '0':
-                print("Your first character can't be Zero")
+                print("Your first character can't be Zero: ")
                 zip_code = ""
             elif not zip_code.isdigit():
-                print("You must enter positive numbers ")
+                print("You must enter positive numbers: ")
                 zip_code = ""
             elif len(zip_code) == 4:
                 self.zip_code = zip_code
@@ -123,7 +160,8 @@ class UserData(object):
         self.number_of_successful_donations = number_of_successful_donations
 
     def calculate_duration_in_minutes(self):
-        duration_in_minutes = (self.end_time - self.start_time).total_seconds() // 60
+        duration_in_minutes = (UserData.parse_time(self.end_time) -
+                               UserData.parse_time(self.start_time)).total_seconds() / 60
         self.duration_in_minutes = int(duration_in_minutes)
 
     def calculate_max_donor_number(self):
@@ -147,12 +185,11 @@ class UserData(object):
             print("This donation was outstanding!")
 
     def print_location_info(self):
-        print("{0}, {1}, {2}"
-              .format(self.city, self.date_of_event, self.address))
+        print("{0}, {1}, {2}".format(self.city, self.date_of_event, self.address))
 
     def make_data_into_string(self):
         with open("./Data/Location_Data.csv", "r") as TextFile:
-            csv_text = csv.reader(TextFile, delimiter =",")
+            csv_text = csv.reader(TextFile, delimiter=",")
             location_id = random.randint(0, 5000)
             location_ids = []
             for line in csv_text:
@@ -162,8 +199,7 @@ class UserData(object):
                 else:
                     location_id = random.randint(0, 5000)
         full_data = str(location_id) + ", " + str(self.date_of_event) + ", " + \
-                    self.start_time.strftime("%I") + ":" + self.start_time.strftime("%M") + ", " + \
-                    self.end_time.strftime("%I") + ":" + self.end_time.strftime("%M") + ", " + \
+                    self.start_time + ", " + self.end_time + ", " + \
                     str(self.zip_code) + ", " + str(self.city) + ", " + str(self.address) + ", " + \
                     str(self.available_beds) + ", " + str(self.planned_donor_number) + ", " + \
                     str(self.number_of_successful_donations) + ", " + str(self.duration_in_minutes) + ", " + \
