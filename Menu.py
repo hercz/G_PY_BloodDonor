@@ -161,14 +161,19 @@ def print_one_location(line):
     print("""{0},{1},{2}
             """.format(city_to_print, date_of_event_corrected, address_to_print))
 
+def the_menu():
+    os.system('cls')
+    print_separator_line()
+    greetings()
+    Main_Menu()
+    Picked_option()
 
 def ask_answer():
     answer = ""
     while answer == "":
         answer = input("Do you want to go back to the Main Menu? Y/N ")
         if answer == "Y" or answer == "y":
-            Main_Menu()
-            Picked_option()
+            the_menu()
         elif answer == "N" or answer == "n":
             exit()
         else:
