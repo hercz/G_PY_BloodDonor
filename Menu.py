@@ -134,7 +134,17 @@ def Picked_option():
         pass
 
     elif Picked_option_string == "7":
-        exit()
+        answer = ""
+        while answer == "":
+            answer = input("Are You sure in your selection?: ")
+            if answer.lower() == "y":
+                print("Thank for using our Blood Donation Register Software!")
+                exit()
+            elif answer.lower() == "n":
+                the_menu()
+            else:
+                print("Press 'Y' or 'N'!")
+                answer = ""
 
     elif Picked_option_string == "8":
         webbrowser.open("https://www.youtube.com/watch?v=_uUBQeJ61nw")
