@@ -28,9 +28,25 @@ class MyTestCase(unittest.TestCase):
         result = self.user.valid_title("Alma")
         self.assertEqual(False, result)
 
+
+
+
     def test_get_first_name_with_6_asString(self):
-        result = self.user.valid_title("6")
+        result = self.user.valid_first_name("6")
         self.assertEqual(False, result)
+
+    def test_get_first_name_with_125_asString(self):
+            result = self.user.valid_first_name("125")
+            self.assertEqual(False, result)
+
+    def test_get_first_name_with_Alma_asString(self):
+        result = self.user.valid_first_name("Alma")
+        self.assertEqual(True, result)
+
+    def test_get_first_name_with_Kovacs_asString(self):
+        result = self.user.valid_first_name("Kovacs")
+        self.assertEqual(True, result)
+
 
 
 

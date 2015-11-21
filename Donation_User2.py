@@ -11,7 +11,7 @@ class UserData2(object):
         print("-" * 50)
 
 
-    def valid_title(self,title):
+    def valid_title(self, title):
         if title == "Y" or title == "y":
             return True
         elif title == "N" or title == "n":
@@ -28,24 +28,26 @@ class UserData2(object):
             else:
                 return title
 
-    def valid_first_name(self,firstName):
-        if firstName.isalpha():
+    def valid_first_name(self, firstName):
+        if firstName.isdigit():
             print("I really hope your name does not contain numbers or special characters or whitespace, check before you enter!")
             return False
+        else:
+            return True
 
 
-    def get_first_name(self,first_name):
-        first_name = ""
-        while first_name == "":
-            first_name = input("Please enter your first name: ")
-            if not self.valid_first_name():
-                first_name = ""
+    def get_first_name(self, firstName):
+        firstName = ""
+        while firstName == "":
+            firstName = input("Please enter your first name: ")
+            if not self.valid_first_name(firstName):
+                firstName = ""
             else:
-                return first_name
+                return firstName
 
 if __name__ == '__main__':
     bela = UserData2()
-    print(bela.get_title(""))
+    print(bela.get_first_name(""))
 
 
 
