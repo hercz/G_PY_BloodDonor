@@ -11,26 +11,28 @@ class UserData2(object):
         print("-" * 50)
 
 
-    def valid_title(self, title):
-        if title == "Y" or title == "y":
-            return True
-        elif title == "N" or title == "n":
-            return True
-        else:
-            return False
-
-    def get_title(self, title):
-        while title == "":
-            title = input("Do you have a title? (Y/N): ")
-            if not self.valid_title(title):
-                print("You must enter Y or N")
-                title = ""
-            else:
-                return title
+    # def valid_title(self, title):
+    #     if title == "Y" or title == "y":
+    #         return True
+    #     elif title == "N" or title == "n":
+    #         return True
+    #     else:
+    #         return False
+    #
+    # def get_title(self, title):
+    #     while title == "":
+    #         title = input("Do you have a title? (Y/N): ")
+    #         if not self.valid_title(title):
+    #             print("You must enter Y or N")
+    #             title = ""
+    #         else:
+    #             return title
 
     def valid_first_name(self, firstName):
         if firstName.isdigit():
             print("I really hope your name does not contain numbers or special characters or whitespace, check before you enter!")
+            return False
+        elif firstName == " ":
             return False
         else:
             return True
@@ -43,11 +45,107 @@ class UserData2(object):
             if not self.valid_first_name(firstName):
                 firstName = ""
             else:
-                return firstName
+                self.first_name = firstName
+
+
+    def get_last_name(self, lastName):
+        lastName = ""
+        while lastName == "":
+            lastName = input("Please enter your last name: ")
+            if not self.valid_last_name(lastName):
+                lastName = ""
+            else:
+                self.last_name = lastName
+
+    def valid_last_name(self, lastName):
+        if lastName.isdigit():
+            print("I really hope your name does not contain numbers or special characters or whitespace, check before you enter!")
+            return False
+        elif lastName == " ":
+            return False
+        else:
+            return True
+
+    def get_full_name(self, fullName, lastName, firstName):
+        fullName = self.first_name + self.last_name
+        self.full_name = fullName
+
+
+    def get_weight(self, weight):
+        weight = ""
+        while weight == "":
+            weight = input("Please enter your weight in kg: ")
+            if not self.valid_weight(weight):
+                weight = ""
+            else:
+                return weight
+
+    def valid_weight(self, weight):
+        if weight.isdigit() and int(weight) >= 50:
+                return True
+        elif weight.isdigit() and int(weight) < 50:
+                return False
+        elif weight.isalpha():
+            return False
+        elif weight == " ":
+            return False
+
+
+    def get_gender(self, gender):
+        gender = ""
+        while gender == "":
+            gender = input("Please choose your gender F/M: ")
+            if not self.valid_gender(gender):
+                print("You most type in one of the available genders:")
+                gender = ""
+            else:
+                return gender
+
+    def valid_gender(self, gender):
+        available_genders = ["f", "m"]
+        if not gender.lower() in available_genders:
+            return False
+        else:
+            return True
+
+    def get_birth_date(self,birthDate):
+        birth_date = ""
+        while birth_date  == "":
+            birthDate = input("Please enter the date of your birth (YYYY.MM.DD): ")
+            if not self.valid_birth_date(birthDate):
+                birthDate = ""
+            else:
+                self.birt_date = birthDate
+
+    def get_age(self,age):
+
+        self.age = age
+        pass
+
+    def valid_birth_date(self, birthDate):
+        try:
+            birthDate = datetime.strptime(birthDate, "%Y.%m.%d").date()
+            if birthDate == "%Y.%m.%d":
+                return True
+            else:
+                return False
+        except ValueError:
+                print("Please enter a valid date!")
+                # age = (datetime.now().date() - birth_date).days // 365
+                # if age > 18:
+
+
+
+
+
+
+
+
+
 
 if __name__ == '__main__':
     bela = UserData2()
-    print(bela.get_first_name(""))
+    print(bela.get_birth_date(""))
 
 
 
@@ -94,62 +192,7 @@ if __name__ == '__main__':
 #
 #
 #
-#     def get_last_name(self):
-#         last_name = ""
-#         while last_name == "":
-#             last_name = input("Please enter your last name: ")
-#             if not last_name.isalpha():
-#                 last_name = ""
-#             else:
-#                 self.last_name = last_name
 #
-#     def get_full_name(self):
-#         full_name = self.first_name + "," + self.title + " " + self.last_name
-#         self.full_name = full_name
-#         full_name_without_title = self.first_name + "," + self.last_name
-#         self.name_without_title = full_name_without_title
-#
-#     def get_weight(self):
-#         weight = ""
-#         while weight == "":
-#             weight = input("Please enter your weight in kg: ")
-#             if weight.isdigit() and int(weight) >= 50:
-#                 self.weight = int(weight)
-#             elif weight.isdigit() and int(weight) < 50:
-#                 print("Sorry you are not suitable for donation! You are below 50 kg.")
-#                 exit()
-#             else:
-#                 print("You must enter a positive integer! ")
-#                 weight = ""
-#
-#     def get_gender(self):
-#         gender = ""
-#         available_genders = ["f", "m"]
-#         while gender == "":
-#             gender = input("Please choose your gender F/M: ")
-#             if not gender.lower() in available_genders:
-#                 print("You most type in one of the available genders:")
-#                 gender = ""
-#             else:
-#                 self.gender = gender
-#
-#     def get_birth_date_and_calculate_age(self):
-#         birth_date = ""
-#         age = ""
-#         while True:
-#             date = input("Please enter the date of your birth (YYYY.MM.DD): ")
-#             try:
-#                 birth_date = datetime.strptime(date, "%Y.%m.%d").date()
-#                 age = (datetime.now().date() - birth_date).days // 365
-#                 if age > 18:
-#                     break
-#                 else:
-#                     print("Sorry, you are too young for blood donation!")
-#                     exit()
-#             except ValueError:
-#                 print("Please enter a valid date!")
-#         self.birth_date = birth_date
-#         self.age = age
 #
 #     def get_last_donation_date(self):
 #         last_donation_date = ""
