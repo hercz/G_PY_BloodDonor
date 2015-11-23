@@ -119,6 +119,7 @@ class UserData2(object):
 
     def valid_age(self):
         if self.get_age() < 18:
+            print("Sorry you are too young to donate")
             answer = input("Do you want to go back to the main menu: Y/N")
             if answer.lower() == "y":
                 Menu.Main_Menu()
@@ -220,7 +221,13 @@ class UserData2(object):
     def valid_was_she_he_sick(self, was_she_he_sick):
         available_answers = ["y", "n"]
         if not was_she_he_sick.lower() in available_answers:
-            return False
+            print("I hope you understand that we dont want sick donators..")
+            answer = input("Do you want to go back to the main menu: Y/N")
+            if answer.lower() == "y":
+                Menu.Main_Menu()
+                Menu.Picked_option()
+            elif answer.lower() == "n":
+                exit()
         else:
             return True
 
@@ -345,9 +352,12 @@ if __name__ == '__main__':
     bela.get_gender()
     bela.get_birth_date()
     bela.get_age()
+    bela.valid_age()
     bela.get_last_donation_date()
+    bela.available_for_donation_last_donation_date()
     bela.get_unique_identifier()
     bela.get_id_expiration()
+    bela.valid_id_expiration()
     bela.get_was_she_he_sick()
     bela.get_blood_type()
     bela.get_email_address()
