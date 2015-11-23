@@ -1,36 +1,18 @@
 import random
 from datetime import datetime
 import Menu
+
 __author__ = 'Stark_Industries'
 
 
 class UserData2(object):
-
-
     def print_separator_line(self):
         print("-" * 50)
 
-
-    # def valid_title(self, title):
-    #     if title == "Y" or title == "y":
-    #         return True
-    #     elif title == "N" or title == "n":
-    #         return True
-    #     else:
-    #         return False
-    #
-    # def get_title(self, title):
-    #     while title == "":
-    #         title = input("Do you have a title? (Y/N): ")
-    #         if not self.valid_title(title):
-    #             print("You must enter Y or N")
-    #             title = ""
-    #         else:
-    #             return title
-
     def valid_first_name(self, firstName):
         if firstName.isdigit():
-            print("I really hope your name does not contain numbers or special characters or whitespace, check before you enter!")
+            print(
+                "I really hope your name does not contain numbers or special characters or whitespace, check before you enter!")
             return False
         elif firstName == " ":
             return False
@@ -57,7 +39,8 @@ class UserData2(object):
 
     def valid_last_name(self, lastName):
         if lastName.isdigit():
-            print("I really hope your name does not contain numbers or special characters or whitespace, check before you enter!")
+            print(
+                "I really hope your name does not contain numbers or special characters or whitespace, check before you enter!")
             return False
         elif lastName == " ":
             return False
@@ -65,7 +48,7 @@ class UserData2(object):
             return True
 
     def get_full_name(self):
-        fullName = self.first_name + " " + self.last_name
+        fullName = self.first_name + "," + self.last_name
         self.full_name = fullName
 
     def get_weight(self):
@@ -79,7 +62,7 @@ class UserData2(object):
 
     def valid_weight(self, weight):
         if weight.isdigit() and int(weight) >= 50:
-                return True
+            return True
         elif weight.isdigit() and int(weight) < 50:
             print("Your weight is too low to donate")
             answer = input("Do you want to go back to the main menu: Y/N")
@@ -125,8 +108,8 @@ class UserData2(object):
         try:
             birth_date = datetime.strptime(birthDate, "%Y.%m.%d").date()
         except ValueError:
-                print("Please enter a valid date!")
-                return False
+            print("Please enter a valid date!")
+            return False
         else:
             return True
 
@@ -159,8 +142,8 @@ class UserData2(object):
         try:
             last_donation_d = datetime.strptime(lastDonationDate, "%Y.%m.%d").date()
         except ValueError:
-                print("Please enter a valid date!")
-                return False
+            print("Please enter a valid date!")
+            return False
         else:
             return True
 
@@ -186,8 +169,8 @@ class UserData2(object):
 
     def valid_identifier(self, unique_id):
         if len(unique_id) != 8:
-                print("Your Identifier length is not enough, type in again: ")
-                return False
+            print("Your Identifier length is not enough, type in again: ")
+            return False
         if unique_id[:6].isalpha() and unique_id[6:].isdigit():
             print("So that's a Passport ID.")
             return True
@@ -327,7 +310,7 @@ class UserData2(object):
 
     def get_random_hemoglobin_donor_is_suitable_or_not(self):
         random_hemoglobin = random.randrange(80, 200, 1)
-        self.hemoglobin= random_hemoglobin
+        self.hemoglobin = random_hemoglobin
         if random_hemoglobin >= 110:
             print("You are suitable for donation, your hemoglobin level is:", random_hemoglobin)
         else:
@@ -348,9 +331,8 @@ class UserData2(object):
         self.full_data_string = full_data
 
     def data_to_file(self):
-         with open("./Data/Donor_Data.csv", "a") as Donor_Text_File:
-             Donor_Text_File.write(self.full_data_string + "\n")
-
+        with open("./Data/Donor_Data.csv", "a") as Donor_Text_File:
+            Donor_Text_File.write(self.full_data_string + "\n")
 
 
 if __name__ == '__main__':
@@ -375,51 +357,3 @@ if __name__ == '__main__':
     bela.get_full_phone_number()
     bela.make_data_into_one_string()
     bela.data_to_file()
-
-
-
-
-# class UserData(object):
-#
-#     def __init__(self   ):
-#
-#         self.available_for_donation()
-#
-#         self.print_separator_line()
-#
-#         self.get_title()
-#         self.get_first_name()
-#         self.get_last_name()
-#         self.get_full_name()
-#         self.get_gender()
-#         self.get_unique_identifier()
-#         self.get_email_address()
-#         self.get_mobil_number()
-#         self.get_blood_type()
-#         self.make_data_into_one_string()
-#         self.data_to_file()
-#
-#         self.print_separator_line()
-#
-#         self.print_donor_info()
-#
-#     def available_for_donation(self):
-#         print("First we need some data from you to decide if you are suitable for donation.")
-#         self.get_birth_date_and_calculate_age()
-#         self.get_weight()
-#         self.get_last_donation_date()
-#         self.random_hemoglobin_donor_is_suitable_or_not()
-#         self.get_id_expiration()
-#         self.get_was_she_he_sick()
-#         print("Congratulations you are available for donation!")
-#         print("Now we need further more data from you to complete your registration.")
-#
-#
-#     def print_donor_info(self):
-#         print("""Name:       {0}\nWeight:     {1} kg\nBirth date: {2}\nAge:        {3} years old\nEmail:      {4}
-#         """.format(self.full_name,
-#                    self.weight,
-#                    self.birth_date,
-#                    self.age,
-#                    self.email_string))
-#
