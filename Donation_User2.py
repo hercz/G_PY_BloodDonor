@@ -81,6 +81,7 @@ class UserData2(object):
         if weight.isdigit() and int(weight) >= 50:
                 return True
         elif weight.isdigit() and int(weight) < 50:
+            print("Your weight is too low to donate")
             answer = input("Do you want to go back to the main menu: Y/N")
             if answer.lower() == "y":
                 Menu.Main_Menu()
@@ -324,7 +325,7 @@ class UserData2(object):
         mobil_string = self.mobil_num_06_36 + " " + self.mobil_num_20_30_60 + " " + self.mobil_num_rest
         self.phone_number = mobil_string
 
-    def random_hemoglobin_donor_is_suitable_or_not(self):
+    def get_random_hemoglobin_donor_is_suitable_or_not(self):
         random_hemoglobin = random.randrange(80, 200, 1)
         self.hemoglobin= random_hemoglobin
         if random_hemoglobin >= 110:
@@ -338,9 +339,43 @@ class UserData2(object):
             elif answer.lower() == "n":
                 exit()
 
+    def make_data_into_one_string(self):
+        full_data = str(self.full_name) + "," + str(self.gender) + "," + str(self.identifier) + "," + \
+                    str(self.email_string) + "," + str(self.blood_type) + "," + str(self.birth_date) + "," + \
+                    str(self.get_age()) + "," + str(self.weight) + "," + str(self.last_donation_date) + "," + \
+                    str(self.id_expiration) + "," + str(self.hemoglobin) + "," + str(self.was_she_he_sick)
+
+        self.full_data_string = full_data
+
+    def data_to_file(self):
+         with open("./Data/Donor_Data.csv", "a") as Donor_Text_File:
+             Donor_Text_File.write(self.full_data_string + "\n")
+
+
 
 if __name__ == '__main__':
     bela = UserData2()
+    bela.get_random_hemoglobin_donor_is_suitable_or_not()
+    bela.get_first_name()
+    bela.get_last_name()
+    bela.get_full_name()
+    bela.get_weight()
+    bela.get_gender()
+    bela.get_birth_date()
+    bela.get_age()
+    bela.get_last_donation_date()
+    bela.get_unique_identifier()
+    bela.get_id_expiration()
+    bela.get_was_she_he_sick()
+    bela.get_blood_type()
+    bela.get_email_address()
+    bela.get_mobil_number_06_36()
+    bela.get_mobil_number_20_30_60()
+    bela.get_mobil_number_the_rest()
+    bela.get_full_phone_number()
+    bela.make_data_into_one_string()
+    bela.data_to_file()
+
 
 
 
@@ -388,15 +423,3 @@ if __name__ == '__main__':
 #                    self.age,
 #                    self.email_string))
 #
-#     def make_data_into_one_string(self):
-#         full_data = str(self.name_without_title) + "," + str(self.gender) + "," + str(self.identifier) + "," + \
-#                     str(self.email_string) + "," + str(self.blood_type) + "," + str(self.birth_date) + "," + \
-#                     str(self.age) + "," + str(self.weight) + "," + str(self.last_donation_date) + "," + \
-#                     str(self.id_expiration) + "," + str(self.hemoglobin) + "," + str(self.was_she_he_sick)
-#
-#         self.full_data_string = full_data
-#
-#     def data_to_file(self):
-#         with open("./Data/Donor_Data.csv", "a") as Donor_Text_File:
-#             Donor_Text_File.write(self.full_data_string + "\n")
-

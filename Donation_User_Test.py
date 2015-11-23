@@ -282,5 +282,55 @@ class MyTestCase(unittest.TestCase):
         result = self.user.valid_blood_type("")
         self.assertEqual(False, result)
 
+
+
+
+    def test_get_mobile_number_06_36_with_10_as_wrong_input(self):
+        result = self.user.validate_mobil_number_06_36("10")
+        self.assertEqual(False, result)
+
+    def test_get_mobile_number_06_36_with_80_as_wrong_input(self):
+        result = self.user.validate_mobil_number_06_36("80")
+        self.assertEqual(False, result)
+
+    def test_get_mobile_number_06_36_with_alma_as_wrong_input(self):
+        result = self.user.validate_mobil_number_06_36("alma")
+        self.assertEqual(False, result)
+
+    def test_get_mobile_number_06_36_with_06_as_Correct_input(self):
+        result = self.user.validate_mobil_number_06_36("06")
+        self.assertEqual(True, result)
+
+
+
+    def test_get_mobile_number_20_30_70_with_10_as_wrong_input(self):
+        result = self.user.validate_mobil_number_20_30_60("10")
+        self.assertEqual(False, result)
+
+    def test_get_mobile_number_20_30_70_with_80_as_wrong_input(self):
+        result = self.user.validate_mobil_number_20_30_60("80")
+        self.assertEqual(False, result)
+
+    def test_get_mobile_number_20_30_70_with_alma_as_wrong_input(self):
+        result = self.user.validate_mobil_number_20_30_60("alma")
+        self.assertEqual(False, result)
+
+    def test_get_mobile_number_20_30_70_with_06_as_Wrong_input(self):
+        result = self.user.validate_mobil_number_20_30_60("06")
+        self.assertEqual(False, result)
+
+    def test_get_mobile_number_20_30_70_with_30_as_Correct_input(self):
+        result = self.user.validate_mobil_number_20_30_60("30")
+        self.assertEqual(True, result)
+
+    def test_get_mobile_number_20_30_70_with_70_as_Correct_input(self):
+        result = self.user.validate_mobil_number_20_30_60("70")
+        self.assertEqual(True, result)
+
+
+
+
+
+
 if __name__ == '__main__':
     unittest.main()
