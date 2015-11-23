@@ -127,6 +127,34 @@ class MyTestCase(unittest.TestCase):
 
 
 
+    def test_get_birthDate_with_Number_as_string(self):
+        result = self.user.valid_birth_date("26")
+        self.assertEqual(False, result)
+
+    def test_get_birthDate_with_Alma_as_string(self):
+        result = self.user.valid_birth_date("Alma")
+        self.assertEqual(False, result)
+
+    def test_get_birthDate_with_WrongYear_as_string(self):
+        result = self.user.valid_birth_date("199991.05.26")
+        self.assertEqual(False, result)
+
+    def test_get_birthDate_with_WrongMonth_as_string(self):
+        result = self.user.valid_birth_date("1991.13.15")
+        self.assertEqual(False, result)
+
+    def test_get_birthDate_with_WrongDay_as_string(self):
+        result = self.user.valid_birth_date("1991.12.45")
+        self.assertEqual(False, result)
+
+    def test_get_birthDate_with_RightDate_as_string(self):
+        result = self.user.valid_birth_date("1991.12.4")
+        self.assertEqual(True, result)
+
+
+
+
+
 
 
 if __name__ == '__main__':

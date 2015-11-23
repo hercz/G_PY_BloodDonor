@@ -109,37 +109,36 @@ class UserData2(object):
             return True
 
     def get_birth_date(self,birthDate):
-        birth_date = ""
-        while birth_date  == "":
+        birthDate = ""
+        while birthDate == "":
             birthDate = input("Please enter the date of your birth (YYYY.MM.DD): ")
             if not self.valid_birth_date(birthDate):
                 birthDate = ""
             else:
                 self.birt_date = birthDate
 
-    def get_age(self,age):
-
-        self.age = age
-        pass
 
     def valid_birth_date(self, birthDate):
         try:
-            birthDate = datetime.strptime(birthDate, "%Y.%m.%d").date()
-            if birthDate == "%Y.%m.%d":
-                return True
-            else:
-                return False
+            birth_date = datetime.strptime(birthDate, "%Y.%m.%d").date()
         except ValueError:
                 print("Please enter a valid date!")
+                return False
+        else:
+            return True
+
+
+
+        # except ValueError:
+        #         print("Please enter a valid date!")
                 # age = (datetime.now().date() - birth_date).days // 365
                 # if age > 18:
 
 
+    def get_age(self,age):
 
-
-
-
-
+        self.age = age
+        pass
 
 
 
@@ -185,13 +184,6 @@ if __name__ == '__main__':
 #         self.get_was_she_he_sick()
 #         print("Congratulations you are available for donation!")
 #         print("Now we need further more data from you to complete your registration.")
-#
-#
-#
-#
-#
-#
-#
 #
 #
 #     def get_last_donation_date(self):
