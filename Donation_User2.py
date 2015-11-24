@@ -279,18 +279,18 @@ class UserData2(object):
         else:
             return True
 
-    def get_mobil_number_20_30_60(self):
-        mobil_203060_string = ""
-        while mobil_203060_string == "":
+    def get_mobil_number_20_30_70(self):
+        mobil_203070_string = ""
+        while mobil_203070_string == "":
             mobil_203060_string = input("Your mobile provide identifier (20, 30 or 70): ")
-            if not self.validate_mobil_number_20_30_60(mobil_203060_string):
+            if not self.validate_mobil_number_20_30_70(mobil_203070_string):
                 print("Invalid format!")
-                mobil_203060_string = ""
+                mobil_203070_string = ""
             else:
-                self.mobil_num_20_30_60 = mobil_203060_string
+                self.mobil_num_20_30_70 = mobil_203070_string
 
-    def validate_mobil_number_20_30_60(self, mobil_203060_string):
-        if not (mobil_203060_string == '20' or mobil_203060_string == '30' or mobil_203060_string == '70'):
+    def validate_mobil_number_20_30_70(self, mobil_203070_string):
+        if not (mobil_203070_string == '20' or mobil_203070_string == '30' or mobil_203070_string == '70'):
             return False
         else:
             return True
@@ -362,7 +362,7 @@ if __name__ == '__main__':
     bela.get_blood_type()
     bela.get_email_address()
     bela.get_mobil_number_06_36()
-    bela.get_mobil_number_20_30_60()
+    bela.get_mobil_number_20_30_70()
     bela.get_mobil_number_the_rest()
     bela.get_full_phone_number()
     bela.make_data_into_one_string()
