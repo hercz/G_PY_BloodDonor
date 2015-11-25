@@ -89,15 +89,17 @@ def the_menu():
     print_separator_line()
     greetings()
     counter = 1
+    main_menu(counter)
     while True:
-        os.system("cls")
-        main_menu(counter)
         key = ord(getch())
-        # print(key)
         if key == 72 and counter > 1:
             counter -= 1
+            os.system("cls")
+            main_menu(counter)
         elif key == 80 and counter < 9:
             counter += 1
+            os.system("cls")
+            main_menu(counter)
         elif key == 13:
             menu_points[counter-1]()
             exit()
