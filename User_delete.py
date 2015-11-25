@@ -37,7 +37,6 @@ def id_is_valid(id_to_delete):
         return True
 
 
-
 def delete_id_from_database(id_to_delete):
         donor_data = open("./Data/Donor_Data.csv", "r")
         lines = donor_data.readlines()

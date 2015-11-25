@@ -8,8 +8,8 @@ class Test_User_delete(unittest.TestCase):
 
     def test_inputs_are_not_correct(self):
         self.assertEqual(id_is_valid("1"), False)
-        self.assertEqual(id_is_valid("unique_id"), False)
-        self.assertEqual(id_is_valid("12345678"), False)
+        self.assertEqual(id_is_valid("unique_id"), False) #isalpha
+        self.assertEqual(id_is_valid("12345678"), False) #justletters
         self.assertEqual(id_is_valid("MA1234FG"), False) #upper letters
 
 
