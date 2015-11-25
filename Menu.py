@@ -71,7 +71,8 @@ def Picked_option():
         print_separator_line()
         print("Welcome in the donor delete application!")
         User_delete.check_database_is_empty()
-        User_delete.get_id_to_delete()
+        id_to_delete = User_delete.get_id_to_delete()
+        User_delete.delete_id_from_database(id_to_delete)
         print()
 
         ask_answer()

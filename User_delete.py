@@ -23,6 +23,7 @@ def get_id_to_delete():
 
 
 def id_is_valid(id_to_delete):
+    id_to_delete = id_to_delete.lower()
     if len(id_to_delete) == 0:
         print("This input cannot be empty!")
         return False
@@ -33,7 +34,8 @@ def id_is_valid(id_to_delete):
         print("This ID is wrong, type it again(It must be an ID or Passport number): ")
         return False
     else:
-        delete_id_from_database(id_to_delete)
+        return True
+
 
 
 def delete_id_from_database(id_to_delete):
