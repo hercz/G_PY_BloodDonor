@@ -47,12 +47,7 @@ def Picked_option():
 
     if Picked_option_string == "1":
         import Donation_User as user
-
-        print_separator_line()
-        print("Welcome in Donor registration application!")
-        print()
-        person = user.UserData()
-        ask_answer()
+        user.donor_app()
 
 
     elif Picked_option_string == "2":
@@ -61,7 +56,7 @@ def Picked_option():
         print_separator_line()
         print("Welcome in Donation event registration application!")
         print()
-        location = location.UserData()
+        location.UserData()
         print()
         print("Thank for your registration (and your blood)!")
         ask_answer()

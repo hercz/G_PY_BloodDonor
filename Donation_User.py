@@ -1,9 +1,11 @@
 import random
+import Menu
 from datetime import datetime
-
 
 __author__ = 'Stark_Industries'
 
+def print_separator_line():
+    print("-" * 32)
 
 class UserData(object):
 
@@ -259,5 +261,13 @@ class UserData(object):
         with open("./Data/Donor_Data.csv", "a") as Donor_Text_File:
             Donor_Text_File.write(self.full_data_string + "\n")
 
-if __name__ == '__main__':
+
+def donor_app():
+    print_separator_line()
+    print("Welcome in Donor registration application!")
+    print()
     UserData()
+    Menu.ask_answer()
+
+if __name__ == '__main__':
+    donor_app()
