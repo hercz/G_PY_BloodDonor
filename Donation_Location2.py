@@ -196,7 +196,8 @@ class UserData(object):
             address = input("Please enter your address: ")
             if not self.validate_address(address):
                 address = ""
-            self.address = address
+            else:
+                self.address = self.validate_address(address)
 
     def get_available_beds(self):
         available_beds = ""
@@ -246,7 +247,12 @@ class UserData(object):
             print("This donation was outstanding!")
 
     def print_location_info(self):
-        print("{0}, {1}, {2}".format(self.city, self.date_of_event, self.address))
+        print("""Host city: {0}\nAddress: {1}\nZip code: {2}\nDate: {3}\nSuccessful donations: {4}
+        """.format(self.city[0].upper() + self.city[1:],
+                   self.address,
+                   self.zip_code,
+                   self.date_of_event,
+                   self.number_of_successful_donations))
 
     def make_data_into_string(self):
         with open("./Data/Location_Data.csv", "r") as TextFile:
