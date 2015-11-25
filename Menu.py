@@ -1,6 +1,5 @@
 import webbrowser
 import os
-import Search
 
 def print_separator_line():
     print("-" * 32)
@@ -11,7 +10,7 @@ def greetings():
     print_separator_line()
 
 
-def Main_Menu():
+def main_menu():
     print("Main menu")
     print("     1. Add new donor")
     print("     2. Add new donation event")
@@ -22,13 +21,16 @@ def Main_Menu():
     print("     7. Change")
     print("     8. Exit \n")
 
+
 def check_picked_option(input_str: str):
     return input_str.isdigit()
+
 
 def valid_picked_option(input_str: str):
     return int(input_str) in range(1, 10)
 
-def Picked_option():
+
+def picked_option():
     Picked_option_string = ""
     while Picked_option_string == "":
         Picked_option_string = input("Pick an option: ")
@@ -60,16 +62,8 @@ def Picked_option():
         Listing.listing()
 
     elif Picked_option_string == "6":
-        import Search as search_option
-        os.system("cls")
-        print_separator_line()
-        print("Welcome to Search")
-        print()
-        Search.Search()
-        print()
-        print("Thank for using our Search Engine")
-
-        ask_answer()
+        import Search
+        Search.search_app()
 
     elif Picked_option_string == "7":
         answer = ""
@@ -123,8 +117,8 @@ def the_menu():
     os.system('cls')
     print_separator_line()
     greetings()
-    Main_Menu()
-    Picked_option()
+    main_menu()
+    picked_option()
 
 
 def ask_answer():

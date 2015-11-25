@@ -1,6 +1,13 @@
-__author__ = 'Stark Industries'
+import Menu
 import csv
 import os
+
+__author__ = 'Stark Industries'
+
+
+def print_separator_line():
+    print("-" * 32)
+
 
 def print_one_location(line):
     city_to_print = line[5]
@@ -31,8 +38,13 @@ def print_one_donor(line, counter):
         age_to_print,
         email_to_print))
 
-def get_search():
-    print('-' * 36)
+
+def search_app():
+    os.system("cls")
+    print_separator_line()
+    print("Welcome to Search")
+    print()
+    print_separator_line()
     print("Search within:")
     print("1, Donors")
     print("2, Donation")
@@ -81,7 +93,10 @@ def get_search():
                         break
             if counter == 0:
                 print("The '{0}' term is not found".format(keyword))
+    print()
+    print("Thank for using our Search Engine")
+    Menu.ask_answer()
 
 
 if __name__ == "__main__":
-    get_search()
+    search_app()
