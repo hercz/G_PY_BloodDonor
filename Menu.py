@@ -86,43 +86,8 @@ def Picked_option():
         ask_answer()
 
     elif Picked_option_string == "5":
-        list_options = ""
-        while list_options == "":
-            print("Please choose which one you want to List: ")
-            print("     1.Donor")
-            print("     2.Donation")
-            list_options = input("")
-            if list_options == "1":
-                with open("./Data/Donor_Data.csv", "r") as TextFile:
-                    csv_text = csv.reader(TextFile)
-                    counter = 0
-                    page_size = 3
-                    record_list = list(csv_text)
-                    for line in record_list[1:]:
-                        counter += 1
-                        print_one_donor(line)
-                        if counter % page_size == 0 and counter <= len(record_list):
-                            next_page = input("For next page press: N ")
-                            if next_page.lower() == "n":
-                                os.system("cls")
-
-                    ask_answer()
-
-            if list_options == "2":
-                with open("./Data/Location_Data.csv", "r") as TextFile:
-                    csv_text = csv.reader(TextFile)
-                    counter = 0
-                    page_size = 3
-                    record_list = list(csv_text)
-                    for line in record_list[1:]:
-                        counter += 1
-                        print_one_location(line)
-                        if counter % page_size == 0 and counter <= len(record_list):
-                            next_page = input("For next page press: N ")
-                            if next_page.lower() == "n":
-                                os.system("cls")
-
-                    ask_answer()
+        import Listing
+        Listing.listing()
 
     elif Picked_option_string == "6":
         import Search as search_option
@@ -135,7 +100,6 @@ def Picked_option():
         print("Thank for using our Search Engine")
 
         ask_answer()
-        pass
 
     elif Picked_option_string == "7":
         answer = ""
@@ -204,3 +168,6 @@ def ask_answer():
         else:
             print("You answer must be Y or N ")
             answer = ""
+
+if __name__ == "__main__":
+    the_menu()
