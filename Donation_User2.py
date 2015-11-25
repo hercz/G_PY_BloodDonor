@@ -367,7 +367,7 @@ class UserData2(object):
         self.data_to_file()
 
 if __name__ == '__main__':
-    self = UserData2().get_user()
+    bela = UserData2().get_user()
 
 
 
