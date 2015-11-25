@@ -69,6 +69,7 @@ class UserData(object):
     def validate_zip_code(self, zip_code):
         if zip_code == "":
             print("ZIP code can not be empty!")
+            return False
         elif len(zip_code) != 4:
             print("You must enter a valid ZIP code! ")
             return False
@@ -92,6 +93,9 @@ class UserData(object):
     def validate_address(self, address):
         if address == "":
             print("Address can not be empty!")
+            return False
+        if address.isspace():
+            print("Address must contains alphanumerical characters!")
             return False
         if not len(address) > 25:
             address_without_comma = address.replace(",", " ")
