@@ -50,9 +50,9 @@ def delete_id_from_database(id_to_delete):
             donor_data.write(line)
     donor_data.close()
     if line_counter == len(lines):
-        print("The user with {} Id is not found".format(id_to_delete))
+        print("The user with {} ID is not found".format(id_to_delete))
     else:
-        print("The user with {} Id is deleted".format(id_to_delete))
+        print("The user with {} ID is deleted".format(id_to_delete))
 
 
 def user_del_app():
