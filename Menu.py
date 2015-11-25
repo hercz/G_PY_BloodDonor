@@ -5,6 +5,7 @@ import Donation_User
 import Donation_Location
 import csv
 import User_delete
+import Location_delete
 import Search
 
 def print_separator_line():
@@ -73,16 +74,15 @@ def Picked_option():
         User_delete.check_database_is_empty()
         id_to_delete = User_delete.get_id_to_delete()
         User_delete.delete_id_from_database(id_to_delete)
-        print()
-
         ask_answer()
 
     elif Picked_option_string == "4":
-        import Location_delete as location_deleter
+
         print_separator_line()
         print("Welcome in the location delete application!")
-        print()
-        user_deleter = location_deleter.DeleteLocation()
+        Location_delete.check_database_is_empty()
+        id_to_delete = Location_delete.get_id_to_delete()
+        User_delete.delete_id_from_database(id_to_delete)
         ask_answer()
 
     elif Picked_option_string == "5":
