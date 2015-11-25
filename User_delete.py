@@ -10,8 +10,8 @@ def check_database_is_empty():
     if os.stat("./Data/Donor_Data.csv").st_size == 0:
         print("Your database is empty! Add some donor before you want to delete them!")
         Menu.ask_answer()
-        Menu.Main_Menu()
-        Menu.Picked_option()
+        Menu.main_menu()
+        Menu.picked_option()
     else:
         pass
 
