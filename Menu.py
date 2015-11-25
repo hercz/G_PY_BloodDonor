@@ -82,7 +82,7 @@ def Picked_option():
         print("Welcome in the location delete application!")
         Location_delete.check_database_is_empty()
         id_to_delete = Location_delete.get_id_to_delete()
-        User_delete.delete_id_from_database(id_to_delete)
+        Location_delete.delete_id_from_database(id_to_delete)
         ask_answer()
 
     elif Picked_option_string == "5":
