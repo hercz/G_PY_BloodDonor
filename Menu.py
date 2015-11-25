@@ -81,6 +81,7 @@ def eighth():
     while answer_key == "":
         answer_key = ord(getch())
         if chr(answer_key) == "y":
+            os.system("cls")
             print("But this is so cool program... :(")
             print("Thank for using our Blood Donation Register Software!")
             exit()

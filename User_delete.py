@@ -3,7 +3,13 @@ import os
 
 
 def print_separator_line():
-    print("-" * 32)
+    print("-" * 50)
+
+
+def greetings():
+    print_separator_line()
+    print("Welcome in the donor delete application!")
+    print_separator_line()
 
 
 def check_database_is_empty():
@@ -22,7 +28,7 @@ def id_is_valid(id_to_delete):
         return False
     elif not id_to_delete[:6].isdigit() and id_to_delete[6:].isalpha() or not \
             id_to_delete[:6].isalpha() and id_to_delete[6:].isdigit():
-        print("This ID is wrong, type it again(It must be an ID or Passport number): ")
+        print("This ID is wrong, type it again! (It must be an ID or Passport number)\n>> ")
         return False
     else:
         return True
@@ -31,7 +37,7 @@ def id_is_valid(id_to_delete):
 def get_id_to_delete():
     id_to_delete = ""
     while id_to_delete == "":
-        id_to_delete = input("Please write here the person's ID which you want to delete from the database: ")
+        id_to_delete = input("Please write here the person's ID which you want to delete from the database\n>>")
         if not id_is_valid(id_to_delete):
             id_to_delete = ""
         else:
@@ -56,8 +62,8 @@ def delete_id_from_database(id_to_delete):
 
 
 def user_del_app():
-    print_separator_line()
-    print("Welcome in the donor delete application!")
+    os.system("cls")
+    greetings()
     check_database_is_empty()
     id_to_delete = get_id_to_delete()
     delete_id_from_database(id_to_delete)

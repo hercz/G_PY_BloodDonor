@@ -3,7 +3,13 @@ import os
 
 
 def print_separator_line():
-    print("-" * 32)
+    print("-" * 50)
+
+
+def greetings():
+    print_separator_line()
+    print("Welcome in the location delete application!")
+    print_separator_line()
 
 
 def check_database_is_empty():
@@ -26,7 +32,7 @@ def id_is_valid(id_to_delete):
 def get_id_to_delete():
     id_to_delete = ""
     while id_to_delete == "":
-        id_to_delete = input("Please write here the location's ID which you want to delete from the database: ")
+        id_to_delete = input("Please write here the location's ID which you want to delete from the database\n>> ")
         if not id_is_valid(id_to_delete):
             id_to_delete = ""
         else:
@@ -52,8 +58,8 @@ def delete_id_from_database(id_to_delete):
 
 
 def loc_del_app():
-    print_separator_line()
-    print("Welcome in the location delete application!")
+    os.system("cls")
+    greetings()
     check_database_is_empty()
     id_to_delete = get_id_to_delete()
     delete_id_from_database(id_to_delete)
