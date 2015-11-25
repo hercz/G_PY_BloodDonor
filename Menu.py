@@ -5,6 +5,7 @@ import Donation_User
 import Donation_Location
 import csv
 import User_delete
+import Location_delete
 import Search
 
 def print_separator_line():
@@ -67,59 +68,26 @@ def Picked_option():
 
 
     elif Picked_option_string == "3":
-        import User_delete as user_deleter
+
         print_separator_line()
         print("Welcome in the donor delete application!")
-        print()
-        user_deleter = user_deleter.DeleteDonor()
+        User_delete.check_database_is_empty()
+        id_to_delete = User_delete.get_id_to_delete()
+        User_delete.delete_id_from_database(id_to_delete)
         ask_answer()
 
     elif Picked_option_string == "4":
-        import Location_delete as location_deleter
+
         print_separator_line()
         print("Welcome in the location delete application!")
-        print()
-        user_deleter = location_deleter.DeleteLocation()
+        Location_delete.check_database_is_empty()
+        id_to_delete = Location_delete.get_id_to_delete()
+        Location_delete.delete_id_from_database(id_to_delete)
         ask_answer()
 
     elif Picked_option_string == "5":
-        list_options = ""
-        while list_options == "":
-            print("Please choose which one you want to List: ")
-            print("     1.Donor")
-            print("     2.Donation")
-            list_options = input("")
-            if list_options == "1":
-                with open("./Data/Donor_Data.csv", "r") as TextFile:
-                    csv_text = csv.reader(TextFile)
-                    counter = 0
-                    page_size = 3
-                    record_list = list(csv_text)
-                    for line in record_list[1:]:
-                        counter += 1
-                        print_one_donor(line)
-                        if counter % page_size == 0 and counter <= len(record_list):
-                            next_page = input("For next page press: N ")
-                            if next_page.lower() == "n":
-                                os.system("cls")
-
-                    ask_answer()
-
-            if list_options == "2":
-                with open("./Data/Location_Data.csv", "r") as TextFile:
-                    csv_text = csv.reader(TextFile)
-                    counter = 0
-                    page_size = 3
-                    record_list = list(csv_text)
-                    for line in record_list[1:]:
-                        counter += 1
-                        print_one_location(line)
-                        if counter % page_size == 0 and counter <= len(record_list):
-                            next_page = input("For next page press: N ")
-                            if next_page.lower() == "n":
-                                os.system("cls")
-
-                    ask_answer()
+        import Listing
+        Listing.listing()
 
     elif Picked_option_string == "6":
         import Search as search_option
@@ -132,7 +100,6 @@ def Picked_option():
         print("Thank for using our Search Engine")
 
         ask_answer()
-        pass
 
     elif Picked_option_string == "7":
         answer = ""
@@ -201,3 +168,6 @@ def ask_answer():
         else:
             print("You answer must be Y or N ")
             answer = ""
+
+if __name__ == "__main__":
+    the_menu()

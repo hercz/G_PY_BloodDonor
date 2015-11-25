@@ -6,54 +6,8 @@ __author__ = 'Stark_Industries'
 
 
 class UserData(object):
-    def __init__(self):
-        self.get_date_of_event()
-        self.get_start_time()
-        self.get_end_time()
-        self.calculate_duration_in_minutes()
-        self.get_available_beds()
-        self.calculate_max_donor_number()
-        self.get_zip_code()
-        self.get_city()
-        self.get_address()
-        self.get_planned_donor_number()
-        self.get_number_of_successful_donations()
-        self.calculate_result_of_donation_by_percentage()
-        self.print_location_info()
-        self.make_data_into_string()
-        self.data_to_file()
-
     def parse_time(self, time_str):
         return datetime.strptime(time_str, '%H:%M')
-
-    def check_time(self, time_str):
-        time_list = time_str.split(":")
-        if len(time_list) != 2:
-            print("Bad time format! You must fill the time correctly! It should be HH:MM (e.g. 15:46)!")
-            return False
-        else:
-            for time in time_list:
-                if not time.isdigit():
-                    print("Time must be a number!")
-                    return False
-        try:
-            self.parse_time(time_str)
-            return True
-        except ValueError:
-            print("This time doesn't exist!")
-            return False
-
-    def validate_end_time(self, start_time_str, end_time_str):
-        preparation_time = 30
-        if ((self.parse_time(end_time_str) - self.parse_time(start_time_str)).total_seconds() / 60) < 0:
-            print("The end time must be later than start time! "
-                  "(I think you don't want to stay for the following day... idiot!)")
-            return False
-        elif ((self.parse_time(end_time_str) - self.parse_time(start_time_str))
-                .total_seconds() / 60) <= preparation_time:
-            print("The duration of event must be more than 30 minutes!")
-            return False
-        return True
 
     def check_date_of_event(self, date_str):
         date_list = date_str.split(".")
@@ -74,6 +28,23 @@ class UserData(object):
             print("This date does not exist!")
             return False
 
+    def check_time(self, time_str):
+        time_list = time_str.split(":")
+        if len(time_list) != 2:
+            print("Bad time format! You must fill the time correctly! It should be HH:MM (e.g. 15:46)!")
+            return False
+        else:
+            for time in time_list:
+                if not time.isdigit():
+                    print("Time must be a number!")
+                    return False
+        try:
+            self.parse_time(time_str)
+            return True
+        except ValueError:
+            print("This time doesn't exist!")
+            return False
+
     def validate_date_of_event(self, date_of_event_str):
         weekday = self.check_date_of_event(date_of_event_str).isoweekday()
         days_left = (self.check_date_of_event(date_of_event_str) - datetime.now().date()).days
@@ -83,9 +54,22 @@ class UserData(object):
             print("Blood donations should be only on weekdays and at least 10 days from the current date.")
             return False
 
+    def validate_end_time(self, start_time_str, end_time_str):
+        preparation_time = 30
+        if ((self.parse_time(end_time_str) - self.parse_time(start_time_str)).total_seconds() / 60) < 0:
+            print("The end time must be later than start time! "
+                  "(I think you don't want to stay for the following day... idiot!)")
+            return False
+        elif ((self.parse_time(end_time_str) - self.parse_time(start_time_str))
+                .total_seconds() / 60) <= preparation_time:
+            print("The duration of event must be more than 30 minutes!")
+            return False
+        return True
+
     def validate_zip_code(self, zip_code):
         if zip_code == "":
             print("ZIP code can not be empty!")
+            return False
         elif len(zip_code) != 4:
             print("You must enter a valid ZIP code! ")
             return False
@@ -109,6 +93,9 @@ class UserData(object):
     def validate_address(self, address):
         if address == "":
             print("Address can not be empty!")
+            return False
+        if address.isspace():
+            print("Address must contains alphanumerical characters!")
             return False
         if not len(address) > 25:
             address_without_comma = address.replace(",", " ")
@@ -278,6 +265,23 @@ class UserData(object):
         with open("./Data/Location_Data.csv", "a") as Location_Text_File:
             Location_Text_File.write(self.full_data_string + "\n")
 
+    def get_user(self):
+        self.get_date_of_event()
+        self.get_start_time()
+        self.get_end_time()
+        self.calculate_duration_in_minutes()
+        self.get_available_beds()
+        self.calculate_max_donor_number()
+        self.get_zip_code()
+        self.get_city()
+        self.get_address()
+        self.get_planned_donor_number()
+        self.get_number_of_successful_donations()
+        self.calculate_result_of_donation_by_percentage()
+        self.print_location_info()
+        self.make_data_into_string()
+        self.data_to_file()
 
 if __name__ == "__main__":
-    UserData()
+    ocelot = UserData().get_user()
+
