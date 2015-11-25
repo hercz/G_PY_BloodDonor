@@ -1,6 +1,10 @@
-import csv
-import os
 import Menu
+import os
+
+
+def print_separator_line():
+    print("-" * 32)
+
 
 def check_database_is_empty():
     if os.stat("./Data/Donor_Data.csv").st_size == 0:
@@ -33,21 +37,29 @@ def id_is_valid(id_to_delete):
     elif not id_to_delete[:6].isdigit() and id_to_delete[6:].isalpha() or not id_to_delete[:6].isalpha() and id_to_delete[6:].isdigit():
         print("This ID is wrong, type it again(It must be an ID or Passport number): ")
         return False
-    else:
-        return True
+    return True
 
 
 def delete_id_from_database(id_to_delete):
-        donor_data = open("./Data/Donor_Data.csv", "r")
-        lines = donor_data.readlines()
-        donor_data.close()
-        donor_data = open("./Data/Donor_Data.csv", "w")
-        for line in lines:
-            if id_to_delete not in line:
-                donor_data.write(line)
-        donor_data.close()
-        print("The user with {} Id is deleted".format(id_to_delete))
-        Menu.ask_answer()
+    donor_data = open("./Data/Donor_Data.csv", "r")
+    lines = donor_data.readlines()
+    donor_data.close()
+    donor_data = open("./Data/Donor_Data.csv", "w")
+    for line in lines:
+        if id_to_delete not in line:
+            donor_data.write(line)
+    donor_data.close()
+    print("The user with {} Id is deleted".format(id_to_delete))
+    Menu.ask_answer()
 
 
+def user_del_app():
+    print_separator_line()
+    print("Welcome in the donor delete application!")
+    check_database_is_empty()
+    id_to_delete = get_id_to_delete()
+    delete_id_from_database(id_to_delete)
+    Menu.ask_answer()
 
+if __name__ == "__main__":
+    user_del_app()

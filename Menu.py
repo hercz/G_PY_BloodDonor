@@ -1,11 +1,5 @@
 import webbrowser
 import os
-from os import system
-import Donation_User
-import Donation_Location
-import csv
-import User_delete
-import Location_delete
 import Search
 
 def print_separator_line():
@@ -46,30 +40,20 @@ def Picked_option():
             Picked_option_string = ""
 
     if Picked_option_string == "1":
-        import Donation_User as user
-        user.donor_app()
+        import Donation_User
+        Donation_User.donor_app()
 
     elif Picked_option_string == "2":
-        import Donation_Location as location
-        location.location_app()
+        import Donation_Location
+        Donation_Location.location_app()
 
     elif Picked_option_string == "3":
-
-        print_separator_line()
-        print("Welcome in the donor delete application!")
-        User_delete.check_database_is_empty()
-        id_to_delete = User_delete.get_id_to_delete()
-        User_delete.delete_id_from_database(id_to_delete)
-        ask_answer()
+        import User_delete
+        User_delete.user_del_app()
 
     elif Picked_option_string == "4":
-
-        print_separator_line()
-        print("Welcome in the location delete application!")
-        Location_delete.check_database_is_empty()
-        id_to_delete = Location_delete.get_id_to_delete()
-        Location_delete.delete_id_from_database(id_to_delete)
-        ask_answer()
+        import Location_delete
+        Location_delete.loc_del_app()
 
     elif Picked_option_string == "5":
         import Listing
@@ -81,7 +65,7 @@ def Picked_option():
         print_separator_line()
         print("Welcome to Search")
         print()
-        search_option = Search.Search()
+        Search.Search()
         print()
         print("Thank for using our Search Engine")
 
@@ -101,8 +85,6 @@ def Picked_option():
                 answer = ""
 
     elif Picked_option_string == "8":
-
-
         pass
 
     elif Picked_option_string == "9":
@@ -136,6 +118,7 @@ def print_one_location(line):
     print("""{0},{1},{2}
             """.format(city_to_print, date_of_event_corrected, address_to_print))
 
+
 def the_menu():
     os.system('cls')
     print_separator_line()
@@ -143,16 +126,17 @@ def the_menu():
     Main_Menu()
     Picked_option()
 
+
 def ask_answer():
     answer = ""
     while answer == "":
-        answer = input("Do you want to go back to the Main Menu? Y/N ")
-        if answer == "Y" or answer == "y":
+        answer = input("Do you want to go back to the Main Menu? (Press 'y' or 'n'!) ")
+        if answer.lower() == "y":
             the_menu()
-        elif answer == "N" or answer == "n":
+        elif answer.lower() == "n":
             exit()
         else:
-            print("You answer must be Y or N ")
+            print("You answer must be Y or N!")
             answer = ""
 
 if __name__ == "__main__":

@@ -1,6 +1,10 @@
-import csv
-import os
 import Menu
+import os
+
+
+def print_separator_line():
+    print("-" * 32)
+
 
 def check_database_is_empty():
     if os.stat("./Data/Location_data.csv").st_size == 0:
@@ -8,8 +12,7 @@ def check_database_is_empty():
         Menu.ask_answer()
         Menu.Main_Menu()
         Menu.Picked_option()
-    else:
-        pass
+    pass
 
 
 def get_id_to_delete():
@@ -30,8 +33,7 @@ def id_is_valid(id_to_delete):
     elif not id_to_delete.isdigit():
         print("The ID has to be a number!")
         return False
-    else:
-        return True
+    return True
 
 
 def delete_id_from_database(id_to_delete):
@@ -48,4 +50,13 @@ def delete_id_from_database(id_to_delete):
     Menu.ask_answer()
 
 
+def loc_del_app():
+    print_separator_line()
+    print("Welcome in the location delete application!")
+    check_database_is_empty()
+    id_to_delete = get_id_to_delete()
+    delete_id_from_database(id_to_delete)
+    Menu.ask_answer()
 
+if __name__ == "__main__":
+    loc_del_app()
