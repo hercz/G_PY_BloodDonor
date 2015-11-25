@@ -71,33 +71,35 @@ def sixth():
 
 
 def seventh():
+    pass
+
+
+def eighth():
     answer = ""
     while answer == "":
-        answer = input("Are You sure in your selection?: ")
+        answer = input("Are You sure in your selection? (Press 'Y' or 'N'!)\n>>")
         if answer.lower() == "y":
             print("Thank for using our Blood Donation Register Software!")
             exit()
         elif answer.lower() == "n":
             the_menu()
         else:
-            print("Press 'Y' or 'N'!")
+            print("You answer must be Y or N!")
             answer = ""
 
 
-def eighth():
-    pass
-
-
 def ninth():
-    print("You've found the hidden menu point! You are very cool guy! ;)")
+    os.system("cls")
+    print("You've found the hidden menu point! You are very cool guy!")
+    print("CODECOOL guy! ;)")
     webbrowser.open("https://www.youtube.com/watch?v=_uUBQeJ61nw")
 
 menu_points = [first, second, third, fourth, fifth, sixth, seventh, eighth, ninth]
 
 
 def the_menu():
-    os.system('cls')
     counter = 1
+    os.system('cls')
     header_of_menu()
     main_menu(counter)
     instructions()
@@ -123,7 +125,7 @@ def the_menu():
 def ask_answer():
     answer = ""
     while answer == "":
-        answer = input("Do you want to go back to the Main Menu? (Press 'y' or 'n'!) ")
+        answer = input("Do you want to go back to the Main Menu? (Press 'Y' or 'N'!)\n>> ")
         if answer.lower() == "y":
             the_menu()
         elif answer.lower() == "n":
