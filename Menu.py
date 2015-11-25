@@ -4,7 +4,7 @@ import os
 
 
 def print_separator_line():
-    print("-" * 32)
+    print("-" * 50)
 
 
 def greetings():
@@ -15,6 +15,11 @@ def greetings():
 def header_of_menu():
     print_separator_line()
     greetings()
+
+
+def instructions():
+    print("You can step between the menu points via the arrow keys (UP and DOWN).")
+    print("If you want to pick an option, press ENTER.")
 
 
 def main_menu(counter):
@@ -32,6 +37,7 @@ def main_menu(counter):
     print(before[6] + "7. Change")
     print(before[7] + "8. Exit")
     print(before[8])
+    print()
 
 
 def first():
@@ -91,9 +97,10 @@ menu_points = [first, second, third, fourth, fifth, sixth, seventh, eighth, nint
 
 def the_menu():
     os.system('cls')
-    header_of_menu()
     counter = 1
+    header_of_menu()
     main_menu(counter)
+    instructions()
     while True:
         key = ord(getch())
         if key == 72 and counter > 1:
@@ -101,11 +108,13 @@ def the_menu():
             os.system("cls")
             header_of_menu()
             main_menu(counter)
+            instructions()
         elif key == 80 and counter < 9:
             counter += 1
             os.system("cls")
             header_of_menu()
             main_menu(counter)
+            instructions()
         elif key == 13:
             menu_points[counter-1]()
             exit()
