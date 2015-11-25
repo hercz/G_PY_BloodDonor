@@ -75,17 +75,21 @@ def seventh():
 
 
 def eighth():
-    answer = ""
-    while answer == "":
-        answer = input("Are You sure in your selection? (Press 'Y' or 'N'!)\n>>")
-        if answer.lower() == "y":
+    os.system("cls")
+    answer_key = ""
+    print("Do You want to leave the program really? (Press 'Y' or 'N'!)")
+    while answer_key == "":
+        answer_key = ord(getch())
+        if chr(answer_key) == "y":
+            print("But this is so cool program... :(")
             print("Thank for using our Blood Donation Register Software!")
             exit()
-        elif answer.lower() == "n":
+        elif chr(answer_key) == "n":
             the_menu()
         else:
-            print("You answer must be Y or N!")
-            answer = ""
+            os.system("cls")
+            print("Please press 'Y' or 'N'!")
+            answer_key = ""
 
 
 def ninth():
@@ -125,7 +129,7 @@ def the_menu():
 def ask_answer():
     answer = ""
     while answer == "":
-        answer = input("Do you want to go back to the Main Menu? (Press 'Y' or 'N'!)\n>> ")
+        answer = input("Do you want to go back to the Main Menu? (Press 'Y' or 'N'!)")
         if answer.lower() == "y":
             the_menu()
         elif answer.lower() == "n":
