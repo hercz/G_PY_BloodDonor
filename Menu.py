@@ -12,6 +12,11 @@ def greetings():
     print_separator_line()
 
 
+def header_of_menu():
+    print_separator_line()
+    greetings()
+
+
 def main_menu(counter):
     space = " " * 5
     before = [space for i in range(9)]
@@ -86,8 +91,7 @@ menu_points = [first, second, third, fourth, fifth, sixth, seventh, eighth, nint
 
 def the_menu():
     os.system('cls')
-    print_separator_line()
-    greetings()
+    header_of_menu()
     counter = 1
     main_menu(counter)
     while True:
@@ -95,10 +99,12 @@ def the_menu():
         if key == 72 and counter > 1:
             counter -= 1
             os.system("cls")
+            header_of_menu()
             main_menu(counter)
         elif key == 80 and counter < 9:
             counter += 1
             os.system("cls")
+            header_of_menu()
             main_menu(counter)
         elif key == 13:
             menu_points[counter-1]()
