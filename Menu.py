@@ -1,11 +1,11 @@
 import webbrowser
 import os
+from os import system
 import Donation_User
 import Donation_Location
 import csv
 import User_delete
 import Search
-
 
 def print_separator_line():
     print("-" * 32)
@@ -24,13 +24,14 @@ def Main_Menu():
     print("     4. Delete a donation event")
     print("     5. List donor or donation events")
     print("     6. Search")
-    print("     7. Exit \n")
+    print("     7. Change")
+    print("     8. Exit \n")
 
 def check_picked_option(input_str: str):
     return input_str.isdigit()
 
 def valid_picked_option(input_str: str):
-    return int(input_str) in range(1, 9)
+    return int(input_str) in range(1, 10)
 
 def Picked_option():
     Picked_option_string = ""
@@ -147,6 +148,11 @@ def Picked_option():
                 answer = ""
 
     elif Picked_option_string == "8":
+
+
+        pass
+
+    elif Picked_option_string == "9":
         webbrowser.open("https://www.youtube.com/watch?v=_uUBQeJ61nw")
 
 def print_one_donor(line):
