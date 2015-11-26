@@ -3,9 +3,11 @@
 #    key = ord(getch())
 #    print(key)
 #
+
 import os
 import csv
 from Donation_User2 import UserData2
+from Location_delete import delete_id_from_database
 import webbrowser
 from datetime import datetime
 
@@ -31,19 +33,22 @@ class Change():
         donor_to_change = ""
         while donor_to_change == "":
             donor_to_change = input("Please type the id of the Donor you want to change: ")
+            self.donor_number = donor_to_change
             with open("./Data/Donor_Data.csv", newline="") as file:
                 reader = csv.reader(file, delimiter=",")
+
                 ids = []
                 for row in reader:
                     ids.append(row[3])
 
-
                 if donor_to_change in str(ids):
                     with open("./Data/Donor_Data.csv", newline="") as file:
+                        writer = csv.writer(file)
                         reader = csv.reader(file, delimiter=",")
                         items = []
-
+                        i = -1
                         for row in reader:
+                            i += 1
                             if donor_to_change in row:
                                 items.append(row)
                                 print(items)
@@ -61,6 +66,31 @@ class Change():
                                 items[0][0] = item
                             else:
                                 item = ""
+
+
+                        # with open("./Data/Donor_Data.csv", newline="") as file:
+                        #     reader = csv.reader(file, delimiter=",")
+                        #     i = -1
+                        #     for line in reader:
+                        #         i += 1
+                        #         if i == i:
+                        #             delete_id_from_database(donor_to_change)
+                        #             with open('./Data/Donor_Data.csv', 'a') as b:
+                        #                 writer = csv.writer(b)
+                        #                 writer.writerows(items)
+
+                        #
+                        # print(items)
+                        # line_to_override = {i:[items]}
+                        # with open('./Data/Donor_Data.csv', 'w') as b:
+                        #     writer = csv.writer(b)
+                        #     writer.writerow(line_to_override)
+
+                        print(i)
+
+
+                        # self.rewrite_into_file(items)
+
 
                     elif item_to_change == "2":
                         item = ""
@@ -165,6 +195,7 @@ class Change():
 
         pass
 
+
     def Options_for_donor(self):
         print('-' * 36)
         print(" 1, First name \n",
@@ -178,6 +209,24 @@ class Change():
               "9, Last Donation Date \n",
               "10, Id Expiration Date \n",
               "11, Was she/he sick? \n")
+
+    def rewrite_into_file(self,items):
+        location_file = open("./Data/Location_data.csv", "r+")
+        read_line = location_file.readlines()
+        location_file.seek(0)
+        print("Meg jo")
+        for row in read_line:
+            if self.donor_number in row:
+                print("Meg mindig")
+                location_file.write(items)
+        # for i in read_line:
+        #     splitted = i.split(",")
+        #     location_file.write(i)
+        print("JAJA")
+        location_file.truncate()
+        location_file.close()
+
+
 
     def change_stuff_donation(self):
         pass
