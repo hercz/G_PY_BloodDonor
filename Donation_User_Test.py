@@ -188,8 +188,8 @@ class MyTestCase(unittest.TestCase):
         result = self.user.valid_blood_type("alma")
         self.assertEqual(False, result)
 
-    def test_get_blood_type_with_WrongString_eekezet(self):
-        result = self.user.valid_blood_type("Ã©")
+    def test_get_blood_type_with_WrongString_é(self):
+        result = self.user.valid_blood_type("é")
         self.assertEqual(False, result)
 
     def test_get_blood_type_with_WrongString_O(self):

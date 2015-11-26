@@ -1,11 +1,14 @@
+import Menu
 from datetime import datetime
-import csv
 import random
+import csv
 
 __author__ = 'Stark_Industries'
 
+def print_separator_line():
+    print("-" * 32)
 
-class UserData(object):
+class LocationData(object):
     def __init__(self):
         self.get_date_of_event()
         self.get_start_time()
@@ -38,7 +41,7 @@ class UserData(object):
                 print("The time must be a number!")
                 return False
         try:
-            UserData.parse_time(time_str)
+            LocationData.parse_time(time_str)
             return True
         except ValueError:
             print("This time doesn't exist!")
@@ -47,11 +50,11 @@ class UserData(object):
     @staticmethod
     def validate_end_time(start_time_str, end_time_str):
         preparation_time = 30
-        if ((UserData.parse_time(end_time_str) - UserData.parse_time(start_time_str)).total_seconds() / 60) < 0:
+        if ((LocationData.parse_time(end_time_str) - LocationData.parse_time(start_time_str)).total_seconds() / 60) < 0:
             print("The end time must be later than star time! "
                   "(I think you don't want to stay to the fallowing day... Idiot!)")
             return False
-        elif ((UserData.parse_time(end_time_str) - UserData.parse_time(start_time_str))
+        elif ((LocationData.parse_time(end_time_str) - LocationData.parse_time(start_time_str))
                 .total_seconds() / 60) <= preparation_time:
             print("The duration of event must be more than 30 minutes!")
             return False
@@ -79,7 +82,7 @@ class UserData(object):
             start_time = input("Start time (HH:MM): ")
             if start_time == "":
                 print("Start time cannot be empty !")
-            elif not UserData.check_time(start_time):
+            elif not LocationData.check_time(start_time):
                 start_time = ""
         self.start_time = start_time
 
@@ -89,7 +92,7 @@ class UserData(object):
             end_time = input("End time (HH:MM): ")
             if end_time == "":
                 print("End time cannot be empty !")
-            elif not (UserData.check_time(end_time) and UserData.validate_end_time(self.start_time, end_time)):
+            elif not (LocationData.check_time(end_time) and LocationData.validate_end_time(self.start_time, end_time)):
                 end_time = ""
         self.end_time = end_time
 
@@ -160,8 +163,8 @@ class UserData(object):
         self.number_of_successful_donations = int(number_of_successful_donations)
 
     def calculate_duration_in_minutes(self):
-        duration_in_minutes = (UserData.parse_time(self.end_time) -
-                               UserData.parse_time(self.start_time)).total_seconds() / 60
+        duration_in_minutes = (LocationData.parse_time(self.end_time) -
+                               LocationData.parse_time(self.start_time)).total_seconds() / 60
         self.duration_in_minutes = duration_in_minutes
 
     def calculate_max_donor_number(self):
@@ -211,6 +214,14 @@ class UserData(object):
         with open("./Data/Location_Data.csv", "a") as Location_Text_File:
             Location_Text_File.write(self.full_data_string + "\n")
 
+def location_app():
+    print_separator_line()
+    print("Welcome in Donation event registration application!")
+    print()
+    LocationData()
+    print()
+    print("Thank for your registration (and your blood)!")
+    Menu.ask_answer()
 
 if __name__ == "__main__":
-    UserData()
+    location_app()
