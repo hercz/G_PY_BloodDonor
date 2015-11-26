@@ -5,7 +5,7 @@ import random
 __author__ = 'Stark_Industries'
 
 
-class UserData(object):
+class LocationData(object):
     def parse_time(self, time_str):
         return datetime.strptime(time_str, '%H:%M')
 
@@ -283,5 +283,5 @@ class UserData(object):
         self.data_to_file()
 
 if __name__ == "__main__":
-    UserData().get_user()
+    location_app = LocationData().get_user()
 
