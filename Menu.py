@@ -104,7 +104,7 @@ menu_points = [first, second, third, fourth, fifth, sixth, seventh, eighth, nint
 
 def the_menu():
     counter = 1
-    os.system('cls')
+    os.system("cls")
     header_of_menu()
     main_menu(counter)
     instructions()
@@ -128,16 +128,18 @@ def the_menu():
 
 
 def ask_answer():
-    answer = ""
-    while answer == "":
-        answer = input("Do you want to go back to the Main Menu? (Press 'Y' or 'N'!)")
-        if answer.lower() == "y":
+    answer_key = ""
+    print("Do you want to go back to the Main Menu? (Press 'Y' or 'N'!)")
+    while answer_key == "":
+        answer_key = ord(getch())
+        if chr(answer_key) == "y":
             the_menu()
-        elif answer.lower() == "n":
+        elif chr(answer_key) == "n":
             exit()
         else:
-            print("You answer must be Y or N!")
-            answer = ""
+            os.system("cls")
+            print("Please press 'Y' or 'N'!")
+            answer_key = ""
 
 if __name__ == "__main__":
     the_menu()
