@@ -1,10 +1,7 @@
 id,date_of_event,start_time,end_time,zip_code,city,address,available_beds,planned_donor_number,number_of_successful_donations,duration_in_minutes,maximum_donor_number
-4,2019-12-12,1900-01-0118:00:00,1900-01-0120:00:00,5487,miskolc,asd asd asdas7,2,60,45,120,6.0
-5,2015-12-15,1900-01-0110:00:00,1900-01-0118:00:00,2586,miskolc,vasutu t8,3,60,45,480,45.0
-7,2050-10-14,1900-01-0112:00:00,1900-01-0116:00:00,5642,miskolc,aht rhte rger67,3,60,45,240,21.0
 8,2018-12-12,10,12,5689,miskolc,asdas dgdfgd 67,2,60,45,120,6.0
-7, 2015-12-15, 10:0, 18:35, 7458, miskolc, vasut ut 8, 2, 60, 45, 515, 32.333333333333336
-8, 2015-12-14, 12:0, 13:0, 3525, miskolc, Bela u. 12, 30, 20, 15, 60, 30.0
+7, 2015-12-15, 10:0, 18:35, 7458, miskolc, vasut ut 8, 2, 60, 45, 515, 32.3
+9, 2015-12-14, 12:0, 13:0, 3525, miskolc, Bela u. 12, 30, 20, 15, 60, 30.0
 10, 2016-01-01, 01:00, 02:00, 3432, szerencs, alma street 1, 20, 20, 20, 60, 20.0
 819, 2017-10-12, 10:00, 08:00, 7458, miskolc, mak katya ut 8, 2, 30, 25, 600, 38.0
 2239, 2016-04-04, 12:00, 13:00, 2144, miskolc, Anyad u. 31, 20, 20, 21, 60, 20.0
