@@ -1,12 +1,12 @@
 import unittest
-from Donation_Location2 import UserData
+from Donation_Location import LocationData
 
 __author__ = 'Stark_Industries'
 
 
 class MyTestCase(unittest.TestCase):
     def setUp(self):
-        self.user = UserData()
+        self.user = LocationData()
 
     def test_if_date_is_Empty(self):
         result = self.user.check_date_of_event("")
@@ -124,11 +124,33 @@ class MyTestCase(unittest.TestCase):
         result = self.user.validate_address("asdsdgsgdhfjhgjgjfdggfgrrgd")
         self.assertEqual(False, result)
 
+    def test_bed_isEmpty(self):
+        result = self.user.validate_available_beds("")
+        self.assertEqual(False, result)
 
+    def test_bed_isNumber(self):
+        result = self.user.validate_available_beds("asd")
+        self.assertEqual(False, result)
 
+    def test_bed_isNegative(self):
+        result = self.user.validate_available_beds("-21")
+        self.assertEqual(False, result)
 
+    def test_plannedDonor_isEmpty(self):
+        result = self.user.validate_planned_donor_number("")
+        self.assertEqual(False, result)
 
+    def test_plannedDonor_isNegative(self):
+        result = self.user.validate_planned_donor_number("-25")
+        self.assertEqual(False, result)
 
+    def test_successDonation_isEmpty(self):
+        result = self.user.validate_number_of_successful_donations("")
+        self.assertEqual(False, result)
+
+    def test_successDonation_isNegative(self):
+        result = self.user.validate_number_of_successful_donations("-89")
+        self.assertEqual(False, result)
 
 if __name__ == '__main__':
     unittest.main()

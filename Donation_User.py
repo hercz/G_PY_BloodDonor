@@ -1,258 +1,338 @@
 import random
-import Menu
 from datetime import datetime
+import Menu
 
 __author__ = 'Stark_Industries'
 
-def print_separator_line():
-    print("-" * 32)
 
-class UserData(object):
-
-    def __init__(self   ):
-
-        self.available_for_donation()
-
-        self.print_separator_line()
-
-        self.get_title()
-        self.get_first_name()
-        self.get_last_name()
-        self.get_full_name()
-        self.get_gender()
-        self.get_unique_identifier()
-        self.get_email_address()
-        self.get_mobil_number()
-        self.get_blood_type()
-        self.make_data_into_one_string()
-        self.data_to_file()
-
-        self.print_separator_line()
-
-        self.print_donor_info()
-
-    def available_for_donation(self):
-        print("First we need some data from you to decide if you are suitable for donation.")
-        self.get_birth_date_and_calculate_age()
-        self.get_weight()
-        self.get_last_donation_date()
-        self.random_hemoglobin_donor_is_suitable_or_not()
-        self.get_id_expiration()
-        self.get_was_she_he_sick()
-        print("Congratulations you are available for donation!")
-        print("Now we need further more data from you to complete your registration.")
-
+class UserData2(object):
     def print_separator_line(self):
         print("-" * 50)
 
-    def get_title(self):
-        answer = ""
-        while answer == "":
-            answer = input("Do you have a title? (Y/N): ")
-            if answer == "Y" or answer == "y":
-                self.title = input("In that Case enter your title: ") + " "
-            elif answer == "N" or answer == "n":
-                self.title = ""
-            else:
-                answer = ""
+    def valid_first_name(self, firstName):
+        if firstName.isdigit():
+            print(
+                "I really hope your name does not contain numbers or special characters or whitespace, check before you enter!")
+            return False
+        elif firstName == " ":
+            return False
+        else:
+            return True
 
     def get_first_name(self):
-        first_name = ""
-        while first_name == "":
-            first_name = input("Please enter your first name: ")
-            if not first_name.isalpha():
-                print(
-                    "I really hope your name does not contain numbers or special characters or whitespace, check before you enter!")
-                first_name = ""
+        firstName = ""
+        while firstName == "":
+            firstName = input("Please enter your first name: ")
+            if not self.valid_first_name(firstName):
+                firstName = ""
             else:
-                self.first_name = first_name
+                self.first_name = firstName
 
     def get_last_name(self):
-        last_name = ""
-        while last_name == "":
-            last_name = input("Please enter your last name: ")
-            if not last_name.isalpha():
-                last_name = ""
+        lastName = ""
+        while lastName == "":
+            lastName = input("Please enter your last name: ")
+            if not self.valid_last_name(lastName):
+                lastName = ""
             else:
-                self.last_name = last_name
+                self.last_name = lastName
+
+    def valid_last_name(self, lastName):
+        if lastName.isdigit():
+            print(
+                "I really hope your name does not contain numbers or special characters or whitespace, check before you enter!")
+            return False
+        elif lastName == " ":
+            return False
+        else:
+            return True
 
     def get_full_name(self):
-        full_name = self.first_name + "," + self.title + " " + self.last_name
-        self.full_name = full_name
-        full_name_without_title = self.first_name + "," + self.last_name
-        self.name_without_title = full_name_without_title
+        fullName = self.first_name + "," + self.last_name
+        self.full_name = fullName
 
     def get_weight(self):
         weight = ""
         while weight == "":
             weight = input("Please enter your weight in kg: ")
-            if weight.isdigit() and int(weight) >= 50:
-                self.weight = int(weight)
-            elif weight.isdigit() and int(weight) < 50:
-                print("Sorry you are not suitable for donation! You are below 50 kg.")
-                exit()
-            else:
-                print("You must enter a positive integer! ")
+            if not self.valid_weight(weight):
                 weight = ""
+            else:
+                self.weight = weight
+
+    def valid_weight(self, weight):
+        if weight.isdigit() and int(weight) >= 50:
+            return True
+        elif weight.isdigit() and int(weight) < 50:
+            print("Your weight is too low to donate")
+            answer = input("Do you want to go back to the main menu: Y/N")
+            if answer.lower() == "y":
+                Menu.Main_Menu()
+                Menu.Picked_option()
+            elif answer.lower() == "n":
+                exit()
+            return False
+        elif weight.isalpha():
+            return False
+        elif weight == " ":
+            return False
 
     def get_gender(self):
         gender = ""
-        available_genders = ["f", "m"]
         while gender == "":
             gender = input("Please choose your gender F/M: ")
-            if not gender.lower() in available_genders:
+            if not self.valid_gender(gender):
                 print("You most type in one of the available genders:")
                 gender = ""
             else:
                 self.gender = gender
 
-    def get_birth_date_and_calculate_age(self):
-        birth_date = ""
-        age = ""
-        while True:
-            date = input("Please enter the date of your birth (YYYY.MM.DD): ")
-            try:
-                birth_date = datetime.strptime(date, "%Y.%m.%d").date()
-                age = (datetime.now().date() - birth_date).days // 365
-                if age > 18:
-                    break
-                else:
-                    print("Sorry, you are too young for blood donation!")
-                    exit()
-            except ValueError:
-                print("Please enter a valid date!")
-        self.birth_date = birth_date
-        self.age = age
+    def valid_gender(self, gender):
+        available_genders = ["f", "m"]
+        if not gender.lower() in available_genders:
+            return False
+        else:
+            return True
+
+    def get_birth_date(self):
+        birthDate = ""
+        while birthDate == "":
+            birthDate = input("Please enter the date of your birth (YYYY.MM.DD): ")
+            if not self.valid_birth_date(birthDate):
+                birthDate = ""
+            else:
+                birth_date = datetime.strptime(birthDate, "%Y.%m.%d").date()
+                self.birth_date = birth_date
+
+    def valid_birth_date(self, birthDate):
+        try:
+            birth_date = datetime.strptime(birthDate, "%Y.%m.%d").date()
+        except ValueError:
+            print("Please enter a valid date!")
+            return False
+        else:
+            return True
+
+    def get_age(self):
+        calculated_age = (datetime.now().date() - self.birth_date).days // 365
+        return calculated_age
+
+    def valid_age(self):
+        if self.get_age() < 18:
+            print("Sorry you are too young to donate")
+            answer = input("Do you want to go back to the main menu: Y/N")
+            if answer.lower() == "y":
+                Menu.Main_Menu()
+                Menu.Picked_option()
+            elif answer.lower() == "n":
+                exit()
+        else:
+            return True
 
     def get_last_donation_date(self):
-        last_donation_date = ""
-        while True:
-            date = input("Please enter the date of your last donation: ")
-            try:
-                last_donation_date = datetime.strptime(date, "%Y.%m.%d").date()
-                elapsed_months = (datetime.now().date() - last_donation_date).days // 30
-                if elapsed_months >= 3:
-                    break
-                else:
-                    print("You are not suitable because you was on donation not long ago.")
+        lastDonationDate = ""
+        while lastDonationDate == "":
+            lastDonationDate = input("Please enter the date of your last donation (YYYY.MM.DD): ")
+            if not self.valid_birth_date(lastDonationDate):
+                lastDonationDate = ""
+            else:
+                last_donation = datetime.strptime(lastDonationDate, "%Y.%m.%d").date()
+                self.last_donation_date = last_donation
+
+    def valid_last_donation_date(self, lastDonationDate):
+        try:
+            last_donation_d = datetime.strptime(lastDonationDate, "%Y.%m.%d").date()
+        except ValueError:
+            print("Please enter a valid date!")
+            return False
+        else:
+            return True
+
+    def available_for_donation_last_donation_date(self):
+        elapsed_months = (datetime.now().date() - self.last_donation_date).days // 30
+        if elapsed_months <= 3:
+            print("You are not suitable because you was on donation not long ago.")
+            answer = input("Do you want to go back to the main menu: Y/N")
+            if answer.lower() == "y":
+                Menu.Main_Menu()
+                Menu.Picked_option()
+            elif answer.lower() == "n":
+                exit()
+
+    def get_unique_identifier(self):
+        unique_id = ""
+        while unique_id == "":
+            unique_id = input("Please enter your unique identifier aka ID: ")
+            if not self.valid_identifier(unique_id):
+                unique_id = ""
+            else:
+                self.identifier = unique_id
+
+    def valid_identifier(self, unique_id):
+        if len(unique_id) != 8:
+            print("Your Identifier length is not enough, type in again: ")
+            return False
+        if unique_id[:6].isalpha() and unique_id[6:].isdigit():
+            print("So that's a Passport ID.")
+            return True
+        elif unique_id[:6].isdigit() and unique_id[6:].isalpha():
+            print("So it's an Identity Card.")
+            return True
+        else:
+            return False
+
+    def get_id_expiration(self):
+        id_expiration = ""
+        while id_expiration == "":
+            id_expiration = input("Enter the expiration date of your unique identifier: ")
+            if not self.valid_id_expiration(id_expiration):
+                id_expiration = ""
+            else:
+                id_expiration = datetime.strptime(id_expiration, "%Y.%m.%d").date()
+                self.id_expiration = id_expiration
+
+    def valid_id_expiration(self, id_expiration):
+        try:
+            id_expiration = datetime.strptime(id_expiration, "%Y.%m.%d").date()
+            if not datetime.now().date() < id_expiration:
+                print("Sorry you can't donate because your ID is expired.")
+                answer = input("Do you want to go back to the main menu: Y/N")
+                if answer.lower() == "y":
+                    Menu.Main_Menu()
+                    Menu.Picked_option()
+                elif answer.lower() == "n":
                     exit()
-            except ValueError:
-                print("Please enter a valid date!")
-        self.last_donation_date = last_donation_date
+        except ValueError:
+            print("You have entered a wrong date type! It should be YYYY.MM.DD!")
+            return False
+        else:
+            return True
 
     def get_was_she_he_sick(self):
         was_she_he_sick = ""
-        available_answers = ["y", "n"]
         while was_she_he_sick == "":
             was_she_he_sick = input("Have you been sick in the last three months? (Y, N): ")
-            if not was_she_he_sick.lower() in available_answers:
+            if not self.valid_was_she_he_sick(was_she_he_sick):
                 print("This is an important question! Please write here the TRUTH!")
                 was_she_he_sick = ""
             else:
                 self.was_she_he_sick = was_she_he_sick
 
-    def get_unique_identifier(self):
-        identifier = ""
-        while identifier == "":
-            identifier = input("Please enter your unique identifier aka ID: ")
-            if len(identifier) != 8:
-                print("Your Identifier length is not enough, type in again: ")
-                identifier = ""
-            elif identifier[:6].isalpha() and identifier[6:].isdigit():
-                print("So that's a Passport ID.")
-                self.identifier = identifier
-            elif identifier[:6].isdigit() and identifier[6:].isalpha():
-                print("So it's an Identity Card.")
-                self.identifier = identifier
-            else:
-                print("Your ID is wrong, type in again(It must be an ID or Passport number): ")
-                identifier = ""
-
-    def get_id_expiration(self):
-        id_expiration = ""
-        while True:
-            date = input("Enter the expiration date of your unique identifier: ")
-            try:
-                id_expiration = datetime.strptime(date, "%Y.%m.%d").date()
-                if datetime.now().date() < id_expiration:
-                    break
-                else:
-                    print("Sorry you can't donate because your ID is expired.")
-                    exit()
-            except ValueError:
-                print("You have entered a wrong date type! It should be YYYY.MM.DD!")
-        self.id_expiration = id_expiration
-
+    def valid_was_she_he_sick(self, was_she_he_sick):
+        available_answers = ["y", "n"]
+        if not was_she_he_sick.lower() in available_answers:
+            print("I hope you understand that we dont want sick donators..")
+            answer = input("Do you want to go back to the main menu: Y/N")
+            if answer.lower() == "y":
+                Menu.Main_Menu()
+                Menu.Picked_option()
+            elif answer.lower() == "n":
+                exit()
+        else:
+            return True
 
     def get_blood_type(self):
-        blood_types = ('a', 'b', 'ab', '0')
         blood_type = ""
         while blood_type == "":
             blood_type = input("Please enter your blood type: ")
-            if blood_type.lower() not in blood_types:
+            if not self.valid_blood_type(blood_type):
                 print("Blood type can be only A, B, AB or 0 !")
                 blood_type = ""
             else:
                 self.blood_type = blood_type
+
+    def valid_blood_type(self, blood_type):
+        blood_types = ('a', 'b', 'ab', '0')
+        if blood_type.lower() not in blood_types:
+            return False
+        else:
+            return True
 
     def get_email_address(self):
         email_string = ""
         while email_string == "":
             email_string = input("E-mail (abc@xyz.hu/.com): ")
             email_list = email_string.split('@')
-            if len(email_list) == 2 and (email_list[1].endswith(".hu") or email_list[1].endswith(".com")):
-                self.email_string = email_string
-                return
-            else:
+            if not self.valid_email_adress(email_list):
                 print("Please enter your e-mail correctly! (abc@xyz.hu/.com)")
                 email_string = ""
+            else:
+                self.email_string = email_string
 
-    def get_mobil_number(self):
+    def valid_email_adress(self, email_list):
+        if len(email_list) == 2 and (email_list[1].endswith(".hu") or email_list[1].endswith(".com")):
+            return True
+
+    def get_mobil_number_06_36(self):
         mobil_3606_string = ""
         while mobil_3606_string == "":
             mobil_3606_string = input("Your mobile number starts with (+36 or 06): ")
-            if not (mobil_3606_string == '+36' or mobil_3606_string == '06'):
+            if not self.validate_mobil_number_06_36(mobil_3606_string):
                 print("Invalid format!")
                 mobil_3606_string = ""
+            else:
+                self.mobil_num_06_36 = mobil_3606_string
 
-        mobil_203060_string = ""
-        while mobil_203060_string == "":
+    def validate_mobil_number_06_36(self, mobil_3606_string):
+        if not (mobil_3606_string == '+36' or mobil_3606_string == '06'):
+            return False
+        else:
+            return True
+
+    def get_mobil_number_20_30_70(self):
+        mobil_203070_string = ""
+        while mobil_203070_string == "":
             mobil_203060_string = input("Your mobile provide identifier (20, 30 or 70): ")
-            if not (mobil_203060_string == '20' or mobil_203060_string == '30' or mobil_203060_string == '70'):
+            if not self.validate_mobil_number_20_30_70(mobil_203070_string):
                 print("Invalid format!")
-                mobil_203060_string = ""
+                mobil_203070_string = ""
+            else:
+                self.mobil_num_20_30_70 = mobil_203070_string
 
+    def validate_mobil_number_20_30_70(self, mobil_203070_string):
+        if not (mobil_203070_string == '20' or mobil_203070_string == '30' or mobil_203070_string == '70'):
+            return False
+        else:
+            return True
+
+    def get_mobil_number_the_rest(self):
         mobil_num_str = ""
         while mobil_num_str == "":
             mobil_num_str = input("Enter your mobil number (7 digits): ")
-            if not (len(mobil_num_str) == 7 and mobil_num_str.isdigit()):
+            if not self.validate_mobil_number_the_rest_(mobil_num_str):
                 print("Invalid format!")
                 mobil_num_str = ""
+            else:
+                self.mobil_num_rest = mobil_num_str
 
-        mobil_string = mobil_3606_string + mobil_203060_string + mobil_num_str
-        self.mobil_string = mobil_string
+    def validate_mobil_number_the_rest_(self, mobil_num_str):
+        if not (len(mobil_num_str) == 7 and mobil_num_str.isdigit()):
+            return False
+        else:
+            return True
 
-    def random_hemoglobin_donor_is_suitable_or_not(self):
+    def get_full_phone_number(self):
+        mobil_string = self.mobil_num_06_36 + " " + self.mobil_num_20_30_60 + " " + self.mobil_num_rest
+        self.phone_number = mobil_string
+
+    def get_random_hemoglobin_donor_is_suitable_or_not(self):
         random_hemoglobin = random.randrange(80, 200, 1)
-        self.hemoglobin= random_hemoglobin
+        self.hemoglobin = random_hemoglobin
         if random_hemoglobin >= 110:
             print("You are suitable for donation, your hemoglobin level is:", random_hemoglobin)
         else:
             print("Sorry you are not suitable for donation, your hemoglobin level is:", random_hemoglobin)
-            exit()
-
-    def print_donor_info(self):
-        print("""Name:       {0}\nWeight:     {1} kg\nBirth date: {2}\nAge:        {3} years old\nEmail:      {4}
-        """.format(self.full_name,
-                   self.weight,
-                   self.birth_date,
-                   self.age,
-                   self.email_string))
+            answer = input("Do you want to go back to the main menu: Y/N")
+            if answer.lower() == "y":
+                Menu.Main_Menu()
+                Menu.Picked_option()
+            elif answer.lower() == "n":
+                exit()
 
     def make_data_into_one_string(self):
-        full_data = str(self.name_without_title) + "," + str(self.gender) + "," + str(self.identifier) + "," + \
+        full_data = str(self.full_name) + "," + str(self.gender) + "," + str(self.identifier) + "," + \
                     str(self.email_string) + "," + str(self.blood_type) + "," + str(self.birth_date) + "," + \
-                    str(self.age) + "," + str(self.weight) + "," + str(self.last_donation_date) + "," + \
+                    str(self.get_age()) + "," + str(self.weight) + "," + str(self.last_donation_date) + "," + \
                     str(self.id_expiration) + "," + str(self.hemoglobin) + "," + str(self.was_she_he_sick)
 
         self.full_data_string = full_data
@@ -261,13 +341,34 @@ class UserData(object):
         with open("./Data/Donor_Data.csv", "a") as Donor_Text_File:
             Donor_Text_File.write(self.full_data_string + "\n")
 
-
-def donor_app():
-    print_separator_line()
-    print("Welcome in Donor registration application!")
-    print()
-    UserData()
-    Menu.ask_answer()
+    def get_user(self):
+        self.get_random_hemoglobin_donor_is_suitable_or_not()
+        self.get_first_name()
+        self.get_last_name()
+        self.get_full_name()
+        self.get_weight()
+        self.get_gender()
+        self.get_birth_date()
+        self.get_age()
+        self.valid_age()
+        self.get_last_donation_date()
+        self.available_for_donation_last_donation_date()
+        self.get_unique_identifier()
+        self.get_id_expiration()
+        self.valid_id_expiration()
+        self.get_was_she_he_sick()
+        self.get_blood_type()
+        self.get_email_address()
+        self.get_mobil_number_06_36()
+        self.get_mobil_number_20_30_70()
+        self.get_mobil_number_the_rest()
+        self.get_full_phone_number()
+        self.make_data_into_one_string()
+        self.data_to_file()
 
 if __name__ == '__main__':
-    donor_app()
+    bela = UserData2().get_user()
+
+
+
+

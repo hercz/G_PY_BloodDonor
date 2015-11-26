@@ -1,7 +1,7 @@
 __author__ = 'Gazdik_Zsolt'
 
 import unittest
-from Donation_User2 import UserData2
+from Donation_User import UserData2
 
 
 class MyTestCase(unittest.TestCase):
@@ -188,8 +188,8 @@ class MyTestCase(unittest.TestCase):
         result = self.user.valid_blood_type("alma")
         self.assertEqual(False, result)
 
-    def test_get_blood_type_with_WrongString_é(self):
-        result = self.user.valid_blood_type("é")
+    def test_get_blood_type_with_WrongString_H(self):
+        result = self.user.valid_blood_type("H")
         self.assertEqual(False, result)
 
     def test_get_blood_type_with_WrongString_O(self):
