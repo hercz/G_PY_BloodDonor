@@ -1,12 +1,33 @@
+import Menu
 from datetime import datetime
 import csv
 import random
 
 __author__ = 'Stark_Industries'
 
+def print_separator_line():
+    print("-" * 32)
 
 class UserData(object):
-    def parse_time(self, time_str):
+    def __init__(self):
+        self.get_date_of_event()
+        self.get_start_time()
+        self.get_end_time()
+        self.calculate_duration_in_minutes()
+        self.get_beds_available()
+        self.calculate_max_donor_number()
+        self.get_zip_code()
+        self.get_city()
+        self.get_address()
+        self.get_planned_donor_number()
+        self.get_number_of_successful_donations()
+        self.calculate_result_of_donation_by_percentage()
+        self.print_location_info()
+        self.make_data_into_string()
+        self.data_to_file()
+
+    @staticmethod
+    def parse_time(time_str):
         return datetime.strptime(time_str, '%H:%M')
 
     def check_date_of_event(self, date_str):
@@ -39,7 +60,7 @@ class UserData(object):
                     print("Time must be a number!")
                     return False
         try:
-            self.parse_time(time_str)
+            UserData.parse_time(time_str)
             return True
         except ValueError:
             print("This time doesn't exist!")
@@ -56,11 +77,11 @@ class UserData(object):
 
     def validate_end_time(self, start_time_str, end_time_str):
         preparation_time = 30
-        if ((self.parse_time(end_time_str) - self.parse_time(start_time_str)).total_seconds() / 60) < 0:
-            print("The end time must be later than start time! "
-                  "(I think you don't want to stay for the following day... idiot!)")
+        if ((UserData.parse_time(end_time_str) - UserData.parse_time(start_time_str)).total_seconds() / 60) < 0:
+            print("The end time must be later than star time! "
+                  "(I think you don't want to stay to the fallowing day... Idiot!)")
             return False
-        elif ((self.parse_time(end_time_str) - self.parse_time(start_time_str))
+        elif ((UserData.parse_time(end_time_str) - UserData.parse_time(start_time_str))
                 .total_seconds() / 60) <= preparation_time:
             print("The duration of event must be more than 30 minutes!")
             return False
@@ -149,7 +170,9 @@ class UserData(object):
         start_time = ""
         while start_time == "":
             start_time = input("Start time (HH:MM): ")
-            if not self.check_time(start_time):
+            if start_time == "":
+                print("Start time cannot be empty !")
+            elif not UserData.check_time(start_time):
                 start_time = ""
             self.start_time = start_time
 
@@ -157,7 +180,9 @@ class UserData(object):
         end_time = ""
         while end_time == "":
             end_time = input("End time (HH:MM): ")
-            if not (self.check_time(end_time) and self.validate_end_time(self.start_time, end_time)):
+            if end_time == "":
+                print("End time cannot be empty !")
+            elif not (UserData.check_time(end_time) and UserData.validate_end_time(self.start_time, end_time)):
                 end_time = ""
             self.end_time = end_time
 
@@ -211,7 +236,8 @@ class UserData(object):
         self.number_of_successful_donations = int(number_of_successful_donations)
 
     def calculate_duration_in_minutes(self):
-        duration_in_minutes = (self.parse_time(self.end_time) - self.parse_time(self.start_time)).total_seconds() / 60
+        duration_in_minutes = (UserData.parse_time(self.end_time) -
+                               UserData.parse_time(self.start_time)).total_seconds() / 60
         self.duration_in_minutes = duration_in_minutes
 
     def calculate_max_donor_number(self):
@@ -265,23 +291,6 @@ class UserData(object):
         with open("./Data/Location_Data.csv", "a") as Location_Text_File:
             Location_Text_File.write(self.full_data_string + "\n")
 
-    def get_user(self):
-        self.get_date_of_event()
-        self.get_start_time()
-        self.get_end_time()
-        self.calculate_duration_in_minutes()
-        self.get_available_beds()
-        self.calculate_max_donor_number()
-        self.get_zip_code()
-        self.get_city()
-        self.get_address()
-        self.get_planned_donor_number()
-        self.get_number_of_successful_donations()
-        self.calculate_result_of_donation_by_percentage()
-        self.print_location_info()
-        self.make_data_into_string()
-        self.data_to_file()
 
 if __name__ == "__main__":
-    UserData().get_user()
-
+    UserData()
