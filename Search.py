@@ -1,12 +1,30 @@
+from msvcrt import getch
 import Menu
 import csv
 import os
+import winsound
 
 __author__ = 'Stark Industries'
 
 
 def print_separator_line():
     print("-" * 32)
+
+
+def menu_points(number=0):
+    space = " " * 5
+    before = [space for i in range(3)]
+    arrow = "---> "
+    before[number] = arrow
+    os.system("cls")
+    print_separator_line()
+    print("Welcome to Search")
+    print_separator_line()
+    print("Search within:")
+    print(before[1] + "1. Donors")
+    print(before[2] + "2. Donations")
+    print()
+    print("Please choose from the list above. Press '1' or '2'.")
 
 
 def print_one_location(line):
@@ -40,21 +58,18 @@ def print_one_donor(line, counter):
 
 
 def search_app():
-    os.system("cls")
-    print_separator_line()
-    print("Welcome to Search")
-    print()
-    print_separator_line()
-    print("Search within:")
-    print("1, Donors")
-    print("2, Donation")
-    print()
+    menu_points()
     search_number = ""
     while search_number == "":
-        search_number = input("Please choose from the list above: ")
-        if not (search_number == '1' or search_number == '2'):
+        search_number = ord(getch())
+        if not (chr(search_number) == '1' or chr(search_number) == '2'):
+            menu_points()
+            print("Please press 1 or 2!")
+            winsound.Beep(1000, 250)
             search_number = ""
-    if search_number == '1':
+
+    if chr(search_number) == '1':
+        menu_points(int(chr(search_number)))
         keyword = input("Please enter keyword to search for: ").lower()
         with open("./Data/Donor_Data.csv", "r") as TextFile:
             csv_text = csv.reader(TextFile)
@@ -74,7 +89,8 @@ def search_app():
             if counter == 0:
                 print("The '{0}' term is not found".format(keyword))
 
-    elif search_number == '2':
+    elif chr(search_number) == '2':
+        menu_points(int(chr(search_number)))
         keyword = input("Please enter keyword to search for: ").lower()
         with open("./Data/Location_Data.csv", "r") as TextFile:
             csv_text = csv.reader(TextFile)
