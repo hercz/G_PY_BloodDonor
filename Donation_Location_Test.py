@@ -1,12 +1,12 @@
 import unittest
-from Donation_Location import UserData
+from Donation_Location import LocationData
 
 __author__ = 'Stark_Industries'
 
 
 class MyTestCase(unittest.TestCase):
     def setUp(self):
-        self.user = UserData()
+        self.user = LocationData()
 
     def test_if_date_is_Empty(self):
         result = self.user.check_date_of_event("")
