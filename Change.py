@@ -303,7 +303,6 @@ class Change():
                 loc_to_change = LocationData()
 
                 if item_to_change == "1":
-                    print(items)
                     item = ""
                     while item == "":
                         item = input("Enter the new Location ID: ")
@@ -325,7 +324,6 @@ class Change():
                     item = loc_to_change.get_date_of_event()
                     items[0][1] = item
                     list_of_items = self.convert_list_into_string(items)
-                    #self.print_new_items(items)
                     print(list_of_items)
                     self.delete_location_from_database(location_to_change)
                     with open("./Data/Location_data.csv", "a") as Donor_Text_File:
@@ -339,8 +337,13 @@ class Change():
                     item2 = items[0][3]
                     duration_in_minutes = (loc_to_change.parse_time(item2) - loc_to_change.parse_time(item)).total_seconds() /60
                     items[0][10] = duration_in_minutes
+                    int_duration = int(duration_in_minutes)
+                    preparation_time = 30
+                    donation_time = 30
+                    available_beds = items[0][7]
+                    max_donor_number = ((int_duration - preparation_time) / donation_time) * int(available_beds)
+                    items[0][11] = max_donor_number
                     list_of_items = self.convert_list_into_string(items)
-                    #self.print_new_items(items)
                     self.delete_location_from_database(location_to_change)
                     with open("./Data/Location_data.csv", "a") as Donor_Text_File:
                         Donor_Text_File.write(list_of_items + "\n")
@@ -353,13 +356,36 @@ class Change():
                     item2 = items[0][2]
                     duration_in_minutes = (loc_to_change.parse_time(item) - loc_to_change.parse_time(item2)).total_seconds() /60
                     items[0][10] = duration_in_minutes
+                    int_duration = int(duration_in_minutes)
+                    preparation_time = 30
+                    donation_time = 30
+                    available_beds = items[0][7]
+                    max_donor_number = ((int_duration - preparation_time) / donation_time) * int(available_beds)
+                    items[0][11] = max_donor_number
                     list_of_items = self.convert_list_into_string(items)
-                    #self.print_new_items(items)
                     self.delete_location_from_database(location_to_change)
                     with open("./Data/Location_data.csv", "a") as Donor_Text_File:
                         Donor_Text_File.write(list_of_items + "\n")
                     print("Task Completed!")
                     Menu.ask_answer()
+
+                elif item_to_change == "5":
+                    item = ""
+                    while item == "":
+                        item = input("Enter the new Zip Code ")
+                        if not loc_to_change.validate_zip_code(item):
+                            self.print_old_items(items)
+                            items[0][4] = item
+                        else:
+                            item = ""
+
+                        list_of_items = self.convert_list_into_string(items)
+                        self.print_new_items(items)
+                        self.delete_location_from_database(location_to_change)
+                        with open("./Data/Location_Data.csv", "a") as Donor_Text_File:
+                            Donor_Text_File.write(list_of_items + "\n")
+                        print("Task Completed!")
+                        Menu.ask_answer()
 
 
 
