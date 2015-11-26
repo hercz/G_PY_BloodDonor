@@ -35,6 +35,7 @@ class Change():
             for row in reader:
                 ids.append(row[3])
             if not donor_to_change in ids:
+                print("The id you entered is not valid")
                 donor_to_change = ""
             else:
                 items = []
@@ -55,26 +56,32 @@ class Change():
                     item = ""
                     while item == "":
                         item = input("Enter the new First Name: ")
+                        self.print_old_items(items)
                         if user_to_change.valid_first_name(item):
                             items[0][0] = item
                         else:
                             item = ""
+
                     list_of_items = self.convert_list_into_string(items)
+                    self.print_new_items(items)
                     self.delete_id_from_database(donor_to_change)
                     with open("./Data/Donor_Data.csv", "a") as Donor_Text_File:
                         Donor_Text_File.write(list_of_items + "\n")
                     print("Task Completed!")
                     Menu.ask_answer()
 
+
                 elif item_to_change == "2":
                     item = ""
                     while item == "":
                         item = input("Enter the new Last Name: ")
+                        self.print_old_items(items)
                         if user_to_change.valid_last_name(item):
                             items[0][1] = item
                         else:
                             item = ""
                     list_of_items = self.convert_list_into_string(items)
+                    self.print_new_items(items)
                     self.delete_id_from_database(donor_to_change)
                     with open("./Data/Donor_Data.csv", "a") as Donor_Text_File:
                         Donor_Text_File.write(list_of_items + "\n")
@@ -86,10 +93,12 @@ class Change():
                     while item == "":
                         item = input("Enter the new Gender: ")
                         if user_to_change.valid_gender(item):
+                            self.print_old_items(items)
                             items[0][2] = item
                         else:
                             item = ""
                     list_of_items = self.convert_list_into_string(items)
+                    self.print_new_items(items)
                     self.delete_id_from_database(donor_to_change)
                     with open("./Data/Donor_Data.csv", "a") as Donor_Text_File:
                         Donor_Text_File.write(list_of_items + "\n")
@@ -100,11 +109,18 @@ class Change():
                     item = ""
                     while item == "":
                         item = input("Enter the new Identifier: ")
-                        if user_to_change.valid_identifier(item):
+                        if item in ids:
+                            print("The ID your entered is not Unique")
+                            item = ""
+                        elif user_to_change.valid_identifier(item):
+                            self.print_old_items(items)
                             items[0][3] = item
+
                         else:
                             item = ""
+
                     list_of_items = self.convert_list_into_string(items)
+                    self.print_new_items(items)
                     self.delete_id_from_database(donor_to_change)
                     with open("./Data/Donor_Data.csv", "a") as Donor_Text_File:
                         Donor_Text_File.write(list_of_items + "\n")
@@ -120,8 +136,10 @@ class Change():
                             print("Please enter your e-mail correctly! (abc@xyz.hu/.com)")
                             item = ""
                         else:
+                            self.print_old_items(items)
                             items[0][4] = item
                     list_of_items = self.convert_list_into_string(items)
+                    self.print_new_items(items)
                     self.delete_id_from_database(donor_to_change)
                     with open("./Data/Donor_Data.csv", "a") as Donor_Text_File:
                         Donor_Text_File.write(list_of_items + "\n")
@@ -133,10 +151,12 @@ class Change():
                     while item == "":
                         item = input("Enter the new Blood Type: ")
                         if user_to_change.valid_blood_type(item):
+                            self.print_old_items(items)
                             items[0][5] = item
                         else:
                             item = ""
                     list_of_items = self.convert_list_into_string(items)
+                    self.print_new_items(items)
                     self.delete_id_from_database(donor_to_change)
                     with open("./Data/Donor_Data.csv", "a") as Donor_Text_File:
                         Donor_Text_File.write(list_of_items + "\n")
@@ -148,10 +168,21 @@ class Change():
                     while item == "":
                         item = input("Enter the new Birth Date: ")
                         if user_to_change.valid_birth_date(item):
+                            self.print_old_items(items)
                             items[0][6] = item
                         else:
                             item = ""
+
+                        birth_date = datetime.strptime(item, "%Y.%m.%d").date()
+                        calculated_age = (datetime.now().date() - birth_date).days // 365
+                        if calculated_age < 18:
+                            print("Sorry you are too young to donate")
+                            item = ""
+                        else:
+                            print(type(calculated_age))
+                            items[0][7] = calculated_age
                     list_of_items = self.convert_list_into_string(items)
+                    self.print_new_items(items)
                     self.delete_id_from_database(donor_to_change)
                     with open("./Data/Donor_Data.csv", "a") as Donor_Text_File:
                         Donor_Text_File.write(list_of_items + "\n")
@@ -163,12 +194,14 @@ class Change():
                     while item == "":
                         item = input("Enter the new Weight(kg): ")
                         if item.isdigit() and int(item) >= 50:
+                            self.print_old_items(items)
                             items[0][8] = item
                         else:
                             print("Your weight is too low, try this: ")
                             webbrowser.open("https://falatozz.hu/rendeles/Miskolc/")
                             item = ""
                     list_of_items = self.convert_list_into_string(items)
+                    self.print_new_items(items)
                     self.delete_id_from_database(donor_to_change)
                     with open("./Data/Donor_Data.csv", "a") as Donor_Text_File:
                         Donor_Text_File.write(list_of_items + "\n")
@@ -183,11 +216,14 @@ class Change():
                             last_donation = datetime.strptime(item, "%Y.%m.%d").date()
                             elapsed_months = (datetime.now().date() - last_donation).days // 30
                             if not elapsed_months <= 3:
+                                self.print_old_items(items)
                                 items[0][9] = item
                             else:
                                 print("You can't add a date within 3 months from now")
                                 item = ""
+
                     list_of_items = self.convert_list_into_string(items)
+                    self.print_new_items(items)
                     self.delete_id_from_database(donor_to_change)
                     with open("./Data/Donor_Data.csv", "a") as Donor_Text_File:
                         Donor_Text_File.write(list_of_items + "\n")
@@ -200,11 +236,13 @@ class Change():
                         item = input("Enter the new Id Expiration date: ")
                         id_expiration = datetime.strptime(item, "%Y.%m.%d").date()
                         if datetime.now().date() < id_expiration:
+                            self.print_old_items(items)
                             items[0][10] = item
                         else:
                             print("Sorry you can't add that expiration date")
                             item = ""
                     list_of_items = self.convert_list_into_string(items)
+                    self.print_new_items(items)
                     self.delete_id_from_database(donor_to_change)
                     with open("./Data/Donor_Data.csv", "a") as Donor_Text_File:
                         Donor_Text_File.write(list_of_items + "\n")
@@ -217,42 +255,64 @@ class Change():
                     while item == "":
                         item = input("Enter the new was she/he sick?: ")
                         if item.lower() in available_answers:
+                            self.print_old_items(items)
                             items[0][12] = item
                         else:
                             item = ""
                     list_of_items = self.convert_list_into_string(items)
+                    self.print_new_items(items)
                     self.delete_id_from_database(donor_to_change)
                     with open("./Data/Donor_Data.csv", "a") as Donor_Text_File:
                         Donor_Text_File.write(list_of_items + "\n")
                     print("Task Completed!")
                     Menu.ask_answer()
 
+    def print_new_items(self, items):
+        print("New items: ", end="")
+        print(items, "\n")
+
+    def print_old_items(self, items):
+        print("Old items: ", end="")
+        print(items)
+
     def change_stuff_donation(self):
         location_to_change = ""
         while location_to_change == "":
             location_to_change = input("Please type the id of the Donor you want to change: ")
-            File = open("./Data/Donor_Data.csv", newline="")
+            File = open("./Data/Location_Data.csv", newline="")
             reader = csv.reader(File, delimiter=",")
 
             ids = []
             for row in reader:
-                ids.append(row[3])
+                ids.append(row[0])
             if not location_to_change in ids:
                 location_to_change = ""
             else:
                 items = []
                 i = -1
-                File = open("./Data/Donor_Data.csv", newline="")
+                File = open("./Data/Location_Data.csv", newline="")
                 reader = csv.reader(File, delimiter=",")
+                #list_reader = list(reader)
+                #print(list_reader)
                 for row in reader:
                     i += 1
                     if location_to_change in row:
                         items.append(row)
                 os.system("cls")
-                self.Options_for_donor()
                 item_to_change = input("I want to change(1-13):")
                 user_to_change = UserData2()
 
+
+
+                if item_to_change == "1":
+                    item = ""
+                    while item == "":
+                        item = input("Enter the new First Name: ")
+                        self.print_old_items(items)
+                        if user_to_change.valid_first_name(item):
+                            items[0][0] = item
+                        else:
+                            item = ""
 
         pass
 
@@ -276,6 +336,19 @@ class Change():
                 line_counter += 1
                 donor_data.write(line)
         donor_data.close()
+
+    def Options_for_donation(self):
+        print('-' * 36)
+        print(" 1, ID \n",
+              "2, Date of Event \n",
+              "3, Start time \n",
+              "4, End Time \n",
+              "5, Zip Code \n",
+              "6, City \n",
+              "7, Available beds \n"
+              "7, Planned Donor Number \n"
+              "7, Numbber of succesfull donations \n")
+
 
 
     def Options_for_donor(self):
