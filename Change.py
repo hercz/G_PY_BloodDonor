@@ -37,7 +37,7 @@ class Change():
             for row in reader:
                 ids.append(row[3])
             if not donor_to_change in ids:
-                print("The id you entered is not valid")
+                print("The id you entered is not in the Database")
                 donor_to_change = ""
             else:
                 items = []
@@ -459,13 +459,6 @@ class Change():
                                 Donor_Text_File.write(list_of_items + "\n")
                             print("Task Completed!")
                             Menu.ask_answer()
-
-
-
-
-
-
-        pass
 
     def avilable_bed_time_change_implication(self, item, items, loc_to_change):
         item1 = items[0][2]
