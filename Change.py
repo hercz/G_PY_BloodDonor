@@ -277,6 +277,7 @@ class Change():
         print(items)
 
     def change_stuff_donation(self):
+        os.system("cls")
         location_to_change = ""
         while location_to_change == "":
             location_to_change = input("Please type the id of the Location you want to change: ")
@@ -287,6 +288,7 @@ class Change():
             for row in reader:
                 ids.append(row[0])
             if not location_to_change in ids:
+                print("Your Id is not in the Database")
                 location_to_change = ""
             else:
                 items = []
@@ -459,6 +461,7 @@ class Change():
                                 Donor_Text_File.write(list_of_items + "\n")
                             print("Task Completed!")
                             Menu.ask_answer()
+
 
     def avilable_bed_time_change_implication(self, item, items, loc_to_change):
         item1 = items[0][2]
