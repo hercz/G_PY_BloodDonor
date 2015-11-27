@@ -340,8 +340,6 @@ class Change():
                         else:
                             items[0][2] = item
                             item2 = items[0][3]
-                            print(type(item))
-                            print(type(item2))
                             duration_in_minutes = (loc_to_change.parse_time(item2) - loc_to_change.parse_time(item)).total_seconds() /60
                             items[0][10] = duration_in_minutes
                             int_duration = int(duration_in_minutes)
@@ -359,23 +357,28 @@ class Change():
 
 
                 elif item_to_change == "4":
-                    item = loc_to_change.get_end_time()
-                    items[0][3] = item
-                    item2 = items[0][2]
-                    duration_in_minutes = (loc_to_change.parse_time(item) - loc_to_change.parse_time(item2)).total_seconds() /60
-                    items[0][10] = duration_in_minutes
-                    int_duration = int(duration_in_minutes)
-                    preparation_time = 30
-                    donation_time = 30
-                    available_beds = items[0][7]
-                    max_donor_number = ((int_duration - preparation_time) / donation_time) * int(available_beds)
-                    items[0][11] = max_donor_number
-                    list_of_items = self.convert_list_into_string(items)
-                    self.delete_location_from_database(location_to_change)
-                    with open("./Data/Location_data.csv", "a") as Donor_Text_File:
-                        Donor_Text_File.write(list_of_items + "\n")
-                    print("Task Completed!")
-                    Menu.ask_answer()
+                    item = ""
+                    while item == "":
+                        item = input("End time (HH:MM): ")
+                        if not loc_to_change.check_time(item):
+                            item = ""
+                        else:
+                            items[0][3] = item
+                            item2 = items[0][2]
+                            duration_in_minutes = (loc_to_change.parse_time(item) - loc_to_change.parse_time(item2)).total_seconds() /60
+                            items[0][10] = duration_in_minutes
+                            int_duration = int(duration_in_minutes)
+                            preparation_time = 30
+                            donation_time = 30
+                            available_beds = items[0][7]
+                            max_donor_number = ((int_duration - preparation_time) / donation_time) * int(available_beds)
+                            items[0][11] = max_donor_number
+                            list_of_items = self.convert_list_into_string(items)
+                            self.delete_location_from_database(location_to_change)
+                            with open("./Data/Location_data.csv", "a") as Donor_Text_File:
+                                Donor_Text_File.write(list_of_items + "\n")
+                            print("Task Completed!")
+                            Menu.ask_answer()
 
                 elif item_to_change == "5":
                     item = ""
