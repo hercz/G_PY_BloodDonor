@@ -357,10 +357,14 @@ class Change():
 
 
                 elif item_to_change == "4":
+                    item2 = items[0][2]
                     item = ""
                     while item == "":
                         item = input("End time (HH:MM): ")
                         if not loc_to_change.check_time(item):
+                            item = ""
+                        elif item < item2:
+                            print("You can't save End time before the Start time..")
                             item = ""
                         else:
                             items[0][3] = item
