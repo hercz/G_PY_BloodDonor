@@ -338,16 +338,7 @@ class Change():
                         if not loc_to_change.check_time(item):
                             item = ""
                         else:
-                            items[0][2] = item
-                            item2 = items[0][3]
-                            duration_in_minutes = (loc_to_change.parse_time(item2) - loc_to_change.parse_time(item)).total_seconds() /60
-                            items[0][10] = duration_in_minutes
-                            int_duration = int(duration_in_minutes)
-                            preparation_time = 30
-                            donation_time = 30
-                            available_beds = items[0][7]
-                            max_donor_number = ((int_duration - preparation_time) / donation_time) * int(available_beds)
-                            items[0][11] = max_donor_number
+                            self.start_time_change_implication(item, items, loc_to_change)
                             list_of_items = self.convert_list_into_string(items)
                             self.delete_location_from_database(location_to_change)
                             with open("./Data/Location_data.csv", "a") as Donor_Text_File:
@@ -367,16 +358,7 @@ class Change():
                             print("You can't save End time before the Start time..")
                             item = ""
                         else:
-                            items[0][3] = item
-                            item2 = items[0][2]
-                            duration_in_minutes = (loc_to_change.parse_time(item) - loc_to_change.parse_time(item2)).total_seconds() /60
-                            items[0][10] = duration_in_minutes
-                            int_duration = int(duration_in_minutes)
-                            preparation_time = 30
-                            donation_time = 30
-                            available_beds = items[0][7]
-                            max_donor_number = ((int_duration - preparation_time) / donation_time) * int(available_beds)
-                            items[0][11] = max_donor_number
+                            item2 = self.end_time_change_implication(item, item2, items, loc_to_change)
                             list_of_items = self.convert_list_into_string(items)
                             self.delete_location_from_database(location_to_change)
                             with open("./Data/Location_data.csv", "a") as Donor_Text_File:
@@ -388,25 +370,68 @@ class Change():
                     item = ""
                     while item == "":
                         item = input("Enter the new Zip Code ")
-                        if not loc_to_change.validate_zip_code(item):
+                        if loc_to_change.validate_zip_code(item):
                             self.print_old_items(items)
                             items[0][4] = item
+                            list_of_items = self.convert_list_into_string(items)
+                            self.print_new_items(items)
+                            self.delete_location_from_database(location_to_change)
+                            with open("./Data/Location_Data.csv", "a") as Donor_Text_File:
+                                Donor_Text_File.write(list_of_items + "\n")
+                            print("Task Completed!")
+                            Menu.ask_answer()
                         else:
                             item = ""
 
-                        list_of_items = self.convert_list_into_string(items)
-                        self.print_new_items(items)
-                        self.delete_location_from_database(location_to_change)
-                        with open("./Data/Location_Data.csv", "a") as Donor_Text_File:
-                            Donor_Text_File.write(list_of_items + "\n")
-                        print("Task Completed!")
-                        Menu.ask_answer()
+                elif item_to_change == "6":
+                    item = ""
+                    while item == "":
+                        item = input("Enter the new City Code ")
+                        if loc_to_change.validate_city(item):
+                            self.print_old_items(items)
+                            items[0][5] = item
+                            list_of_items = self.convert_list_into_string(items)
+                            self.print_new_items(items)
+                            self.delete_location_from_database(location_to_change)
+                            with open("./Data/Location_Data.csv", "a") as Donor_Text_File:
+                                Donor_Text_File.write(list_of_items + "\n")
+                            print("Task Completed!")
+                            Menu.ask_answer()
+                        else:
+                            item = ""
+
+
 
 
 
 
 
         pass
+
+    def start_time_change_implication(self, item, items, loc_to_change):
+        items[0][2] = item
+        item2 = items[0][3]
+        duration_in_minutes = (loc_to_change.parse_time(item2) - loc_to_change.parse_time(item)).total_seconds() / 60
+        items[0][10] = duration_in_minutes
+        int_duration = int(duration_in_minutes)
+        preparation_time = 30
+        donation_time = 30
+        available_beds = items[0][7]
+        max_donor_number = ((int_duration - preparation_time) / donation_time) * int(available_beds)
+        items[0][11] = max_donor_number
+
+    def end_time_change_implication(self, item, item2, items, loc_to_change):
+        items[0][3] = item
+        item2 = items[0][2]
+        duration_in_minutes = (loc_to_change.parse_time(item) - loc_to_change.parse_time(item2)).total_seconds() / 60
+        items[0][10] = duration_in_minutes
+        int_duration = int(duration_in_minutes)
+        preparation_time = 30
+        donation_time = 30
+        available_beds = items[0][7]
+        max_donor_number = ((int_duration - preparation_time) / donation_time) * int(available_beds)
+        items[0][11] = max_donor_number
+        return item2
 
     def convert_list_into_string(self, items):
         list_of_items = items

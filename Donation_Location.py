@@ -144,6 +144,7 @@ class LocationData(object):
             elif not self.validate_date_of_event(date_of_event):
                 date_of_event = ""
         self.date_of_event = date_of_event
+        return date_of_event
 
     def get_start_time(self):
         start_time = ""
@@ -152,6 +153,7 @@ class LocationData(object):
             if not self.check_time(start_time):
                 start_time = ""
             self.start_time = start_time
+            return start_time
 
     def get_end_time(self):
         end_time = ""
@@ -161,6 +163,7 @@ class LocationData(object):
                 end_time = ""
             self.end_time = end_time
 
+
     def get_zip_code(self):
         zip_code = ""
         while zip_code == "":
@@ -168,6 +171,7 @@ class LocationData(object):
             if not self.validate_zip_code(zip_code):
                 zip_code = ""
             self.zip_code = zip_code
+            return zip_code
 
     def get_city(self):
         city = ""
