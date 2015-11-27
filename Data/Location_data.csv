@@ -1,7 +1,7 @@
 id,date_of_event,start_time,end_time,zip_code,city,address,available_beds,planned_donor_number,number_of_successful_donations,duration_in_minutes,maximum_donor_number
-4673, 2080.12.12, 10:00, 18:00, 3752, miskolc, miskolc ut 8, 20, 20, 15, 480.0, 300.0
 2239,2080.12.12,10:00,13:00,2144,miskolc,Anyadu.31,20,20,21,60,20.0
-29,2080.12.12,06:00,13:00,2144,miskolc,Anyadu.31,20,20,21,60,20.0
 229,2080.12.12,10:00,13:00,2144,miskolc,Anyadu.31,20,20,21,60,20.0
 39,2080.12.12,11:00,13:00,2144,miskolc,Anyadu.31,20,20,21,60,20.0
-12,2080.12.12,08:00,15:00,3432,szerencs,almastreet1,20,20,20,420.0,20.0
+87878,2080.12.12,08:00,18:00,,szerencs,almastreet1,20,20,20,600.0,380.0
+4673,2016.03.25,10:00,18:00,3752,miskolc,miskolcut8,20,20,15,480.0,300.0
+1,2080.12.12,04:00,13:00,2144,miskolc,Anyadu.31,20,20,21,540.0,340.0
