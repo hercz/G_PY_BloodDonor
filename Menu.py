@@ -71,8 +71,8 @@ def sixth():
 
 
 def seventh():
-
-    pass
+    import Change
+    Change.Change().change_within()
 
 
 def eighth():
