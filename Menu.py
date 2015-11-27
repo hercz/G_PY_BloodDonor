@@ -42,7 +42,7 @@ def main_menu(counter):
 
 def first():
     import Donation_User
-    Donation_User.donor_app()
+    Donation_User.UserData2().get_user()
 
 
 def second():
@@ -71,8 +71,8 @@ def sixth():
 
 
 def seventh():
-
-    pass
+    import Change
+    Change.Change().change_within()
 
 
 def eighth():

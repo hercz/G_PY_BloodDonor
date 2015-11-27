@@ -65,12 +65,7 @@ class UserData2(object):
             return True
         elif weight.isdigit() and int(weight) < 50:
             print("Your weight is too low to donate")
-            answer = input("Do you want to go back to the main menu: Y/N")
-            if answer.lower() == "y":
-                Menu.Main_Menu()
-                Menu.Picked_option()
-            elif answer.lower() == "n":
-                exit()
+            Menu.ask_answer()
             return False
         elif weight.isalpha():
             return False
@@ -120,12 +115,7 @@ class UserData2(object):
     def valid_age(self):
         if self.get_age() < 18:
             print("Sorry you are too young to donate")
-            answer = input("Do you want to go back to the main menu: Y/N")
-            if answer.lower() == "y":
-                Menu.Main_Menu()
-                Menu.Picked_option()
-            elif answer.lower() == "n":
-                exit()
+            Menu.ask_answer()
         else:
             return True
 
@@ -152,12 +142,7 @@ class UserData2(object):
         elapsed_months = (datetime.now().date() - self.last_donation_date).days // 30
         if elapsed_months <= 3:
             print("You are not suitable because you was on donation not long ago.")
-            answer = input("Do you want to go back to the main menu: Y/N")
-            if answer.lower() == "y":
-                Menu.Main_Menu()
-                Menu.Picked_option()
-            elif answer.lower() == "n":
-                exit()
+            Menu.ask_answer()
 
     def get_unique_identifier(self):
         unique_id = ""
@@ -197,11 +182,7 @@ class UserData2(object):
             if not datetime.now().date() < id_expiration:
                 print("Sorry you can't donate because your ID is expired.")
                 answer = input("Do you want to go back to the main menu: Y/N")
-                if answer.lower() == "y":
-                    Menu.Main_Menu()
-                    Menu.Picked_option()
-                elif answer.lower() == "n":
-                    exit()
+                Menu.ask_answer()
         except ValueError:
             print("You have entered a wrong date type! It should be YYYY.MM.DD!")
             return False
@@ -222,12 +203,7 @@ class UserData2(object):
         available_answers = ["y", "n"]
         if not was_she_he_sick.lower() in available_answers:
             print("I hope you understand that we dont want sick donators..")
-            answer = input("Do you want to go back to the main menu: Y/N")
-            if answer.lower() == "y":
-                Menu.Main_Menu()
-                Menu.Picked_option()
-            elif answer.lower() == "n":
-                exit()
+            Menu.ask_answer()
         else:
             return True
 
@@ -322,12 +298,7 @@ class UserData2(object):
             print("You are suitable for donation, your hemoglobin level is:", random_hemoglobin)
         else:
             print("Sorry you are not suitable for donation, your hemoglobin level is:", random_hemoglobin)
-            answer = input("Do you want to go back to the main menu: Y/N")
-            if answer.lower() == "y":
-                Menu.Main_Menu()
-                Menu.Picked_option()
-            elif answer.lower() == "n":
-                exit()
+            Menu.ask_answer()
 
     def make_data_into_one_string(self):
         full_data = str(self.full_name) + "," + str(self.gender) + "," + str(self.identifier) + "," + \
