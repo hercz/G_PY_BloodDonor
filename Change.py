@@ -7,11 +7,16 @@ import Menu
 from Donation_Location import LocationData
 
 
+def print_separator_line():
+    print("-" * 50)
 
 
 class Change():
     def change_within(self):
-        print('-' * 36)
+        os.system("cls")
+        print_separator_line()
+        print("Welcome in the Change application!")
+        print_separator_line()
         print("Change within:")
         print("1, Donors")
         print("2, Donation")
@@ -277,7 +282,6 @@ class Change():
         print(items)
 
     def change_stuff_donation(self):
-        os.system("cls")
         location_to_change = ""
         while location_to_change == "":
             location_to_change = input("Please type the id of the Location you want to change: ")

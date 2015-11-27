@@ -4,4 +4,5 @@ id,date_of_event,start_time,end_time,zip_code,city,address,available_beds,planne
 39,2080.12.12,11:00,13:00,2144,miskolc,Anyadu.31,20,20,21,60,20.0
 4673,2016.03.25,10:00,18:00,3752,miskolc,miskolcut8,20,20,15,480.0,300.0
 878,2080.12.12,00:00,19:00,,szerencs,almastreet1,20,20,20,1140.0,740.0
-1,2080.12.12,10:00,18:00,4578,Kazincbarcika,Anyadu.31,20,20,21,480.0,300.0
+4460, 2016.01.04, 12:00, 13:00, 2233, miskolc, 1344, 23, 120, 20, 60.0, 23.0
+31,2080.12.12,10:00,18:00,4578,Kazincbarcika,Anyadu.31,20,20,21,480.0,300.0
