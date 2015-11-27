@@ -279,7 +279,7 @@ class Change():
     def change_stuff_donation(self):
         location_to_change = ""
         while location_to_change == "":
-            location_to_change = input("Please type the id of the Donor you want to change: ")
+            location_to_change = input("Please type the id of the Location you want to change: ")
             File = open("./Data/Location_data.csv", newline="")
             reader = csv.reader(File, delimiter=",")
 
