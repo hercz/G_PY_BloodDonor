@@ -1,6 +1,6 @@
 import Menu
 import os
-
+from msvcrt import getch
 
 def print_separator_line():
     print("-" * 50)
@@ -25,8 +25,23 @@ def id_is_valid(id_to_delete):
         return False
     elif not id_to_delete.isdigit():
         print("The ID has to be a number!")
+        change_purpose()
         return False
     return True
+
+def change_purpose():
+    decision = ""
+    print("Do you want to delete another location? (Press Y, or N)")
+    while decision == "":
+        decision = ord(getch())
+        if chr(decision) == "y":
+            loc_del_app()
+        elif chr(decision) == "n":
+            Menu.the_menu()
+        else:
+            os.system("cls")
+            print("Please press Y or N")
+            decision = ""
 
 
 def get_id_to_delete():
@@ -53,8 +68,10 @@ def delete_id_from_database(id_to_delete):
     location_file.close()
     if line_counter == len(read_line):
         print("The location with {} ID is not found".format(id_to_delete))
+
     else:
         print("The location with {} ID is deleted".format(id_to_delete))
+
 
 
 def loc_del_app():
@@ -63,7 +80,8 @@ def loc_del_app():
     check_database_is_empty()
     id_to_delete = get_id_to_delete()
     delete_id_from_database(id_to_delete)
-    Menu.ask_answer()
+    change_purpose()
+
 
 if __name__ == "__main__":
     loc_del_app()
