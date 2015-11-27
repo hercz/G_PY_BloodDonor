@@ -400,6 +400,65 @@ class Change():
                         else:
                             item = ""
 
+                elif item_to_change == "7":
+                    item = ""
+                    while item == "":
+                        item = input("Enter the new number of Avilable Beds ")
+                        if loc_to_change.validate_available_beds(item):
+                            self.print_old_items(items)
+                            items[0][7] = item
+                            self.avilable_bed_time_change_implication(item, items, loc_to_change)
+                            list_of_items = self.convert_list_into_string(items)
+                            self.print_new_items(items)
+                            self.delete_location_from_database(location_to_change)
+                            with open("./Data/Location_Data.csv", "a") as Donor_Text_File:
+                                Donor_Text_File.write(list_of_items + "\n")
+                            print("Task Completed!")
+                            Menu.ask_answer()
+                        else:
+                            item = ""
+
+                if item_to_change == "8":
+                    item = ""
+                    while item == "":
+                        item = input("Enter the new Planned Donor Number: ")
+                        if item == "":
+                            print("Print cannot be empty")
+                            item = ""
+                        elif not item.isdigit() and not item.isdigit() > 0:
+                            print("Enter a valid Number")
+                            item = ""
+                        else:
+                            self.print_old_items(items)
+                            items[0][8] = item
+                            list_of_items = self.convert_list_into_string(items)
+                            self.print_new_items(items)
+                            self.delete_location_from_database(location_to_change)
+                            with open("./Data/Location_Data.csv", "a") as Donor_Text_File:
+                                Donor_Text_File.write(list_of_items + "\n")
+                            print("Task Completed!")
+                            Menu.ask_answer()
+
+                if item_to_change == "9":
+                    item = ""
+                    while item == "":
+                        item = input("Enter the new Planned Donor Number: ")
+                        if item == "":
+                            print("Print cannot be empty")
+                            item = ""
+                        elif not item.isdigit() and not item.isdigit() > 0:
+                            print("Enter a valid Number")
+                            item = ""
+                        else:
+                            self.print_old_items(items)
+                            items[0][9] = item
+                            list_of_items = self.convert_list_into_string(items)
+                            self.print_new_items(items)
+                            self.delete_location_from_database(location_to_change)
+                            with open("./Data/Location_Data.csv", "a") as Donor_Text_File:
+                                Donor_Text_File.write(list_of_items + "\n")
+                            print("Task Completed!")
+                            Menu.ask_answer()
 
 
 
@@ -407,6 +466,18 @@ class Change():
 
 
         pass
+
+    def avilable_bed_time_change_implication(self, item, items, loc_to_change):
+        item1 = items[0][2]
+        item2 = items[0][3]
+        duration_in_minutes = (loc_to_change.parse_time(item2) - loc_to_change.parse_time(item1)).total_seconds() / 60
+        items[0][10] = duration_in_minutes
+        int_duration = int(duration_in_minutes)
+        preparation_time = 30
+        donation_time = 30
+        available_beds = item
+        max_donor_number = ((int_duration - preparation_time) / donation_time) * int(available_beds)
+        items[0][11] = max_donor_number
 
     def start_time_change_implication(self, item, items, loc_to_change):
         items[0][2] = item
@@ -475,7 +546,7 @@ class Change():
               "6, City \n",
               "7, Available beds \n"
               " 8, Planned Donor Number \n"
-              " 9, Numbber of succesfull donations \n")
+              " 9, Number of succesfull donations \n")
 
     def Options_for_donor(self):
         print('-' * 36)
