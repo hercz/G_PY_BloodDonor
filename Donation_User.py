@@ -16,6 +16,10 @@ class UserData2(object):
             return False
         elif firstName == " ":
             return False
+        elif "0" or "1" or "2" or "3" or "4" or "5" or "6" or "7" or "8" or "9" in firstName:
+            print(
+                "I really hope your name does not contain numbers or special characters or whitespace, check before you enter!")
+            return False
         else:
             return True
 
@@ -43,6 +47,10 @@ class UserData2(object):
                 "I really hope your name does not contain numbers or special characters or whitespace, check before you enter!")
             return False
         elif lastName == " ":
+            return False
+        elif "0" or "1" or "2" or "3" or "4" or "5" or "6" or "7" or "8" or "9" in lastName:
+            print(
+                "I really hope your name does not contain numbers or special characters or whitespace, check before you enter!")
             return False
         else:
             return True
