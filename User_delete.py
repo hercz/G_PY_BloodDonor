@@ -1,6 +1,6 @@
 import Menu
 import os
-
+from msvcrt import getch
 
 def print_separator_line():
     print("-" * 50)
@@ -25,13 +25,29 @@ def id_is_valid(id_to_delete):
         return False
     elif len(id_to_delete) != 8:
         print("The ID length is not correct! (8 digit)")
+        change_purpose()
         return False
     elif not id_to_delete[:6].isdigit() and id_to_delete[6:].isalpha() or not \
             id_to_delete[:6].isalpha() and id_to_delete[6:].isdigit():
         print("This ID is wrong, type it again! (It must be an ID or Passport number)\n>> ")
+        change_purpose()
         return False
     else:
         return True
+
+def change_purpose():
+    decision = ""
+    print("Do you want to delete another donation? (Press Y, or N)")
+    while decision == "":
+        decision = ord(getch())
+        if chr(decision) == "y":
+            user_del_app()
+        elif chr(decision) == "n":
+            Menu.the_menu()
+        else:
+            os.system("cls")
+            print("Please press Y or N")
+            decision = ""
 
 
 def get_id_to_delete():
@@ -67,7 +83,7 @@ def user_del_app():
     check_database_is_empty()
     id_to_delete = get_id_to_delete()
     delete_id_from_database(id_to_delete)
-    Menu.ask_answer()
+    change_purpose()
 
 if __name__ == "__main__":
     user_del_app()
