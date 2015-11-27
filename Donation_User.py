@@ -288,7 +288,7 @@ class UserData2(object):
             return True
 
     def get_full_phone_number(self):
-        mobil_string = self.mobil_num_06_36 + " " + self.mobil_num_20_30_60 + " " + self.mobil_num_rest
+        mobil_string = self.mobil_num_06_36 + " " + self.mobil_num_20_30_70 + " " + self.mobil_num_rest
         self.phone_number = mobil_string
 
     def get_random_hemoglobin_donor_is_suitable_or_not(self):
@@ -326,7 +326,7 @@ class UserData2(object):
         self.available_for_donation_last_donation_date()
         self.get_unique_identifier()
         self.get_id_expiration()
-        self.valid_id_expiration()
+        self.valid_id_expiration(self.id_expiration)
         self.get_was_she_he_sick()
         self.get_blood_type()
         self.get_email_address()
