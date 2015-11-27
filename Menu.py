@@ -47,7 +47,7 @@ def first():
 
 def second():
     import Donation_Location
-    Donation_Location.location_app()
+    Donation_Location.LocationData().get_user()
 
 
 def third():
