@@ -10,15 +10,17 @@ class UserData2(object):
         print("-" * 50)
 
     def valid_first_name(self, firstName):
+        numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        for number in numbers:
+            if number in firstName:
+                print(
+                    "I really hope your name does not contain numbers or special characters or whitespace, check before you enter!")
+                return False
         if firstName.isdigit():
             print(
                 "I really hope your name does not contain numbers or special characters or whitespace, check before you enter!")
             return False
         elif firstName == " ":
-            return False
-        elif "0" or "1" or "2" or "3" or "4" or "5" or "6" or "7" or "8" or "9" in firstName:
-            print(
-                "I really hope your name does not contain numbers or special characters or whitespace, check before you enter!")
             return False
         else:
             return True
@@ -42,6 +44,12 @@ class UserData2(object):
                 self.last_name = lastName
 
     def valid_last_name(self, lastName):
+        numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        for number in numbers:
+            if number in lastName:
+                print(
+                    "I really hope your name does not contain numbers or special characters or whitespace, check before you enter!")
+                return False
         if lastName.isdigit():
             print(
                 "I really hope your name does not contain numbers or special characters or whitespace, check before you enter!")
